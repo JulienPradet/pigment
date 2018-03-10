@@ -4,6 +4,7 @@
   "description": "Example app using Pigment.js React Framework",
   "main": "index.js",
   "scripts": {
+    "start": "pigment start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -11,5 +12,10 @@
     "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-demo"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@pigment/scripts": "^0.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
 }
