@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = paths => ({
   mode: "development",
@@ -39,6 +40,10 @@ module.exports = paths => ({
       "process.env": {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production")
       }
+    }),
+    new CleanWebpackPlugin(paths.build, {
+      verbose: false,
+      root: process.cwd()
     })
   ]
 });
