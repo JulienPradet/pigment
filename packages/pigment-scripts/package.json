@@ -1,0 +1,21 @@
+{
+  "name": "@pigment/scripts",
+  "version": "0.0.0",
+  "description": "Scripts that allow to develop your Pigment.js app",
+  "bin": {
+    "pigment": "./bin/pigment"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url":
+      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-scripts"
+  },
+  "author": "Julien Pradet <julien.pradet+git@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "common-tags": "^1.7.2"
+  }
+}

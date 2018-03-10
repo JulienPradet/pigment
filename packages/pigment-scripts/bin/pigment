@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+process.on("unhandledRejection", err => {
+  throw err;
+});
+
+process.on("SIGTERM", () => {
+  process.exit(1);
+});
+
+const script = process.argv.length > 2 ? process.argv[2] : null;
+const args = process.argv.slice(3);
+
+const printHelp = () => {
+  const { stripIndent } = require("common-tags");
+  console.log(stripIndent`
+    Usage : pigment <script> [arguments]
+
+    Available scripts :
+      help     displays this help message
+      TODO
+
+    For further information on each available script, please
+    use the help command after your script name.
+      pigment start help
+  `);
+};
+
+switch (script) {
+  case "help":
+    console.log("Welcome to Pigment.js!");
+    printHelp();
+    break;
+  default:
+    console.log('Unknown script "' + script + '".');
+    printHelp();
+    break;
+}
