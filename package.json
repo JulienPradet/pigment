@@ -4,11 +4,16 @@
   "scripts": {
     "precommit": "lint-staged",
     "format":
-      "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
+      "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'",
+    "lerna": "lerna"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JulienPradet/pigment.js"
   },
   "devDependencies": {
     "husky": "^0.13.4",
-    "lerna": "2.6.0",
+    "lerna": "^2.6.0",
     "lerna-changelog": "^0.6.0",
     "lint-staged": "^3.3.1",
     "prettier": "^1.11.1"
