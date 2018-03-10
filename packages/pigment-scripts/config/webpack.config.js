@@ -18,6 +18,19 @@ module.exports = paths => ({
   module: {
     rules: [
       {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "eslint-loader",
+        options: {
+          cahe: paths.cacheEslint,
+          baseConfig: {
+            extends: [require.resolve("eslint-config-react-app")]
+          },
+          ignore: false,
+          useEslintrc: false
+        }
+      },
+      {
         oneOf: [
           {
             test: /\.js$/,
