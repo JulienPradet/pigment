@@ -11,7 +11,10 @@ module.exports = () => {
   return {
     build: resolveApp("build"),
     buildClient: resolveApp("build/client"),
-    clientIndex: resolveApp("var/tmp/client/index.js"),
+    buildServer: resolveApp("build/server"),
+    appIndex: resolveApp("var/tmp/app/index.js"),
+    serverEntry: resolveApp("var/tmp/server/index.js"),
+    clientEntry: resolveApp("var/tmp/client/index.js"),
     log: resolveApp("var/log"),
     cacheBabel: resolveApp("var/cache/babel"),
     cacheEslint: resolveApp("var/cache/eslint"),

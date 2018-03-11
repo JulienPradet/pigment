@@ -2,19 +2,20 @@ const fs = require("@pigment/fs");
 const path = require("path");
 const { mergeMap } = require("rxjs/operators");
 const { stripIndent } = require("common-tags");
-
+const prettier = require("prettier");
 module.exports = paths => {
-  return fs.mkdirp(path.dirname(paths.clientIndex)).pipe(
+  return fs.mkdirp(path.dirname(paths.appIndex)).pipe(
     mergeMap(() => {
       return fs.writefile(
-        paths.clientIndex,
-        stripIndent`
-          import Page from "../../../src/pages";
+        paths.appIndex,
+        prettier.format(stripIndent`
           import React from "react";
-          import ReactDOM from "react-dom";
-    
-          ReactDOM.render(<Page />, document.querySelector("#root"));
-        `
+          import Page from "../../../src/pages";
+
+          const App = () => <Page />;
+
+          export default App;
+        `)
       );
     })
   );
