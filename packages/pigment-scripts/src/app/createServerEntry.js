@@ -5,7 +5,6 @@ const { stripIndent } = require("common-tags");
 const prettier = require("prettier");
 
 module.exports = paths => {
-  console.log(paths.serverEntry);
   return fs.mkdirp(path.dirname(paths.serverEntry)).pipe(
     mergeMap(() => {
       return fs.writefile(

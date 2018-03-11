@@ -16,6 +16,7 @@ module.exports = paths => {
     name: "client",
     target: "web",
     mode: "development",
+    devtool: "cheap-module-source-map",
     entry: {
       main: [paths.clientEntry]
     },
