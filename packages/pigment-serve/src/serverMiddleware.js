@@ -9,6 +9,8 @@ module.exports = compiler => {
   const outputFs = serverCompiler.outputFileSystem;
   const outputPath = serverCompiler.outputPath;
 
+  let serverRenderer;
+
   compiler.plugin("done", stats => {
     try {
       const serverStats = findStats(stats, "server")[0].toJson();
@@ -17,10 +19,7 @@ module.exports = compiler => {
         serverStats.assetsByChunkName.main
       );
       const buffer = outputFs.readFileSync(filename);
-      serverRenderer = requireFromString(buffer.toString());
-      if (typeof serverRenderer !== "function") {
-        serverRenderer = serverRenderer.default;
-      }
+      serverRenderer = requireFromString(buffer.toString()).default;
     } catch (e) {
       log("error", "An error occured when updating the server\n" + e.stack);
     }
