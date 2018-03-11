@@ -9,12 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-demo"
+    "url":
+      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-demo"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@pigment/scripts": "^0.0.0",
+    "@pigment/serve": "^0.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
