@@ -36,7 +36,7 @@ module.exports = paths => {
           include: input => shouldCompileRegExp.test(input),
           loader: "eslint-loader",
           options: {
-            cahe: paths.cacheEslint,
+            cache: paths.cacheEslint,
             baseConfig: {
               extends: [require.resolve("eslint-config-react-app")]
             },
