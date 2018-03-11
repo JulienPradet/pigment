@@ -7,13 +7,6 @@ const createAppRouter = compiler => {
   const router = express.Router();
   router.use(clientMiddleware(compiler));
   router.use(serverMiddleware(compiler));
-
-  compiler.watch({}, err => {
-    if (err) {
-      console.log(err);
-    }
-  });
-
   return router;
 };
 
