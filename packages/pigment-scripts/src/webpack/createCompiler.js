@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const log = require("@pigment/log")("CLI");
+const log = require("@pigment/log")("WEBPACK");
 
 const createCompiler = config => {
   const compiler = webpack(config);
