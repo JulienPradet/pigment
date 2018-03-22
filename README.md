@@ -41,3 +41,14 @@ it go.
 
 My blog already has this kind of features and it will most likely migrate to
 Pigment.js.
+
+# Roadmap
+
+* [ ] Routes multiple pages
+* [ ] Lie to the browser by displaying a fake URL
+* [ ] Share Layouts
+* [ ] Animations
+* [ ] Stories
+* [ ] Automatic Stories when missing
+* [ ] Data fetching
+* [ ] .mdx
