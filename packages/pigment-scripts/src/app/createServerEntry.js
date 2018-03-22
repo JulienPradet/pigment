@@ -10,13 +10,17 @@ module.exports = paths => {
       return fs.writefile(
         paths.serverEntry,
         prettier.format(stripIndent`
-          import App from "${path.relative(
+          import App from "./${path.relative(
             path.dirname(paths.serverEntry),
             paths.appIndex
           )}";
-          import serverRenderApp from "@pigment/serve/src/serverRenderApp";
+          import Document from "./${path.relative(
+            path.dirname(paths.serverEntry),
+            path.join(paths.src, "Document.js")
+          )}";
+          import {serverRenderApp} from "@pigment/serve/src/serverRenderApp";
 
-          export default serverRenderApp(App);
+          export default serverRenderApp(Document, App);
         `)
       );
     })

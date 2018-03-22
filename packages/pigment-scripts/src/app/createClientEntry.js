@@ -14,10 +14,9 @@ module.exports = paths => {
             path.dirname(paths.clientEntry),
             paths.appIndex
           )}";
-          import React from "react";
-          import ReactDOM from "react-dom";
+          import {clientRenderApp} from "@pigment/serve/src/clientRenderApp";
 
-          ReactDOM.render(<App />, document.querySelector("#root"));
+          clientRenderApp(App);
         `)
       );
     })

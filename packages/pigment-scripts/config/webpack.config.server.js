@@ -22,14 +22,12 @@ module.exports = paths => {
       })
     ],
     node: {
-      fs: "empty",
-      net: "empty",
-      tls: "empty",
       // The __dirname will be the original __dirname of the file
       // ``/.../src/...`
       __dirname: true
     },
     mode: "development",
+    devtool: "inline-cheap-source-map",
     entry: {
       main: [paths.serverEntry]
     },
@@ -69,6 +67,9 @@ module.exports = paths => {
                 options: {
                   babelrc: false,
                   presets: [require.resolve("babel-preset-react-app")],
+                  plugins: [
+                    require.resolve("babel-plugin-dynamic-import-node")
+                  ],
                   cacheDirectory: paths.cacheBabel
                 }
               }

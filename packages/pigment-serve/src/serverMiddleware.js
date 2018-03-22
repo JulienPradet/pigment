@@ -19,7 +19,9 @@ module.exports = compiler => {
         serverStats.assetsByChunkName.main
       );
       const buffer = outputFs.readFileSync(filename);
-      serverRenderer = requireFromString(buffer.toString()).default;
+      serverRenderer = requireFromString(buffer.toString()).default({
+        clientStats: findStats(stats, "client")[0].toJson()
+      });
     } catch (e) {
       log("error", "An error occured when updating the server\n" + e.stack);
     }

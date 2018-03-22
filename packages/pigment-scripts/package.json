@@ -21,6 +21,7 @@
     "@pigment/serve": "0.0.0",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-preset-react-app": "^4.0.0-next.47d2d941",
     "clean-webpack-plugin": "^0.1.19",
     "common-tags": "^1.7.2",
