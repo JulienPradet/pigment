@@ -1,12 +1,10 @@
 {
   "name": "@pigment/serve",
   "version": "0.0.0",
-  "description":
-    "Server and middleware utilities that allow to launch a Pigment.js app",
+  "description": "Server and middleware utilities that allow to launch a Pigment.js app",
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-serve"
+    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-serve"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
@@ -17,8 +15,12 @@
     "source-map-support": "^0.5.3",
     "webpack-dev-middleware": "^3.0.1"
   },
+  "devDependencies": {
+    "react": "^16.3.0-alpha.3",
+    "react-dom": "^16.3.0-alpha.3"
+  },
   "peerDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^16.3.0-alpha.3",
+    "react-dom": "^16.3.0-alpha.3"
   }
 }
