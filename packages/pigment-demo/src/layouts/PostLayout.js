@@ -8,7 +8,7 @@ const DefaultLayout = ({ children }) => (
     <Header />
     <hr />
     <PostList />
-    {this.props.children}
+    {children}
     <hr />
     <Footer />
   </div>
