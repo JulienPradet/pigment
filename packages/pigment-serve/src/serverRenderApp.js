@@ -7,7 +7,7 @@ const serverRenderApp = (Document, App) => {
       clientStats.publicPath + clientStats.assetsByChunkName.main[0];
 
     const main = renderToString(
-      <App history={{ location: req.originalUrl }} />
+      <App initialRoute={{ pathname: req.originalUrl }} />
     );
 
     res.send(

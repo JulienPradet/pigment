@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 
 const clientRenderApp = App => {
   const url = new URL(window.location.href);
-  const history = {
-    location: url.pathname
-  };
-  ReactDOM.hydrate(<App history={history} />, document.getElementById("root"));
+  ReactDOM.hydrate(
+    <App initialRoute={{ pathname: url.pathname }} />,
+    document.getElementById("root")
+  );
 };
 
 export { clientRenderApp };
