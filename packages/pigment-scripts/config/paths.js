@@ -20,6 +20,7 @@ module.exports = () => {
     cacheEslint: resolveApp("var/cache/eslint"),
     tmp: resolveApp("var/tmp"),
     src: resolveApp("src"),
+    public: resolveApp("public"),
     nodePaths: [
       resolveApp("node_modules"),
       path.resolve(__dirname, "../node_modules")

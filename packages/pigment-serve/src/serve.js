@@ -10,8 +10,9 @@ const createAppRouter = compiler => {
   return router;
 };
 
-module.exports = compiler => {
+module.exports = (paths, compiler) => {
   const app = express();
+  app.use(express.static(paths.public));
   app.use(createAppRouter(compiler));
 
   const server = app.listen(

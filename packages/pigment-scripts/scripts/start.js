@@ -22,7 +22,7 @@ module.exports = args => {
         const serve = require("@pigment/serve/src/serve");
 
         return Observable.create(observer => {
-          const server = serve(compiler);
+          const server = serve(paths, compiler);
           observer.next();
           server.on("close", () => {
             observer.complete();
