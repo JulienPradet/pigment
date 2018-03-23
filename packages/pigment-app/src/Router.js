@@ -9,12 +9,23 @@ const toRoute = route => {
 };
 
 const getPage = (route, pages) => {
-  const page = pages.find(page => page.pathname === route.pathname);
+  const page = pages.find(page => page.test.test(route.pathname));
   if (page) {
     return page;
   } else {
-    return pages.find(page => page.pathname === "/404");
+    return pages.find(page => page.test.test("/404"));
   }
+};
+
+const getParams = (route, page) => {
+  const match = page.test.exec(route.pathname);
+  return page.pathKeys.reduce(
+    (params, { name }, key) => ({
+      ...params,
+      [name]: match[key + 1]
+    }),
+    {}
+  );
 };
 
 export const RouterContext = createContext("router");
@@ -22,8 +33,12 @@ export const RouterContext = createContext("router");
 class Router extends Component {
   constructor(props) {
     super();
+    const page = getPage(props.initialRoute, props.pages);
+    const params = getParams(props.initialRoute, page);
     this.state = {
-      page: getPage(props.initialRoute, props.pages)
+      route: props.initialRoute,
+      params: params,
+      page: page
     };
     this.handlePopState = this.handlePopState.bind(this);
     this.push = this.push.bind(this);
@@ -37,28 +52,37 @@ class Router extends Component {
     window.removeEventListener("popstate", this.handlePopState);
   }
 
+  setRoute(route) {
+    const page = getPage(route, this.props.pages);
+    const params = getParams(route, page);
+    this.setState({
+      route: route,
+      params: params,
+      page: page
+    });
+  }
+
   handlePopState(event) {
     if (event.isTrusted) {
       const pathname = window.location.pathname;
-      this.setState({
-        page: getPage(toRoute(pathname), this.props.pages)
-      });
+      const route = toRoute(pathname);
+      this.setRoute(route);
     }
   }
 
   push(route) {
     route = toRoute(route);
+    this.setRoute(route);
     window.history.pushState({}, null, route.pathname);
-    this.setState({
-      page: getPage(route, this.props.pages)
-    });
   }
 
   render() {
     const page = this.state.page;
+    const params = this.state.params;
+
     return (
       <RouterContext.Provider value={{ push: this.push }}>
-        {this.props.children(page)}
+        {this.props.children({ params, page })}
       </RouterContext.Provider>
     );
   }

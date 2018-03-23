@@ -7,7 +7,7 @@ const makeApp = pages => {
     render() {
       return (
         <Router initialRoute={this.props.initialRoute} pages={pages}>
-          {page => {
+          {({ params, page }) => {
             const Page = page.Component;
             let decorateWithLayout = Page.layout;
 
@@ -26,14 +26,16 @@ const makeApp = pages => {
                 const Layout = decorateWithLayout;
                 return (
                   <Layout>
-                    <Page />
+                    <Page params={params} />
                   </Layout>
                 );
               } else {
-                return decorateWithLayout({ children: <Page /> });
+                return decorateWithLayout({
+                  children: <Page params={params} />
+                });
               }
             } else {
-              return <Page />;
+              return <Page params={params} />;
             }
           }}
         </Router>

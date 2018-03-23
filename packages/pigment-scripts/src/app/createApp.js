@@ -3,8 +3,50 @@ const path = require("path");
 const { mergeMap } = require("rxjs/operators");
 const { stripIndent } = require("common-tags");
 const prettier = require("prettier");
+const pathToRegexp = require("path-to-regexp");
+
+const filePathToRoute = filePath => {
+  let path = filePath;
+  if (path.endsWith("/index.js")) {
+    path = path.replace(/\/index\.[^/.]+$/, "");
+  } else {
+    path = path.replace(/\.[^/.]+$/, "");
+  }
+
+  if (path.length === 0) {
+    path = "/";
+  }
+  return path;
+};
 
 module.exports = paths => {
+  const pagesFilePaths = [
+    path.join(paths.src, "pages", "/404.js"),
+    path.join(paths.src, "pages", "/index.js"),
+    path.join(paths.src, "pages", "/about.js"),
+    path.join(paths.src, "pages", "/posts/index.js"),
+    path.join(paths.src, "pages", "/posts/:post.js")
+  ];
+
+  const pagesDefinitions = pagesFilePaths
+    .map(
+      filePath => `/` + path.relative(path.join(paths.src, "pages"), filePath)
+    )
+    .map(filePath => {
+      const path = filePathToRoute(filePath);
+      const keys = [];
+      const regexp = pathToRegexp(path, keys);
+
+      return `
+      {
+        test: ${regexp.toString()},
+        pathKeys: ${JSON.stringify(keys)},
+        Component: require("../../../src/pages${filePath}").default,
+        filePath: "src/pages${filePath}"
+      }
+    `;
+    });
+
   return fs.mkdirp(path.dirname(paths.appIndex)).pipe(
     mergeMap(() => {
       return fs.writefile(
@@ -12,33 +54,11 @@ module.exports = paths => {
         prettier.format(stripIndent`
           import makeApp from '@pigment/app/src/makeApp';
 
+          /* eslint-disable */
           const pages = [
-            {
-              pathname: "/404",
-              Component: require("../../../src/pages/404.js").default,
-              filePath: "src/pages/404.js"
-            },
-            {
-              pathname: "/",
-              Component: require("../../../src/pages/index.js").default,
-              filePath: "src/pages/index.js"
-            },
-            {
-              pathname: "/about",
-              Component: require("../../../src/pages/about.js").default,
-              filePath: "src/pages/404.js"
-            },
-            {
-              pathname: "/posts",
-              Component: require("../../../src/pages/posts/index.js").default,
-              filePath: "src/pages/posts/index.js"
-            },
-            {
-              pathname: "/posts/:post",
-              Component: require("../../../src/pages/posts/:post.js").default,
-              filePath: "src/pages/posts/:post.js"
-            }
+            ${pagesDefinitions.join(",")}
           ];
+          /* eslint-enable */
 
           const App = makeApp(pages);
 
