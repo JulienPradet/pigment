@@ -4,7 +4,9 @@ const makeApp = pages => {
   class App extends Component {
     render() {
       const path = this.props.history.location;
-      const currentPage = pages.find(({ route }) => route === path);
+      const currentPage =
+        pages.find(({ route }) => route === path) ||
+        pages.find(({ route }) => route === "/404");
       const Page = currentPage.Component;
       return <Page />;
     }

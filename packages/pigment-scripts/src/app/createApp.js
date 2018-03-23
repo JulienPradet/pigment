@@ -14,6 +14,10 @@ module.exports = paths => {
 
           const pages = [
             {
+              route: "/404",
+              Component: require("../../../src/pages/404.js").default
+            },
+            {
               route: "/",
               Component: require("../../../src/pages/index.js").default
             },
