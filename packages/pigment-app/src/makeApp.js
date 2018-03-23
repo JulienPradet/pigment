@@ -17,7 +17,10 @@ const makeApp = pages => {
           process.env.NODE_ENV === "development" &&
           typeof decorateWithLayout.prototype.render === "function"
         ) {
+          const currentFilePath = currentPage.filePath;
+
           console.warn(stripIndent`
+            ${currentFilePath}
             It seems that your page's layout is a React Component class.
             A layout must be a function in order not to unmount the whole page when you navigate in your app.
           `);

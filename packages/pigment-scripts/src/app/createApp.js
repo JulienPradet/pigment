@@ -15,23 +15,28 @@ module.exports = paths => {
           const pages = [
             {
               route: "/404",
-              Component: require("../../../src/pages/404.js").default
+              Component: require("../../../src/pages/404.js").default,
+              filePath: "src/pages/404.js"
             },
             {
               route: "/",
-              Component: require("../../../src/pages/index.js").default
+              Component: require("../../../src/pages/index.js").default,
+              filePath: "src/pages/index.js"
             },
             {
               route: "/about",
-              Component: require("../../../src/pages/about.js").default
+              Component: require("../../../src/pages/about.js").default,
+              filePath: "src/pages/404.js"
             },
             {
               route: "/posts",
-              Component: require("../../../src/pages/posts/index.js").default
+              Component: require("../../../src/pages/posts/index.js").default,
+              filePath: "src/pages/posts/index.js"
             },
             {
               route: "/posts/:post",
-              Component: require("../../../src/pages/posts/:post.js").default
+              Component: require("../../../src/pages/posts/:post.js").default,
+              filePath: "src/pages/posts/:post.js"
             }
           ];
 
