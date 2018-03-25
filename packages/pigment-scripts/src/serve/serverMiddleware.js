@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const { findCompiler, findStats } = require("./util");
@@ -14,15 +15,18 @@ module.exports = compiler => {
   compiler.plugin("done", stats => {
     try {
       const serverStats = findStats(stats, "server")[0].toJson();
-      const filename = path.join(
+      const serverFilename = path.join(
         outputPath,
         serverStats.assetsByChunkName.main
       );
-      const buffer = outputFs.readFileSync(filename);
-      serverRenderer = requireFromString(buffer.toString()).default({
+      const buffer = outputFs.readFileSync(serverFilename);
+      const makeServerRenderer = requireFromString(buffer.toString()).default;
+
+      serverRenderer = makeServerRenderer({
         clientStats: findStats(stats, "client")[0].toJson()
       });
     } catch (e) {
+      console.log(e);
       log("error", "An error occured when updating the server\n" + e.stack);
     }
   });

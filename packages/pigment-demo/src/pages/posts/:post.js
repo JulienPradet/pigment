@@ -6,4 +6,5 @@ const Post = props => {
 };
 
 Post.layout = PostLayout;
+
 export default Post;

@@ -7,9 +7,9 @@ module.exports = args => {
   process.env.NODE_ENV = "development";
 
   const paths = require("../config/paths")();
-  const createApp = require("../src/app/createApp");
-  const createClientEntry = require("../src/app/createClientEntry");
-  const createServerEntry = require("../src/app/createServerEntry");
+  const createApp = require("../src/generate/createApp");
+  const createClientEntry = require("../src/generate/createClientEntry");
+  const createServerEntry = require("../src/generate/createServerEntry");
 
   let served = null;
 
@@ -19,7 +19,7 @@ module.exports = args => {
       mergeMap(() => {
         const config = require("../config/webpack.config")(paths);
         const compiler = require("../src/webpack/createCompiler")(config);
-        const serve = require("@pigment/serve/src/serve");
+        const serve = require("../src/serve/serve");
 
         return Observable.create(observer => {
           const server = serve(paths, compiler);

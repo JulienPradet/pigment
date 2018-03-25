@@ -32,19 +32,26 @@ module.exports = paths => {
     .map(
       filePath => `/` + path.relative(path.join(paths.src, "pages"), filePath)
     )
-    .map(filePath => {
-      const path = filePathToRoute(filePath);
+    .map((filePath, index) => {
+      const route = filePathToRoute(filePath);
       const keys = [];
-      const regexp = pathToRegexp(path, keys);
+      const regexp = pathToRegexp(route, keys);
+
+      const importPath = path.relative(
+        path.dirname(paths.appIndex),
+        path.join(paths.src, "pages")
+      );
 
       return `
-      {
-        test: ${regexp.toString()},
-        pathKeys: ${JSON.stringify(keys)},
-        Component: require("../../../src/pages${filePath}").default,
-        filePath: "src/pages${filePath}"
-      }
-    `;
+        {
+          /* eslint-disable */
+          test: ${regexp.toString()},
+          /* eslint-enable */
+          pathKeys: ${JSON.stringify(keys)},
+          Component: require("${importPath}${filePath}").default,
+          filePath: "src/pages${filePath}"
+        }
+      `;
     });
 
   return fs.mkdirp(path.dirname(paths.appIndex)).pipe(
@@ -54,11 +61,9 @@ module.exports = paths => {
         prettier.format(stripIndent`
           import makeApp from '@pigment/app/src/makeApp';
 
-          /* eslint-disable */
           const pages = [
             ${pagesDefinitions.join(",")}
           ];
-          /* eslint-enable */
 
           const App = makeApp(pages);
 

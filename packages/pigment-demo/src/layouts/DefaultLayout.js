@@ -1,6 +1,10 @@
 import React from "react";
 import Header from "../modules/Header";
-import Footer from "../modules/Footer";
+import loadable from "loadable-components";
+
+const LoadableFooter = loadable(() => import("../modules/Footer"), {
+  LoadingComponent: () => <div>Loading...</div>
+});
 
 const DefaultLayout = props => {
   return (
@@ -9,7 +13,7 @@ const DefaultLayout = props => {
       <hr />
       {props.children}
       <hr />
-      <Footer />
+      <LoadableFooter />
     </div>
   );
 };

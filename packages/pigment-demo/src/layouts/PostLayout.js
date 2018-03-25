@@ -1,17 +1,15 @@
 import React from "react";
-import Header from "../modules/Header";
-import Footer from "../modules/Footer";
+import DefaultLayout from "./DefaultLayout";
 import PostList from "../modules/Posts/PostList";
 
-const DefaultLayout = ({ children }) => (
-  <div>
-    <Header />
-    <hr />
-    <PostList />
-    {children}
-    <hr />
-    <Footer />
-  </div>
-);
+const PostLayout = ({ children }) =>
+  DefaultLayout({
+    children: (
+      <>
+        <PostList />
+        {children}
+      </>
+    )
+  });
 
-export default DefaultLayout;
+export default PostLayout;

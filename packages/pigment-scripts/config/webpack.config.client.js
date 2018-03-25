@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = paths => {
@@ -6,10 +7,9 @@ module.exports = paths => {
   // tmp
   // node_modules/@pigment/*/src (userland)
   // packages/pigment-*/src (dev)
+  const { src, tmp } = paths;
   const shouldCompileRegExp = new RegExp(
-    `^(${paths.src}|${
-      paths.tmp
-    })|(node_modules\/@pigment\/[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
+    `^(${src}|${tmp})|(node_modules\/@pigment\/[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
   );
 
   return {
@@ -25,6 +25,18 @@ module.exports = paths => {
       filename: "static/js/[name].[hash].js",
       chunkFilename: "static/js/[name].[hash].js",
       publicPath: "/"
+    },
+    resolve: {
+      // Dedupplicate peer dependencies
+      alias: {
+        "loadable-components": require.resolve("loadable-components"),
+        "loadable-components/babel": require.resolve(
+          "loadable-components/babel"
+        ),
+        "loadable-components/server": require.resolve(
+          "loadable-components/server"
+        )
+      }
     },
     resolveLoader: {
       modules: paths.nodePaths
@@ -55,6 +67,7 @@ module.exports = paths => {
                 options: {
                   babelrc: false,
                   presets: [require.resolve("babel-preset-react-app")],
+                  plugins: [require.resolve("loadable-components/babel")],
                   cacheDirectory: paths.cacheBabel
                 }
               }

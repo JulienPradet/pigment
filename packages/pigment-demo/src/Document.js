@@ -4,7 +4,7 @@ const Document = ({ scripts, children }) => {
   return (
     <html>
       <body>
-        <div id="root" dangerouslySetInnerHTML={{ __html: children }} />
+        <div id="root">{children}</div>
         {scripts}
       </body>
     </html>
