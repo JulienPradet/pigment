@@ -14,10 +14,7 @@ module.exports = paths => {
             path.dirname(paths.clientEntry),
             paths.appIndex
           )}";
-          import {clientRenderApp} from "${path.relative(
-            path.dirname(paths.clientEntry),
-            path.join(__dirname, "../serve/clientRenderApp")
-          )}";
+          import {clientRenderApp} from "@pigment/app/src/clientRenderApp";
 
           clientRenderApp(App);
         `)

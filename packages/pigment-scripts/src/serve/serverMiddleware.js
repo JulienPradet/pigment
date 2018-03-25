@@ -22,9 +22,11 @@ module.exports = compiler => {
       const buffer = outputFs.readFileSync(serverFilename);
       const makeServerRenderer = requireFromString(buffer.toString()).default;
 
-      serverRenderer = makeServerRenderer({
-        clientStats: findStats(stats, "client")[0].toJson()
-      });
+      const clientStats = findStats(stats, "client")[0].toJson();
+      const script =
+        clientStats.publicPath + clientStats.assetsByChunkName.main[0];
+
+      serverRenderer = makeServerRenderer({ script });
     } catch (e) {
       console.log(e);
       log("error", "An error occured when updating the server\n" + e.stack);

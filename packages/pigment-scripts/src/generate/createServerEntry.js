@@ -18,10 +18,7 @@ module.exports = paths => {
             path.dirname(paths.serverEntry),
             path.join(paths.src, "Document.js")
           )}";
-          import {serverRenderApp} from "${path.relative(
-            path.dirname(paths.clientEntry),
-            path.join(__dirname, "../serve/serverRenderApp")
-          )}";
+          import {serverRenderApp} from "@pigment/app/src/serverRenderApp";
 
           export default serverRenderApp(Document, App);
         `)
