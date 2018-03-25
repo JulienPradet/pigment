@@ -38,7 +38,7 @@ module.exports = paths => {
       const regexp = pathToRegexp(route, keys);
 
       const importPath = path.relative(
-        path.dirname(paths.appIndex),
+        path.dirname(paths.pagesIndex),
         path.join(paths.src, "pages")
       );
 
@@ -49,25 +49,21 @@ module.exports = paths => {
           /* eslint-enable */
           pathKeys: ${JSON.stringify(keys)},
           Component: require("${importPath}${filePath}").default,
-          filePath: "src/pages${filePath}"
+          filePath: "${importPath}${filePath}"
         }
       `;
     });
 
-  return fs.mkdirp(path.dirname(paths.appIndex)).pipe(
+  return fs.mkdirp(path.dirname(paths.pagesIndex)).pipe(
     mergeMap(() => {
       return fs.writefile(
-        paths.appIndex,
+        paths.pagesIndex,
         prettier.format(stripIndent`
-          import makeApp from '@pigment/app/src/makeApp';
-
           const pages = [
             ${pagesDefinitions.join(",")}
           ];
 
-          const App = makeApp(pages);
-
-          export default App;
+          export default pages;
         `)
       );
     })

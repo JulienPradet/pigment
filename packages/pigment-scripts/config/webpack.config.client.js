@@ -18,7 +18,11 @@ module.exports = paths => {
     mode: "development",
     devtool: "cheap-module-source-map",
     entry: {
-      main: [paths.clientEntry]
+      main: [
+        require.resolve("webpack-hot-middleware/client") +
+          "?noInfo=true&name=client&reload=true&overlayWarnings=true",
+        paths.clientEntry
+      ]
     },
     output: {
       path: paths.buildClient,
@@ -85,7 +89,9 @@ module.exports = paths => {
       new CleanWebpackPlugin(paths.build, {
         verbose: false,
         root: process.cwd()
-      })
+      }),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin()
     ]
   };
 };

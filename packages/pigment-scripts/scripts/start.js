@@ -7,13 +7,13 @@ module.exports = args => {
   process.env.NODE_ENV = "development";
 
   const paths = require("../config/paths")();
-  const createApp = require("../src/generate/createApp");
+  const createPages = require("../src/generate/createPages");
   const createClientEntry = require("../src/generate/createClientEntry");
   const createServerEntry = require("../src/generate/createServerEntry");
 
   let served = null;
 
-  merge(createClientEntry(paths), createServerEntry(paths), createApp(paths))
+  merge(createClientEntry(paths), createServerEntry(paths), createPages(paths))
     .pipe(
       take(1),
       mergeMap(() => {

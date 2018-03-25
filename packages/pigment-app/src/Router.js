@@ -33,12 +33,8 @@ export const RouterContext = createContext("router");
 class Router extends Component {
   constructor(props) {
     super();
-    const page = getPage(props.initialRoute, props.pages);
-    const params = getParams(props.initialRoute, page);
     this.state = {
-      route: props.initialRoute,
-      params: params,
-      page: page
+      route: props.initialRoute
     };
     this.handlePopState = this.handlePopState.bind(this);
     this.push = this.push.bind(this);
@@ -53,12 +49,8 @@ class Router extends Component {
   }
 
   setRoute(route) {
-    const page = getPage(route, this.props.pages);
-    const params = getParams(route, page);
     this.setState({
-      route: route,
-      params: params,
-      page: page
+      route: route
     });
   }
 
@@ -77,8 +69,8 @@ class Router extends Component {
   }
 
   render() {
-    const page = this.state.page;
-    const params = this.state.params;
+    const page = getPage(this.state.route, this.props.pages);
+    const params = getParams(this.state.route, page);
 
     return (
       <RouterContext.Provider value={{ push: this.push }}>

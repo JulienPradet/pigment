@@ -10,16 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-scripts"
+    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-scripts"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.0.0-beta.38",
+    "@pigment/app": "0.0.0",
     "@pigment/fs": "0.0.0",
     "@pigment/log": "0.0.0",
-    "@pigment/app": "0.0.0",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-dynamic-import-node": "^1.2.0",
@@ -33,16 +32,18 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "express": "^4.16.2",
+    "loadable-components": "^1.1.1",
     "minimist": "^1.2.0",
     "path-to-regexp": "^2.2.0",
-    "rxjs": "^5.5.6",
-    "webpack": "^4.1.1",
-    "webpack-node-externals": "^1.6.0",
-    "express": "^4.16.2",
+    "react-hot-loader": "^4.0.0",
     "require-from-string": "^2.0.1",
+    "rxjs": "^5.5.6",
     "source-map-support": "^0.5.3",
+    "webpack": "^4.1.1",
     "webpack-dev-middleware": "^3.0.1",
-    "loadable-components": "^1.1.1"
+    "webpack-hot-middleware": "^2.21.2",
+    "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
     "react": "^16.3.0-alpha.3",
