@@ -1,5 +1,6 @@
 const path = require("path");
-const { from } = require("rxjs/observable/from");
+const fs = require("@pigment/fs");
+const { of } = require("rxjs/observable/of");
 const { tap, map, mergeMap } = require("rxjs/operators");
 const pathToRegexp = require("path-to-regexp");
 const writeGeneratedFile = require("./writeGeneratedFile");
@@ -29,7 +30,9 @@ const findPages = srcFolder => {
     path.join(srcFolder, "pages", "/posts/:post.js")
   ];
 
-  return from(pagesFilePaths);
+  return fs
+    .getRecursiveFiles(of(path.join(srcFolder, "pages")))
+    .pipe(map(({ filepath }) => filepath));
 };
 
 const mapPageToDefinition = (pageFolder, importFrom) => pageFilePath => {

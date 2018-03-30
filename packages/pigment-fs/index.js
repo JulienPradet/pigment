@@ -1,4 +1,6 @@
 const { Observable } = require("rxjs/Observable");
+const { of } = require("rxjs/observable/of");
+const { empty } = require("rxjs/observable/empty");
 const { mergeMap, map, expand, filter } = require("rxjs/operators");
 const fs = require("fs");
 const path = require("path");
@@ -91,9 +93,7 @@ function getRecursiveFiles(inputDir$) {
     })),
     expand(
       ({ filepath, stats, isDirectory }) =>
-        isDirectory
-          ? getRecursiveFiles(Observable.of(filepath))
-          : Observable.empty()
+        isDirectory ? getRecursiveFiles(of(filepath)) : empty()
     ),
     filter(({ isDirectory }) => !isDirectory),
     map(({ isDirectory, filepath, stats }) => ({ filepath, stats }))
@@ -111,7 +111,7 @@ function saveFiles(filesToSave$) {
 function copyfile(sourcePath, destPath, recursive = false) {
   let file$;
   if (recursive) {
-    file$ = getRecursiveFiles(Observable.of(sourcePath)).pipe(
+    file$ = getRecursiveFiles(of(sourcePath)).pipe(
       mergeMap(({ filepath }) =>
         copyfile(
           filepath,
