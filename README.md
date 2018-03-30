@@ -2,6 +2,8 @@
 
 An attempt at building a React Framework all batteries included.
 
+> 🚧 Not even an alpha yet 🚧
+
 It focuses on these primary goals:
 
 * Easily up and running
@@ -18,8 +20,8 @@ It focuses on these primary goals:
 
 ## Inspiration
 
-* Gatsby/Phenomic/Any Static Site Generator
 * Next.js
+* Gatsby/Phenomic/Any Static Site Generator
 * Create React App
 * Storybook
 
@@ -40,7 +42,7 @@ using it. I don't know what I'm doing, but I'm willing to experiment how far can
 it go.
 
 My blog already has this kind of features and it will most likely migrate to
-Pigment.js.
+Pigment.js sooner or later.
 
 # Roadmap
 
