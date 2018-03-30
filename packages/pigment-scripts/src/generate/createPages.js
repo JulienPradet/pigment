@@ -1,9 +1,10 @@
-const fs = require("@pigment/fs");
 const path = require("path");
-const { mergeMap } = require("rxjs/operators");
-const { stripIndent } = require("common-tags");
-const prettier = require("prettier");
+const { from } = require("rxjs/observable/from");
+const { tap, map, mergeMap } = require("rxjs/operators");
 const pathToRegexp = require("path-to-regexp");
+const writeGeneratedFile = require("./writeGeneratedFile");
+const reduceObservable = require("./reduceObservable");
+const { stripIndent } = require("common-tags");
 
 const filePathToRoute = filePath => {
   let path = filePath;
@@ -19,53 +20,53 @@ const filePathToRoute = filePath => {
   return path;
 };
 
-module.exports = paths => {
+const findPages = srcFolder => {
   const pagesFilePaths = [
-    path.join(paths.src, "pages", "/404.js"),
-    path.join(paths.src, "pages", "/index.js"),
-    path.join(paths.src, "pages", "/about.js"),
-    path.join(paths.src, "pages", "/posts/index.js"),
-    path.join(paths.src, "pages", "/posts/:post.js")
+    path.join(srcFolder, "pages", "/404.js"),
+    path.join(srcFolder, "pages", "/index.js"),
+    path.join(srcFolder, "pages", "/about.js"),
+    path.join(srcFolder, "pages", "/posts/index.js"),
+    path.join(srcFolder, "pages", "/posts/:post.js")
   ];
 
-  const pagesDefinitions = pagesFilePaths
-    .map(
-      filePath => `/` + path.relative(path.join(paths.src, "pages"), filePath)
-    )
-    .map((filePath, index) => {
-      const route = filePathToRoute(filePath);
-      const keys = [];
-      const regexp = pathToRegexp(route, keys);
+  return from(pagesFilePaths);
+};
 
-      const importPath = path.relative(
-        path.dirname(paths.pagesIndex),
-        path.join(paths.src, "pages")
-      );
+const mapPageToDefinition = (pageFolder, importFrom) => pageFilePath => {
+  const canonicalPagePath = `/` + path.relative(pageFolder, pageFilePath);
+  const importPath = path.join(
+    path.relative(path.dirname(importFrom), pageFolder),
+    canonicalPagePath
+  );
 
-      return `
-        {
-          /* eslint-disable */
-          test: ${regexp.toString()},
-          /* eslint-enable */
-          pathKeys: ${JSON.stringify(keys)},
-          Component: require("${importPath}${filePath}").default,
-          filePath: "${importPath}${filePath}"
-        }
+  const route = filePathToRoute(canonicalPagePath);
+  const keys = [];
+  const regexp = pathToRegexp(route, keys);
+
+  return stripIndent`
+    {
+      test: ${regexp.toString()},
+      pathKeys: ${JSON.stringify(keys)},
+      Component: require("${importPath}").default,
+      filePath: "${importPath}"
+    }
+  `;
+};
+
+module.exports = paths => {
+  return findPages(paths.src).pipe(
+    map(mapPageToDefinition(path.join(paths.src, "pages"), paths.pagesIndex)),
+    reduceObservable((acc, pageDefinition) => [...acc, pageDefinition], []),
+    map(pagesDefinitions => {
+      return stripIndent`
+        /* eslint no-useless-escape: 0 */
+        const pages = [
+          ${pagesDefinitions.join(",")}
+        ];
+
+        export default pages;
       `;
-    });
-
-  return fs.mkdirp(path.dirname(paths.pagesIndex)).pipe(
-    mergeMap(() => {
-      return fs.writefile(
-        paths.pagesIndex,
-        prettier.format(stripIndent`
-          const pages = [
-            ${pagesDefinitions.join(",")}
-          ];
-
-          export default pages;
-        `)
-      );
-    })
+    }),
+    writeGeneratedFile(paths.pagesIndex)
   );
 };
