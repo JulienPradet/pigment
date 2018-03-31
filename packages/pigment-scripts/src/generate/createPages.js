@@ -1,7 +1,8 @@
 const path = require("path");
 const fs = require("@pigment/fs");
 const { of } = require("rxjs/observable/of");
-const { tap, map, mergeMap } = require("rxjs/operators");
+const { interval } = require("rxjs/observable/interval");
+const { filter, tap, map, switchMap, debounceTime } = require("rxjs/operators");
 const pathToRegexp = require("path-to-regexp");
 const writeGeneratedFile = require("./writeGeneratedFile");
 const reduceObservable = require("./reduceObservable");
@@ -32,7 +33,10 @@ const findPages = srcFolder => {
 
   return fs
     .getRecursiveFiles(of(path.join(srcFolder, "pages")))
-    .pipe(map(({ filepath }) => filepath));
+    .pipe(
+      map(({ filepath }) => filepath),
+      filter(filepath => filepath.endsWith(".js"))
+    );
 };
 
 const mapPageToDefinition = (pageFolder, importFrom) => pageFilePath => {
@@ -56,20 +60,29 @@ const mapPageToDefinition = (pageFolder, importFrom) => pageFilePath => {
   `;
 };
 
-module.exports = paths => {
-  return findPages(paths.src).pipe(
-    map(mapPageToDefinition(path.join(paths.src, "pages"), paths.pagesIndex)),
-    reduceObservable((acc, pageDefinition) => [...acc, pageDefinition], []),
-    map(pagesDefinitions => {
-      return stripIndent`
-        /* eslint no-useless-escape: 0 */
-        const pages = [
-          ${pagesDefinitions.join(",")}
-        ];
+module.exports = (paths, watch = false) => {
+  const pageFolder = path.join(paths.src, "pages");
+  return fs.watch(pageFolder).pipe(
+    filter(
+      ({ event, path, details }) => event === "rename" && path.endsWith(".js")
+    ),
+    debounceTime(20),
+    switchMap(() =>
+      findPages(paths.src).pipe(
+        map(mapPageToDefinition(pageFolder, paths.pagesIndex)),
+        reduceObservable((acc, pageDefinition) => [...acc, pageDefinition], []),
+        map(pagesDefinitions => {
+          return stripIndent`
+            /* eslint no-useless-escape: 0 */
+            const pages = [
+              ${pagesDefinitions.join(",")}
+            ];
 
-        export default pages;
-      `;
-    }),
-    writeGeneratedFile(paths.pagesIndex)
+            export default pages;
+          `;
+        }),
+        writeGeneratedFile(paths.pagesIndex)
+      )
+    )
   );
 };

@@ -1,6 +1,6 @@
 const { Observable } = require("rxjs/Observable");
 const { merge } = require("rxjs/observable/merge");
-const { mergeMap, take } = require("rxjs/operators");
+const { mergeMap, takeUntil, share, first, last } = require("rxjs/operators");
 
 module.exports = args => {
   process.env.BABEL_ENV = "development";
@@ -13,28 +13,38 @@ module.exports = args => {
 
   let served = null;
 
-  merge(createClientEntry(paths), createServerEntry(paths), createPages(paths))
-    .pipe(
-      take(1),
-      mergeMap(() => {
-        const config = require("../config/webpack.config")(paths);
-        const compiler = require("../src/webpack/createCompiler")(config);
-        const serve = require("../src/serve/serve");
+  const generateFiles$ = merge(
+    createClientEntry(paths),
+    createServerEntry(paths),
+    createPages(paths)
+  ).pipe(share());
 
-        return Observable.create(observer => {
-          const server = serve(paths, compiler);
-          observer.next();
-          server.on("close", () => {
-            observer.complete();
-          });
+  const serveApp$ = generateFiles$.pipe(
+    first(),
+    mergeMap(() => {
+      const config = require("../config/webpack.config")(paths);
+      const compiler = require("../src/webpack/createCompiler")(config);
+      const serve = require("../src/serve/serve");
+
+      return Observable.create(observer => {
+        const server = serve(paths, compiler);
+        observer.next();
+        server.on("close", () => {
+          observer.complete();
         });
-      })
-    )
-    .subscribe(
-      () => {},
-      err => console.error(err),
-      () => {
-        process.exit(0);
-      }
-    );
+      });
+    }),
+    share()
+  );
+
+  merge(
+    serveApp$,
+    generateFiles$.pipe(takeUntil(serveApp$.pipe(last())))
+  ).subscribe(
+    () => {},
+    err => console.error(err),
+    () => {
+      process.exit(0);
+    }
+  );
 };

@@ -16,11 +16,13 @@ function exists(filePath) {
   });
 }
 
-function watchfile(filePath) {
+function watch(paths) {
   return Observable.create(observer => {
-    chokidar.watch(filePath, { persistent: true }).on("change", () => {
-      observer.next();
-    });
+    chokidar
+      .watch(paths, { persistent: true })
+      .on("raw", (event, path, details) => {
+        observer.next({ event, path, details });
+      });
   });
 }
 
@@ -144,7 +146,7 @@ function copyfile(sourcePath, destPath, recursive = false) {
 
 module.exports = {
   exists,
-  watchfile,
+  watch,
   readdir,
   readfile,
   writefile,
