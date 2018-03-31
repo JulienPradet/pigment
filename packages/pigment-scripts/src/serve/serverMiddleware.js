@@ -28,8 +28,10 @@ module.exports = compiler => {
 
       serverRenderer = makeServerRenderer({ script });
     } catch (e) {
-      console.log(e);
-      log("error", "An error occured when updating the server\n" + e.stack);
+      log.message(
+        "error",
+        "An error occured when updating the server\n" + e.stack
+      );
     }
   });
 
