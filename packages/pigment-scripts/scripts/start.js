@@ -37,10 +37,11 @@ module.exports = args => {
     share()
   );
 
-  merge(
-    serveApp$,
-    generateFiles$.pipe(takeUntil(serveApp$.pipe(last())))
-  ).subscribe(
+  const watchGeneratedFiles$ = generateFiles$.pipe(
+    takeUntil(serveApp$.pipe(last()))
+  );
+
+  merge(serveApp$, watchGeneratedFiles$).subscribe(
     () => {},
     err => console.error(err),
     () => {
