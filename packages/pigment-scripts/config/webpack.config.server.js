@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const fs = require("fs");
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
@@ -10,16 +11,52 @@ module.exports = paths => {
   // packages/pigment-*/src (dev)
   const { src, tmp } = paths;
   const shouldCompileRegExp = new RegExp(
-    `^(${src}|${tmp})|(node_modules\/@pigment\/[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
+    `^(${src}|${tmp})|(@pigment\/[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
   );
+
+  const modules = paths.nodePaths
+    .filter(path => {
+      try {
+        fs.accessSync(path);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    })
+    .map(modulesPath =>
+      fs
+        .readdirSync(modulesPath)
+        .map(moduleName => path.join(modulesPath, moduleName))
+    )
+    .reduce((acc, curr) => [...acc, ...curr], []);
 
   return {
     name: "server",
     target: "node",
     externals: [
-      nodeExternals({
-        whitelist: [/^(lodash|@?pigment)/]
-      })
+      (context, request, callback) => {
+        const req = request.startsWith(".")
+          ? path.join(context, request)
+          : request;
+
+        if (shouldCompileRegExp.test(req)) {
+          return callback();
+        }
+
+        const moduleName = req.replace(/\/.*$/, "");
+        const fullModulePath = modules.find(module =>
+          module.endsWith(moduleName)
+        );
+
+        if (fullModulePath) {
+          callback(
+            null,
+            "commonjs " + path.join(fullModulePath, req.replace(moduleName, ""))
+          );
+        } else {
+          callback();
+        }
+      }
     ],
     node: {
       // The __dirname will be the original __dirname of the file
@@ -29,7 +66,8 @@ module.exports = paths => {
     mode: "development",
     devtool: "inline-cheap-source-map",
     entry: {
-      main: [paths.serverEntry]
+      ssr: [paths.ssrEntry],
+      graphql: [paths.graphQLEntry]
     },
     output: {
       path: paths.buildServer,
@@ -39,15 +77,12 @@ module.exports = paths => {
       libraryTarget: "commonjs2"
     },
     resolve: {
+      // Resolve any dependency of the pigment packages
+      modules: paths.nodePaths,
       // Dedupplicate peer dependencies
       alias: {
         "loadable-components": require.resolve("loadable-components"),
-        "loadable-components/babel": require.resolve(
-          "loadable-components/babel"
-        ),
-        "loadable-components/server": require.resolve(
-          "loadable-components/server"
-        )
+        express: require.resolve("express")
       }
     },
     resolveLoader: {

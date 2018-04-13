@@ -6,15 +6,15 @@ const writeGeneratedFile = require("./writeGeneratedFile");
 module.exports = paths => {
   return of(stripIndent`
     import pages from "./${path.relative(
-      path.dirname(paths.serverEntry),
+      path.dirname(paths.ssrEntry),
       paths.pagesIndex
     )}";
     import Document from "./${path.relative(
-      path.dirname(paths.serverEntry),
+      path.dirname(paths.ssrEntry),
       path.join(paths.src, "Document.js")
     )}";
-    import {serverRenderApp} from "@pigment/app/src/serverRenderApp";
+    import {ssrMiddleware} from "@pigment/app/src/ssrMiddleware";
 
-    export default serverRenderApp(Document, pages);
-  `).pipe(writeGeneratedFile(paths.serverEntry));
+    export default ssrMiddleware(Document, pages);
+  `).pipe(writeGeneratedFile(paths.ssrEntry));
 };

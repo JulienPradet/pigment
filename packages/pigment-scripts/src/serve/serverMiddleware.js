@@ -10,23 +10,41 @@ module.exports = compiler => {
   const outputFs = serverCompiler.outputFileSystem;
   const outputPath = serverCompiler.outputPath;
 
-  let serverRenderer;
+  let ssrMiddleware;
+  let graphQLMiddleware;
+
+  const makeSsrMiddleware = stats => {
+    const serverStats = findStats(stats, "server")[0].toJson();
+    const ssrFilename = path.join(
+      outputPath,
+      serverStats.assetsByChunkName.ssr
+    );
+    const buffer = outputFs.readFileSync(ssrFilename);
+    const ssrMiddleware = requireFromString(buffer.toString()).default;
+
+    const clientStats = findStats(stats, "client")[0].toJson();
+    const script =
+      clientStats.publicPath + clientStats.assetsByChunkName.main[0];
+
+    return ssrMiddleware({ script });
+  };
+
+  const makeGraphQLMiddleware = stats => {
+    const serverStats = findStats(stats, "server")[0].toJson();
+    const graphQLFilename = path.join(
+      outputPath,
+      serverStats.assetsByChunkName.graphql
+    );
+    const buffer = outputFs.readFileSync(graphQLFilename);
+    const graphQLMiddleware = requireFromString(buffer.toString()).default;
+
+    return graphQLMiddleware;
+  };
 
   compiler.plugin("done", stats => {
     try {
-      const serverStats = findStats(stats, "server")[0].toJson();
-      const serverFilename = path.join(
-        outputPath,
-        serverStats.assetsByChunkName.main
-      );
-      const buffer = outputFs.readFileSync(serverFilename);
-      const makeServerRenderer = requireFromString(buffer.toString()).default;
-
-      const clientStats = findStats(stats, "client")[0].toJson();
-      const script =
-        clientStats.publicPath + clientStats.assetsByChunkName.main[0];
-
-      serverRenderer = makeServerRenderer({ script });
+      ssrMiddleware = makeSsrMiddleware(stats);
+      graphQLMiddleware = makeGraphQLMiddleware(stats);
     } catch (e) {
       log.message(
         "error",
@@ -40,8 +58,11 @@ module.exports = compiler => {
 
   const router = express.Router();
 
-  router.get("*", (req, res, next) => {
-    serverRenderer(req, res, next);
+  router.use((req, res, next) => {
+    graphQLMiddleware.handle(req, res, next);
+  });
+  router.use((req, res, next) => {
+    ssrMiddleware.handle(req, res, next);
   });
 
   return router;

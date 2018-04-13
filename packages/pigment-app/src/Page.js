@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import stripIndent from "common-tags/es/stripIndent";
+import stripIndent from "common-tags/lib/stripIndent";
 
 class Page extends Component {
   constructor(props) {

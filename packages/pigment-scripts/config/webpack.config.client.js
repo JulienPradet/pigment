@@ -33,13 +33,7 @@ module.exports = paths => {
     resolve: {
       // Dedupplicate peer dependencies
       alias: {
-        "loadable-components": require.resolve("loadable-components"),
-        "loadable-components/babel": require.resolve(
-          "loadable-components/babel"
-        ),
-        "loadable-components/server": require.resolve(
-          "loadable-components/server"
-        )
+        "loadable-components": require.resolve("loadable-components")
       }
     },
     resolveLoader: {
