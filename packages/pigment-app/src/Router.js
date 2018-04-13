@@ -1,4 +1,5 @@
 import React, { Component, createContext } from "react";
+import Page from "./Page";
 
 export const toRoute = route => {
   if (typeof route === "string") {
@@ -79,7 +80,7 @@ class Router extends Component {
 
     return (
       <RouterContext.Provider value={{ push: this.push }}>
-        {this.props.children({ params, page })}
+        <Page params={params} page={page} />
       </RouterContext.Provider>
     );
   }
