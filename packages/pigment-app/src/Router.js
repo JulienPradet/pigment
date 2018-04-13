@@ -44,6 +44,7 @@ class Router extends Component {
     };
     this.handlePopState = this.handlePopState.bind(this);
     this.push = this.push.bind(this);
+    this.preload = this.preload.bind(this);
   }
 
   componentDidMount() {
@@ -74,12 +75,20 @@ class Router extends Component {
     window.history.pushState({}, null, route.pathname);
   }
 
+  preload(route) {
+    route = toRoute(route);
+    const page = getPage(this.state.route, this.props.pages);
+    Page.preload(page);
+  }
+
   render() {
     const page = getPage(this.state.route, this.props.pages);
     const params = getParams(this.state.route, page);
 
     return (
-      <RouterContext.Provider value={{ push: this.push }}>
+      <RouterContext.Provider
+        value={{ push: this.push, preload: this.preload }}
+      >
         <Page params={params} page={page} />
       </RouterContext.Provider>
     );

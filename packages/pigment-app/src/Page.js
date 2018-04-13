@@ -65,4 +65,8 @@ class Page extends Component {
   }
 }
 
+Page.preload = page => {
+  page.loadComponent();
+};
+
 export default Page;

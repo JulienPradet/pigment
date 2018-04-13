@@ -4,9 +4,10 @@ import { RouterContext } from "./Router";
 const Link = ({ to, children }) => {
   return (
     <RouterContext.Consumer>
-      {({ push }) => (
+      {({ push, preload }) => (
         <a
           href={to}
+          onMouseEnter={() => preload(to)}
           onClick={event => {
             event.preventDefault();
             push(to);
