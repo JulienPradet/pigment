@@ -11,7 +11,7 @@ const DefaultLayout = props => {
     <div>
       <Header />
       <hr />
-      {props.children}
+      {props.loadingNextPage ? "Loading..." : props.children}
       <hr />
       <LoadableFooter />
     </div>
