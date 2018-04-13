@@ -1,11 +1,16 @@
 import React, { Component, createContext } from "react";
 
-const toRoute = route => {
+export const toRoute = route => {
   if (typeof route === "string") {
     return { pathname: route };
   } else {
     return route;
   }
+};
+
+export const loadFirstRoute = (route, pages) => {
+  const page = getPage(route, pages);
+  return page.loadComponent();
 };
 
 const getPage = (route, pages) => {

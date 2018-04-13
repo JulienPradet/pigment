@@ -80,7 +80,6 @@ module.exports = paths => {
                   babelrc: false,
                   presets: [require.resolve("babel-preset-react-app")],
                   plugins: [
-                    require.resolve("loadable-components/babel"),
                     require.resolve("babel-plugin-dynamic-import-node")
                   ],
                   cacheDirectory: paths.cacheBabel

@@ -11,30 +11,17 @@ module.exports = paths => {
 
   return of(
     stripIndent`
-    import pages from "${pagesPath}";
-    import React from "react";
-    import ReactDOM from "react-dom";
-    import { loadComponents } from "loadable-components";
-    import App from "@pigment/app/src/App";
+      import pages from "${pagesPath}";
+      import clientRenderApp from "@pigment/app/src/clientRenderApp";
 
-    const url = new URL(window.location.href);
+      clientRenderApp(pages)
 
-    loadComponents().then(() => {
-      ReactDOM.hydrate(
-        <App pages={pages} initialRoute={{ pathname: url.pathname }} />,
-        document.getElementById("root")
-      );
-    });
-
-    if (module.hot) {
-      module.hot.accept("${pagesPath}", () => {
-        const pages = require("${pagesPath}").default;
-        ReactDOM.render(
-          <App pages={pages} initialRoute={{ pathname: url.pathname }} />,
-          document.getElementById("root")
-        );
-      });
-    }
-  `
+      if (module.hot) {
+        module.hot.accept("${pagesPath}", () => {
+          const pages = require("${pagesPath}").default;
+          clientRenderApp(pages)
+        });
+      }
+    `
   ).pipe(writeGeneratedFile(paths.clientEntry));
 };

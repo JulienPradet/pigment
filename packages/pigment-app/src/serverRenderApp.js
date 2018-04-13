@@ -1,23 +1,23 @@
 const React = require("react");
 const { renderToNodeStream } = require("react-dom/server");
-const { getLoadableState } = require("loadable-components/server");
 const App = require("./App").default;
+const { toRoute, loadFirstRoute } = require("./Router");
 
 const serverRenderApp = (Document, pages) => ({ script }) => (
   req,
   res,
   next
 ) => {
-  const app = (
-    <App pages={pages} initialRoute={{ pathname: req.originalUrl }} />
-  );
-  getLoadableState(app).then(loadableState => {
+  const route = toRoute(req.originalUrl);
+  loadFirstRoute(route, pages).then(Component => {
+    const app = (
+      <App pages={pages} initialRoute={route} initialComponent={Component} />
+    );
     res.write(`<!DOCTYPE html>`);
     renderToNodeStream(
       <Document
         scripts={
           <>
-            {loadableState.getScriptElement()}
             <script type="text/javascript" src={script} />
           </>
         }

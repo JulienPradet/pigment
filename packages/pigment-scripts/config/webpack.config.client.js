@@ -20,14 +20,14 @@ module.exports = paths => {
     entry: {
       main: [
         require.resolve("webpack-hot-middleware/client") +
-          "?noInfo=true&name=client&reload=true&overlayWarnings=true",
+          "?name=client&reload=true&overlayWarnings=true",
         paths.clientEntry
       ]
     },
     output: {
       path: paths.buildClient,
-      filename: "static/js/[name].[hash].js",
-      chunkFilename: "static/js/[name].[hash].js",
+      filename: "static/js/[name].[hash:8].js",
+      chunkFilename: "static/js/[name].[hash:8].js",
       publicPath: "/"
     },
     resolve: {
@@ -71,7 +71,6 @@ module.exports = paths => {
                 options: {
                   babelrc: false,
                   presets: [require.resolve("babel-preset-react-app")],
-                  plugins: [require.resolve("loadable-components/babel")],
                   cacheDirectory: paths.cacheBabel
                 }
               }

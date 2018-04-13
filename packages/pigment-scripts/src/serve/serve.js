@@ -5,7 +5,12 @@ const log = require("@pigment/log")("SERVER");
 
 const createAppRouter = compiler => {
   const router = express.Router();
-  router.use(require("webpack-hot-middleware")(compiler, { log: false }));
+  router.use(
+    require("webpack-hot-middleware")(
+      compiler.compilers.find(({ name }) => name === "client"),
+      { log: false }
+    )
+  );
   router.use(clientMiddleware(compiler));
   router.use(serverMiddleware(compiler));
   return router;
