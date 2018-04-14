@@ -29,14 +29,6 @@ const filePathToRoute = filePath => {
 };
 
 const findPages = pagesFolder => {
-  const pagesFilePaths = [
-    path.join(pagesFolder, "/404.js"),
-    path.join(pagesFolder, "/index.js"),
-    path.join(pagesFolder, "/about.js"),
-    path.join(pagesFolder, "/posts/index.js"),
-    path.join(pagesFolder, "/posts/:post.js")
-  ];
-
   return fs
     .getRecursiveFiles(of(pagesFolder))
     .pipe(
