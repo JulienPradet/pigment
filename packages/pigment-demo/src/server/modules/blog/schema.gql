@@ -1,0 +1,14 @@
+type Query {
+  blog: Blog
+}
+
+type Blog {
+  posts(from: Int, to: Int): [Post]
+  post(path: String): Post
+}
+
+type Post {
+  path: String
+  title: String
+  content: String
+}

@@ -25,6 +25,7 @@ module.exports = () => {
     cacheEslint: resolveApp("var/cache/eslint"),
     src: resolveApp("src"),
     pages: resolveApp("src/client/pages"),
+    graphqlModules: resolveApp("src/server/modules"),
     public: resolveApp("public"),
     nodePaths: [
       resolveApp("node_modules"),

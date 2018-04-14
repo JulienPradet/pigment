@@ -120,6 +120,11 @@ module.exports = paths => {
                   cacheDirectory: paths.cacheBabel
                 }
               }
+            },
+            {
+              test: /\.(graphql|gql)$/,
+              include: input => shouldCompileRegExp.test(input),
+              loader: "graphql-tag/loader"
             }
           ]
         }

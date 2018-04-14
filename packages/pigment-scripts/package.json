@@ -34,6 +34,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "express": "^4.16.2",
+    "graphql": "^0.13.2",
     "loadable-components": "^1.1.1",
     "minimist": "^1.2.0",
     "path-to-regexp": "^2.2.0",
@@ -47,6 +48,7 @@
     "webpack-node-externals": "^1.6.0"
   },
   "devDependencies": {
+    "graphql-tag": "^2.8.0",
     "react": "^16.3.0-alpha.3",
     "react-dom": "^16.3.0-alpha.3"
   },
