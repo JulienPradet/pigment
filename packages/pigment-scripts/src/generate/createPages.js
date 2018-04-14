@@ -28,28 +28,28 @@ const filePathToRoute = filePath => {
   return path;
 };
 
-const findPages = srcFolder => {
+const findPages = pagesFolder => {
   const pagesFilePaths = [
-    path.join(srcFolder, "pages", "/404.js"),
-    path.join(srcFolder, "pages", "/index.js"),
-    path.join(srcFolder, "pages", "/about.js"),
-    path.join(srcFolder, "pages", "/posts/index.js"),
-    path.join(srcFolder, "pages", "/posts/:post.js")
+    path.join(pagesFolder, "/404.js"),
+    path.join(pagesFolder, "/index.js"),
+    path.join(pagesFolder, "/about.js"),
+    path.join(pagesFolder, "/posts/index.js"),
+    path.join(pagesFolder, "/posts/:post.js")
   ];
 
   return fs
-    .getRecursiveFiles(of(path.join(srcFolder, "pages")))
+    .getRecursiveFiles(of(pagesFolder))
     .pipe(
       map(({ filepath }) => filepath),
       filter(filepath => filepath.endsWith(".js"))
     );
 };
 
-const mapPageToDefinition = (pageFolder, importFrom) => pageFilePath => {
-  const pagePath = path.relative(pageFolder, pageFilePath);
+const mapPageToDefinition = (pagesFolder, importFrom) => pageFilePath => {
+  const pagePath = path.relative(pagesFolder, pageFilePath);
   const canonicalPagePath = `/` + pagePath;
   const importPath = path.join(
-    path.relative(path.dirname(importFrom), pageFolder),
+    path.relative(path.dirname(importFrom), pagesFolder),
     canonicalPagePath
   );
 
@@ -69,9 +69,9 @@ const mapPageToDefinition = (pageFolder, importFrom) => pageFilePath => {
   `;
 };
 
-const generatePages = (paths, pageFolder) => {
-  return findPages(paths.src).pipe(
-    map(mapPageToDefinition(pageFolder, paths.pagesIndex)),
+const generatePages = paths => {
+  return findPages(paths.pages).pipe(
+    map(mapPageToDefinition(paths.pages, paths.pagesIndex)),
     reduceObservable((acc, pageDefinition) => [...acc, pageDefinition], []),
     map(pagesDefinitions => {
       return stripIndent`
@@ -90,19 +90,18 @@ const generatePages = (paths, pageFolder) => {
 };
 
 module.exports = (paths, watch = false) => {
-  const pageFolder = path.join(paths.src, "pages");
-  return generatePages(paths, pageFolder).pipe(
+  return generatePages(paths).pipe(
     first(),
     switchMap(() =>
       fs
-        .watch(pageFolder)
+        .watch(paths.pages)
         .pipe(
           filter(
             ({ event, path, details }) =>
               event === "rename" && path.endsWith(".js")
           ),
           debounceTime(20),
-          switchMap(() => generatePages(paths, pageFolder))
+          switchMap(() => generatePages(paths))
         )
     )
   );

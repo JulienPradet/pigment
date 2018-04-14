@@ -24,6 +24,7 @@ module.exports = () => {
     cacheBabel: resolveApp("var/cache/babel"),
     cacheEslint: resolveApp("var/cache/eslint"),
     src: resolveApp("src"),
+    pages: resolveApp("src/client/pages"),
     public: resolveApp("public"),
     nodePaths: [
       resolveApp("node_modules"),
