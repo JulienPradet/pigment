@@ -1,5 +1,5 @@
 const posts = new Array(23).fill(null).map((_, index) => ({
-  path: `/post/${index}`,
+  path: `/posts/${index}`,
   title: `Post ${index}`,
   content: `Hello post ${index}!`
 }));

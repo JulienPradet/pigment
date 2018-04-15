@@ -2,6 +2,8 @@ const webpack = require("webpack");
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
+const publicPath = "/";
+
 module.exports = paths => {
   // src
   // tmp
@@ -28,7 +30,7 @@ module.exports = paths => {
       path: paths.buildClient,
       filename: "static/js/[name].[hash:8].js",
       chunkFilename: "static/js/[name].[hash:8].js",
-      publicPath: "/"
+      publicPath: publicPath
     },
     resolve: {
       // Dedupplicate peer dependencies
@@ -58,6 +60,11 @@ module.exports = paths => {
         {
           oneOf: [
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: "javascript/auto"
+            },
+            {
               test: /\.js$/,
               include: input => shouldCompileRegExp.test(input),
               use: {
@@ -68,6 +75,11 @@ module.exports = paths => {
                   cacheDirectory: paths.cacheBabel
                 }
               }
+            },
+            {
+              test: /\.(graphql|gql)$/,
+              include: input => shouldCompileRegExp.test(input),
+              loader: "graphql-tag/loader"
             }
           ]
         }
@@ -76,7 +88,8 @@ module.exports = paths => {
     plugins: [
       new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production")
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production"),
+          PUBLIC_URL: JSON.stringify("http://localhost:3000" + publicPath)
         }
       }),
       new CleanWebpackPlugin(paths.build, {

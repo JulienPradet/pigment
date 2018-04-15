@@ -13,13 +13,19 @@ module.exports = paths => {
     stripIndent`
       import pages from "${pagesPath}";
       import clientRenderApp from "@pigment/app/src/clientRenderApp";
+      import makeApolloClient from "@pigment/app/src/makeApolloClient";
 
-      clientRenderApp(pages)
+      const apolloClient = makeApolloClient({
+        uri: "/graphql",
+        fetch: fetch
+      })
+
+      clientRenderApp(pages, apolloClient)
 
       if (module.hot) {
         module.hot.accept("${pagesPath}", () => {
           const pages = require("${pagesPath}").default;
-          clientRenderApp(pages)
+          clientRenderApp(pages, apolloClient)
         });
       }
     `

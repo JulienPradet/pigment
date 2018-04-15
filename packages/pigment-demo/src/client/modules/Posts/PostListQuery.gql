@@ -1,0 +1,8 @@
+query PostListQuery {
+  blog {
+    posts {
+      path
+      title
+    }
+  }
+}

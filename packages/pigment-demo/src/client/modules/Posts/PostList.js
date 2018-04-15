@@ -1,17 +1,29 @@
 import React from "react";
 import Link from "@pigment/app/src/Link";
+import Query from "@pigment/app/src/Query";
+import PostListQuery from "./PostListQuery.gql";
 
 const PostList = () => {
   return (
     <div>
-      <ul>
-        <li>
-          <Link to="/posts/toto">Toto</Link>
-        </li>
-        <li>
-          <Link to="/posts/tata">Tata</Link>
-        </li>
-      </ul>
+      <Query query={PostListQuery}>
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error :(</p>;
+
+          return (
+            <ul>
+              {data.blog.posts.map(post => {
+                return (
+                  <li key={post.path}>
+                    <Link to={post.path}>{post.title}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          );
+        }}
+      </Query>
     </div>
   );
 };

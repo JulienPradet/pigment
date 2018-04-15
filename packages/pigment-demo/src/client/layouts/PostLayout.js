@@ -4,11 +4,11 @@ import PostList from "../modules/Posts/PostList";
 
 const PostLayout = ({ children, loadingNextPage }) =>
   DefaultLayout({
-    loadingNextPage: loadingNextPage,
+    loadingNextPage: false,
     children: (
       <>
         <PostList />
-        {children}
+        {loadingNextPage ? <div>Loading...</div> : children}
       </>
     )
   });

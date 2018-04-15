@@ -4,6 +4,8 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
+const publicPath = "/";
+
 module.exports = paths => {
   // src
   // tmp
@@ -73,7 +75,7 @@ module.exports = paths => {
       path: paths.buildServer,
       filename: "[name].[hash].js",
       chunkFilename: "[name].[hash].js",
-      publicPath: "/",
+      publicPath: publicPath,
       libraryTarget: "commonjs2"
     },
     resolve: {
@@ -107,6 +109,11 @@ module.exports = paths => {
         {
           oneOf: [
             {
+              test: /\.mjs$/,
+              include: /node_modules/,
+              type: "javascript/auto"
+            },
+            {
               test: /\.js$/,
               include: input => shouldCompileRegExp.test(input),
               use: {
@@ -133,7 +140,8 @@ module.exports = paths => {
     plugins: [
       new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production")
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production"),
+          PUBLIC_URL: JSON.stringify("http://localhost:3000" + publicPath)
         }
       }),
       new CleanWebpackPlugin(paths.build, {
