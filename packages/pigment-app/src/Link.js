@@ -1,16 +1,16 @@
 import React from "react";
 import { RouterContext } from "./Router";
 
-const Link = ({ to, children }) => {
+const Link = ({ to, as, children }) => {
   return (
     <RouterContext.Consumer>
       {({ push, preload }) => (
         <a
           href={to}
-          onMouseEnter={() => preload(to)}
+          onMouseEnter={() => preload(as)}
           onClick={event => {
             event.preventDefault();
-            push(to);
+            push(to, as || to);
           }}
         >
           {children}

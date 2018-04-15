@@ -1,0 +1,5 @@
+query FirstRouteQuery($path: String!) {
+  matchUrl(path: $path) {
+    pagePath
+  }
+}

@@ -6,8 +6,8 @@ const resolvers = {
     posts: (_, { from = 0, to = 10 }, { loader }) => {
       return loader.loadList(from, to);
     },
-    post: (_, { path }, { loader }) => {
-      return loader.load(path);
+    post: (_, { id }, { loader }) => {
+      return loader.load(id);
     }
   }
 };

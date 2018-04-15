@@ -1,5 +1,6 @@
 import React, { Component, createContext } from "react";
 import Page from "./Page";
+import FirstRouteQuery from "./FirstRouteQuery.gql";
 
 export const toRoute = route => {
   if (typeof route === "string") {
@@ -9,9 +10,14 @@ export const toRoute = route => {
   }
 };
 
-export const loadFirstRoute = (route, pages) => {
-  const page = getPage(route, pages);
-  return page.loadComponent();
+export const loadFirstRoute = (pathname, pages, apolloClient) => {
+  return apolloClient
+    .query({ query: FirstRouteQuery, variables: { path: pathname } })
+    .then(({ data }) => {
+      const route = toRoute(data.matchUrl ? data.matchUrl.pagePath : pathname);
+      const page = getPage(route, pages);
+      return page.loadComponent().then(() => route);
+    });
 };
 
 const getPage = (route, pages) => {
@@ -48,6 +54,12 @@ class Router extends Component {
   }
 
   componentDidMount() {
+    window.history.replaceState(
+      { as: this.props.initialRoute.pathname },
+      null,
+      window.location.pathname
+    );
+
     window.addEventListener("popstate", this.handlePopState);
   }
 
@@ -63,16 +75,16 @@ class Router extends Component {
 
   handlePopState(event) {
     if (event.isTrusted) {
-      const pathname = window.location.pathname;
+      const pathname = event.state.as || window.location.pathname;
       const route = toRoute(pathname);
       this.setRoute(route);
     }
   }
 
-  push(route) {
-    route = toRoute(route);
+  push(to, as) {
+    const route = toRoute(as);
     this.setRoute(route);
-    window.history.pushState({}, null, route.pathname);
+    window.history.pushState({ as }, null, to);
   }
 
   preload(route) {

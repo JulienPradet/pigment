@@ -2,9 +2,9 @@ import typeDefs from "./schema.gql";
 import loader from "./loader";
 import resolvers from "./resolvers";
 
-export default {
-  namespace: "Blog",
-  loader: loader(),
+export default moduleLoaders => ({
+  namespace: "Url",
+  loader: loader(moduleLoaders),
   typeDefs,
   resolvers
-};
+});

@@ -16,7 +16,9 @@ const PostList = () => {
               {data.blog.posts.map(post => {
                 return (
                   <li key={post.path}>
-                    <Link to={post.path}>{post.title}</Link>
+                    <Link to={post.path} as={`/posts/${post.id}`}>
+                      {post.title}
+                    </Link>
                   </li>
                 );
               })}

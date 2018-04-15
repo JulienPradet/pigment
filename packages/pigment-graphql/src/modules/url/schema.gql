@@ -1,0 +1,8 @@
+type Query {
+  matchUrl(path: String!): MatchedUrl
+}
+
+type MatchedUrl {
+  seoPath: String
+  pagePath: String
+}

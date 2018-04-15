@@ -25,18 +25,18 @@ const findModules = modulesFolder => {
 
 module.exports = paths => {
   return findModules(paths.graphqlModules).pipe(
-    map(modules =>
-      modules
-        .map(module => `require(${JSON.stringify(module)}).default`)
-        .join(",")
+    map(
+      modules => `[
+        ${modules
+          .map(module => `require(${JSON.stringify(module)}).default`)
+          .join(",")}
+      ]`
     ),
     map(
-      dataSources => stripIndent`
+      modules => stripIndent`
         import graphQLMiddleware from '@pigment/graphql/src/graphQLMiddleware';
 
-        export default graphQLMiddleware({
-          dataSources: [${dataSources}]
-        });
+        export default graphQLMiddleware(${modules});
       `
     ),
     writeGeneratedFile(paths.graphQLEntry)

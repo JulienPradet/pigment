@@ -1,5 +1,6 @@
 const posts = new Array(23).fill(null).map((_, index) => ({
-  path: `/posts/${index}`,
+  id: `${index}`,
+  path: `/seo-post-${index}`,
   title: `Post ${index}`,
   content: `Hello post ${index}!`
 }));
@@ -15,8 +16,17 @@ const loader = () => {
       }
       return posts.slice(from, to);
     },
-    load(path) {
-      return posts.find(post => post.path === path);
+    load(id) {
+      return posts.find(post => post.id === id);
+    },
+    matchUrl(path) {
+      const post = posts.find(post => post.path === path);
+      if (post) {
+        return {
+          seoPath: post.path,
+          pagePath: `/posts/${post.id}`
+        };
+      }
     }
   };
 };

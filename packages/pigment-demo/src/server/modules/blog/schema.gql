@@ -4,10 +4,11 @@ type Query {
 
 type Blog {
   posts(from: Int, to: Int): [Post]
-  post(path: String): Post
+  post(id: String): Post
 }
 
 type Post {
+  id: String
   path: String
   title: String
   content: String

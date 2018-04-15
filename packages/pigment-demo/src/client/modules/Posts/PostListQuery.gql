@@ -1,6 +1,7 @@
 query PostListQuery {
   blog {
     posts {
+      id
       path
       title
     }
