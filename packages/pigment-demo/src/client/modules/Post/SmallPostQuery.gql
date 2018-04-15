@@ -1,0 +1,7 @@
+query SmallPostQuery($id: String) {
+  blog {
+    post(id: $id) {
+      title
+    }
+  }
+}

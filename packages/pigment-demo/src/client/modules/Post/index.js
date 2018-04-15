@@ -1,22 +1,27 @@
 import React from "react";
-import Query from "@pigment/app/src/Query";
+import ProgressiveQuery from "@pigment/app/src/ProgressiveQuery";
+import SmallPostQuery from "./SmallPostQuery.gql";
 import PostQuery from "./PostQuery.gql";
 
 const Post = ({ id }) => {
   return (
-    <Query query={PostQuery} variables={{ id: id }}>
-      {({ loading, error, data }) => {
-        if (loading) return <div>Loading...</div>;
+    <ProgressiveQuery
+      smallQuery={SmallPostQuery}
+      query={PostQuery}
+      variables={{ id: id }}
+    >
+      {({ initialLoading, loading, error, data }) => {
+        if (initialLoading) return <div>Loading...</div>;
         if (error) return <div>Error...</div>;
 
         return (
           <>
             <h1>{data.blog.post.title}</h1>
-            <p>{data.blog.post.content}</p>
+            <p>{loading ? "Loading..." : data.blog.post.content}</p>
           </>
         );
       }}
-    </Query>
+    </ProgressiveQuery>
   );
 };
 

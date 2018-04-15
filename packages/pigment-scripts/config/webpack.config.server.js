@@ -141,7 +141,8 @@ module.exports = paths => {
       new webpack.DefinePlugin({
         "process.env": {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production"),
-          PUBLIC_URL: JSON.stringify("http://localhost:3000" + publicPath)
+          PUBLIC_URL: JSON.stringify("http://localhost:3000" + publicPath),
+          SERVER: "true"
         }
       }),
       new CleanWebpackPlugin(paths.build, {

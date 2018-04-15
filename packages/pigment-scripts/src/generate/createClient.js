@@ -9,15 +9,21 @@ module.exports = paths => {
     paths.pagesIndex
   );
 
+  const cacheRedirectsPath = path.relative(
+    path.dirname(paths.clientEntry),
+    path.join(paths.src, "client/graphql/cacheRedirects")
+  );
+
   return of(
     stripIndent`
       import pages from "${pagesPath}";
+      import cacheRedirects from "${cacheRedirectsPath}";
       import clientRenderApp from "@pigment/app/src/clientRenderApp";
       import makeApolloClient from "@pigment/app/src/makeApolloClient";
 
       const apolloClient = makeApolloClient({
-        uri: "/graphql",
-        fetch: fetch
+        fetch: fetch,
+        cacheRedirects: cacheRedirects
       })
 
       clientRenderApp(pages, apolloClient)

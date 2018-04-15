@@ -4,7 +4,7 @@ import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { HttpLink } from "apollo-link-http";
 
-export default ({ ssr, fetch }) => {
+export default ({ ssr, fetch, cacheRedirects }) => {
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) =>
@@ -23,7 +23,11 @@ export default ({ ssr, fetch }) => {
 
   const link = ApolloLink.from([errorLink, httpLink]);
 
-  const cache = new InMemoryCache();
+  const cache = new InMemoryCache({
+    addTypename: true,
+    cacheRedirects: cacheRedirects(() => cache)
+  });
+
   if (!ssr) {
     cache.restore(window.__APOLLO_STATE__);
   }
