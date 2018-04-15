@@ -1,0 +1,8 @@
+query PostQuery($id: String) {
+  blog {
+    post(id: $id) {
+      title
+      content
+    }
+  }
+}
