@@ -1,4 +1,4 @@
-# Pigment.js
+# 🎨 Pigment.js
 
 An attempt at building a React Framework all batteries included.
 
@@ -46,11 +46,11 @@ Pigment.js sooner or later.
 
 # Roadmap
 
-* [ ] Routes multiple pages
-* [ ] Lie to the browser by displaying a fake URL
-* [ ] Share Layouts
+* [x] Routes multiple pages
+* [x] Lie to the browser by displaying a fake URL
+* [x] Share Layouts
+* [x] Data fetching
+* [x] Html To React
 * [ ] Animations
 * [ ] Stories
 * [ ] Automatic Stories when missing
-* [ ] Data fetching
-* [ ] .mdx
