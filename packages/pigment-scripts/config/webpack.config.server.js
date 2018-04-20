@@ -32,6 +32,8 @@ module.exports = paths => {
     )
     .reduce((acc, curr) => [...acc, ...curr], []);
 
+  const whitelist = ["path"];
+
   return {
     name: "server",
     target: "node",
@@ -50,7 +52,9 @@ module.exports = paths => {
           module.endsWith(moduleName)
         );
 
-        if (fullModulePath) {
+        if (whitelist.some(module => module === moduleName)) {
+          callback(null, "commonjs " + moduleName);
+        } else if (fullModulePath) {
           callback(
             null,
             "commonjs " + path.join(fullModulePath, req.replace(moduleName, ""))

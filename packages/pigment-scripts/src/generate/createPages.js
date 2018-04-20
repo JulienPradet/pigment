@@ -11,7 +11,7 @@ const {
 } = require("rxjs/operators");
 const pathToRegexp = require("path-to-regexp");
 const writeGeneratedFile = require("./writeGeneratedFile");
-const reduceObservable = require("./reduceObservable");
+const reduceObservable = require("@pigment/utils/src/reduceObservable");
 const { stripIndent } = require("common-tags");
 
 const filePathToRoute = filePath => {
