@@ -2,6 +2,14 @@ import React from "react";
 import ProgressiveQuery from "@pigment/app/src/ProgressiveQuery";
 import SmallPostQuery from "./SmallPostQuery.gql";
 import PostQuery from "./PostQuery.gql";
+import htmlToReact from "@pigment/app/src/htmlToReact";
+import loadable from "loadable-components";
+
+const RenderHtml = htmlToReact({
+  counter: loadable(() => import("./Counter"), {
+    LoadingComponent: () => <div>Loading...</div>
+  })
+});
 
 const Post = ({ id }) => {
   return (
@@ -17,7 +25,11 @@ const Post = ({ id }) => {
         return (
           <>
             <h1>{data.blog.post.title}</h1>
-            <p>{loading ? "Loading..." : data.blog.post.content}</p>
+            {loading ? (
+              <p>"Loading..."</p>
+            ) : (
+              <RenderHtml content={data.blog.post.content} />
+            )}
           </>
         );
       }}
