@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Link from "./Link";
 
 const domToReact = require("html-react-parser/lib/dom-to-react");
 const htmlToDOM = process.env.SERVER
@@ -17,6 +18,14 @@ const htmlToReact = components => {
   );
 
   const replace = domNode => {
+    if (domNode.name === "a") {
+      return (
+        <Link to={domNode.attribs.href} as={domNode.attribs["data-as"]}>
+          {domToReact(domNode.children, { replace })}
+        </Link>
+      );
+    }
+
     const componentName = Object.keys(loadableComponents).find(
       name => domNode.name === name
     );
