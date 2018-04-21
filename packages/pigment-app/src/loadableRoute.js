@@ -1,4 +1,4 @@
-export default ({ test, pathKeys, routeComponent, filePath }) => {
+const loadableRoute = ({ test, pathKeys, routeComponent, filePath }) => {
   let loadingPromise = null;
   let loadedComponent = null;
 
@@ -23,3 +23,5 @@ export default ({ test, pathKeys, routeComponent, filePath }) => {
     filePath: filePath
   };
 };
+
+export default loadableRoute;

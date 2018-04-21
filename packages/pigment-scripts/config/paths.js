@@ -29,12 +29,7 @@ module.exports = () => {
     public: resolveApp("public"),
     nodePaths: [
       resolveApp("node_modules"),
-      path.resolve(__dirname, "../node_modules"),
-      path.resolve(__dirname, "../../pigment-app/node_modules"),
-      path.resolve(__dirname, "../../pigment-fs/node_modules"),
-      path.resolve(__dirname, "../../pigment-graphql/node_modules"),
-      path.resolve(__dirname, "../../pigment-log/node_modules"),
-      path.resolve(__dirname, "../../pigment-utils/node_modules")
+      path.resolve(__dirname, "../../../node_modules")
     ]
   };
 };

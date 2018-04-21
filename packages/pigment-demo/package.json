@@ -17,10 +17,11 @@
   "dependencies": {
     "@pigment/app": "^0.0.0",
     "@pigment/fs": "^0.0.0",
+    "@pigment/graphql": "^0.0.0",
     "@pigment/scripts": "^0.0.0",
     "apollo-utilities": "^1.0.11",
     "loadable-components": "^1.1.1",
-    "react": "^16.3.0-alpha.3",
-    "react-dom": "^16.3.0-alpha.3"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   }
 }

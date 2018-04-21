@@ -51,7 +51,10 @@ module.exports = paths => {
           options: {
             cache: paths.cacheEslint,
             baseConfig: {
-              extends: [require.resolve("eslint-config-react-app")]
+              extends: [require.resolve("eslint-config-react-app")],
+              rules: {
+                "no-unused-vars": ["error", { args: "none" }]
+              }
             },
             ignore: false,
             useEslintrc: false

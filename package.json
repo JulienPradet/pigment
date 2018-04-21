@@ -1,24 +1,75 @@
 {
   "private": true,
-  "workspaces": ["packages/*"],
+  "name": "pigment",
+  "version": "0.0.0",
+  "description":
+    "A React/GraphQL Framework. One could say it's an opiniated Next.js alternative.",
+  "main": "index.js",
+  "author": "Julien Pradet <julien@pradet.me>",
+  "license": "MIT",
+  "devDependencies": {
+    "apollo-cache-inmemory": "^1.1.12",
+    "apollo-client": "^2.2.8",
+    "apollo-link-error": "^1.0.9",
+    "apollo-link-http": "^1.5.4",
+    "common-tags": "^1.7.2",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
+    "html-react-parser": "^0.4.3",
+    "node-fetch": "^2.1.2",
+    "react-apollo": "^2.1.0-beta.3",
+    "serialize-javascript": "^1.4.0",
+    "husky": "^0.13.4",
+    "lint-staged": "^3.3.1",
+    "prettier": "^1.11.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "apollo-utilities": "^1.0.11",
+    "loadable-components": "^1.1.1",
+    "chalk": "^2.3.2",
+    "chokidar": "^2.0.2",
+    "mkdirp": "^0.5.1",
+    "rxjs": "^5.5.10",
+    "@gramps/gramps": "^1.4.0",
+    "apollo-server-express": "^1.3.4",
+    "body-parser": "^1.18.2",
+    "remark": "^9.0.0",
+    "remark-html": "^7.0.0",
+    "remark-preset-lint-recommended": "^3.0.1",
+    "gray-matter": "^4.0.1",
+    "@babel/core": "^7.0.0-beta.38",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-preset-react-app": "^4.0.0-next.47d2d941",
+    "clean-webpack-plugin": "^0.1.19",
+    "eslint": "^4.18.2",
+    "eslint-config-react-app": "^3.0.0-next.47d2d941",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-flowtype": "^2.46.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "express": "^4.16.2",
+    "minimist": "^1.2.0",
+    "path-to-regexp": "^2.2.0",
+    "react-hot-loader": "^4.0.0",
+    "require-from-string": "^2.0.1",
+    "source-map-support": "^0.5.3",
+    "webpack": "^4.1.1",
+    "webpack-dev-middleware": "^3.0.1",
+    "webpack-hot-middleware": "^2.21.2",
+    "webpack-node-externals": "^1.6.0"
+  },
   "scripts": {
+    "start": "cd packages/pigment-demo && yarn -s start",
     "precommit": "lint-staged",
     "format":
-      "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'",
-    "lerna": "lerna"
+      "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/JulienPradet/pigment.js"
-  },
-  "devDependencies": {
-    "husky": "^0.13.4",
-    "lerna": "^2.6.0",
-    "lerna-changelog": "^0.6.0",
-    "lint-staged": "^3.3.1",
-    "prettier": "^1.11.1"
-  },
+  "repository": "https://github.com/JulienPradet/pigment.js",
   "lint-staged": {
     "*.js": ["prettier --write", "git add"]
-  }
+  },
+  "workspaces": ["packages/*"]
 }

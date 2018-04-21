@@ -16,53 +16,19 @@ module.exports = paths => {
     `^(${src}|${tmp})|(@pigment\/[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
   );
 
-  const modules = paths.nodePaths
-    .filter(path => {
-      try {
-        fs.accessSync(path);
-        return true;
-      } catch (e) {
-        return false;
-      }
-    })
-    .map(modulesPath =>
-      fs
-        .readdirSync(modulesPath)
-        .map(moduleName => path.join(modulesPath, moduleName))
-    )
-    .reduce((acc, curr) => [...acc, ...curr], []);
-
-  const whitelist = ["path"];
+  const whitelist = [/^@pigment\/\w+\/src/, /^react-apollo/];
 
   return {
     name: "server",
     target: "node",
     externals: [
-      (context, request, callback) => {
-        const req = request.startsWith(".")
-          ? path.join(context, request)
-          : request;
-
-        if (shouldCompileRegExp.test(req)) {
-          return callback();
-        }
-
-        const moduleName = req.replace(/\/.*$/, "");
-        const fullModulePath = modules.find(module =>
-          module.endsWith(moduleName)
-        );
-
-        if (whitelist.some(module => module === moduleName)) {
-          callback(null, "commonjs " + moduleName);
-        } else if (fullModulePath) {
-          callback(
-            null,
-            "commonjs " + path.join(fullModulePath, req.replace(moduleName, ""))
-          );
-        } else {
-          callback();
-        }
-      }
+      nodeExternals({
+        whitelist: whitelist
+      }),
+      nodeExternals({
+        modulesDir: path.join(__dirname, "../../../node_modules"),
+        whitelist: whitelist
+      })
     ],
     node: {
       // The __dirname will be the original __dirname of the file
@@ -88,7 +54,12 @@ module.exports = paths => {
       // Dedupplicate peer dependencies
       alias: {
         "loadable-components": require.resolve("loadable-components"),
-        express: require.resolve("express")
+        express: require.resolve("express"),
+        "@pigment/app": path.join(__dirname, "../../pigment-app"),
+        "@pigment/fs": path.join(__dirname, "../../pigment-fs"),
+        "@pigment/graphql": path.join(__dirname, "../../pigment-graphql"),
+        "@pigment/log": path.join(__dirname, "../../pigment-log"),
+        "@pigment/utils": path.join(__dirname, "../../pigment-utils")
       }
     },
     resolveLoader: {
@@ -104,7 +75,10 @@ module.exports = paths => {
           options: {
             cache: paths.cacheEslint,
             baseConfig: {
-              extends: [require.resolve("eslint-config-react-app")]
+              extends: [require.resolve("eslint-config-react-app")],
+              rules: {
+                "no-unused-vars": ["error", { args: "none" }]
+              }
             },
             ignore: false,
             useEslintrc: false
