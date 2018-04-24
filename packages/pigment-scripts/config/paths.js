@@ -20,6 +20,7 @@ module.exports = () => {
     ),
     ssrEntry: path.join(__dirname, "../var/tmp/server/ssrMiddleware.js"),
     clientEntry: path.join(__dirname, "../var/tmp/client/index.js"),
+    styleguideEntry: path.join(__dirname, "../var/tmp/styleguide/index.js"),
     log: resolveApp("var/log"),
     cacheBabel: resolveApp("var/cache/babel"),
     cacheEslint: resolveApp("var/cache/eslint"),

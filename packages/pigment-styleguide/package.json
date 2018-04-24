@@ -1,0 +1,21 @@
+{
+  "name": "@pigment/styleguide",
+  "version": "0.0.0",
+  "description": "A styleguide for Pigment.js apps",
+  "repository": {
+    "type": "git",
+    "url":
+      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-styleguide"
+  },
+  "author": "Julien Pradet <julien.pradet+git@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "peerDependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  }
+}

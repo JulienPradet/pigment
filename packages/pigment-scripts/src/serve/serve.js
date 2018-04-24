@@ -1,16 +1,11 @@
 const express = require("express");
 const clientMiddleware = require("./clientMiddleware");
 const serverMiddleware = require("./serverMiddleware");
+const styleguideMiddleware = require("./styleguideMiddleware");
 const log = require("@pigment/log")("SERVER");
 
 const createAppRouter = compiler => {
   const router = express.Router();
-  router.use(
-    require("webpack-hot-middleware")(
-      compiler.compilers.find(({ name }) => name === "client"),
-      { log: false }
-    )
-  );
   router.use(clientMiddleware(compiler));
   router.use(serverMiddleware(compiler));
   return router;

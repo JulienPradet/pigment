@@ -28,14 +28,15 @@ module.exports = paths => {
     },
     output: {
       path: paths.buildClient,
-      filename: "static/js/[name].[hash:8].js",
-      chunkFilename: "static/js/[name].[hash:8].js",
+      filename: "_pigment/static/js/[name].[hash:8].js",
+      chunkFilename: "_pigment/static/js/[name].[hash:8].js",
       publicPath: publicPath
     },
     resolve: {
-      // Dedupplicate peer dependencies
       alias: {
-        "loadable-components": require.resolve("loadable-components")
+        "loadable-components": require.resolve("loadable-components"),
+        "@pigment/app": path.join(__dirname, "../../pigment-app"),
+        "@pigment/utils": path.join(__dirname, "../../pigment-utils")
       }
     },
     resolveLoader: {
@@ -62,11 +63,6 @@ module.exports = paths => {
         },
         {
           oneOf: [
-            {
-              test: /\.mjs$/,
-              include: /node_modules/,
-              type: "javascript/auto"
-            },
             {
               test: /\.js$/,
               include: input => shouldCompileRegExp.test(input),
