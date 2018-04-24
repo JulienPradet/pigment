@@ -7,7 +7,7 @@ const hashHistory = {
     );
   },
   pushState: ({ as }, _, to) => {
-    window.history.pushState({ as }, null, window.location.pathname + "#" + to);
+    window.history.pushState({ as }, null, window.location.pathname + to);
   }
 };
 

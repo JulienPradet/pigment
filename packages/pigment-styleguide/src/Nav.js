@@ -12,7 +12,9 @@ const Nav = ({ stories }) => {
       {storiesArray.map(story => {
         return (
           <li key={story.id}>
-            <Link to={story.id}>{story.name}</Link>
+            <Link to={`#${story.id}`} as={story.id}>
+              {story.name}
+            </Link>
           </li>
         );
       })}

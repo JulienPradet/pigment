@@ -3,7 +3,7 @@ import { RouterContext } from "./Router";
 
 const Link = ({ to, as, children }) => {
   const isExternal =
-    !/^\.?\.?\//.test(to) && !to.startsWith(process.env.PUBLIC_URL);
+    !/^#|^\.?\.?\//.test(to) && !to.startsWith(process.env.PUBLIC_URL);
 
   if (isExternal) {
     return <a href={to}>{children}</a>;
