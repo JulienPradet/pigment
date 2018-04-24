@@ -10,14 +10,26 @@ export const toRoute = route => {
   }
 };
 
+const getFirstRoute = (pathname, apolloClient) => {
+  if (apolloClient) {
+    return apolloClient
+      .query({ query: FirstRouteQuery, variables: { path: pathname } })
+      .then(({ data }) => {
+        const route = toRoute(
+          data.matchUrl ? data.matchUrl.pagePath : pathname
+        );
+        return route;
+      });
+  } else {
+    return Promise.resolve(toRoute(pathname));
+  }
+};
+
 export const loadFirstRoute = (pathname, pages, apolloClient) => {
-  return apolloClient
-    .query({ query: FirstRouteQuery, variables: { path: pathname } })
-    .then(({ data }) => {
-      const route = toRoute(data.matchUrl ? data.matchUrl.pagePath : pathname);
-      const page = getPage(route, pages);
-      return page.loadComponent().then(() => route);
-    });
+  return getFirstRoute(pathname, apolloClient).then(route => {
+    const page = getPage(route, pages);
+    return page.loadComponent().then(() => route);
+  });
 };
 
 const getPage = (route, pages) => {
@@ -54,10 +66,10 @@ class Router extends Component {
   }
 
   componentDidMount() {
-    window.history.replaceState(
+    this.props.history.replaceState(
       { as: this.props.initialRoute.pathname },
       null,
-      window.location.pathname
+      this.props.getLocation().pathname
     );
 
     window.addEventListener("popstate", this.handlePopState);
@@ -75,7 +87,7 @@ class Router extends Component {
 
   handlePopState(event) {
     if (event.isTrusted) {
-      const pathname = event.state.as || window.location.pathname;
+      const pathname = event.state.as || this.props.getLocation().pathname;
       const route = toRoute(pathname);
       this.setRoute(route);
     }
@@ -84,7 +96,7 @@ class Router extends Component {
   push(to, as) {
     const route = toRoute(as);
     this.setRoute(route);
-    window.history.pushState({ as }, null, to);
+    this.props.history.pushState({ as }, null, to);
   }
 
   preload(route) {

@@ -25,6 +25,7 @@ module.exports = () => {
     cacheBabel: resolveApp("var/cache/babel"),
     cacheEslint: resolveApp("var/cache/eslint"),
     src: resolveApp("src"),
+    stories: resolveApp("src/client"),
     pages: resolveApp("src/client/pages"),
     graphqlModules: resolveApp("src/server/modules"),
     public: resolveApp("public"),

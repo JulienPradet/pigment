@@ -9,6 +9,8 @@ class App extends Component {
         <Router
           initialRoute={this.props.initialRoute}
           pages={this.props.pages}
+          getLocation={this.props.getLocation}
+          history={this.props.history}
         />
       </IsServerSideProvider>
     );

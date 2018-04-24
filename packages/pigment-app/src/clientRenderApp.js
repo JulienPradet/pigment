@@ -10,7 +10,12 @@ const clientRenderApp = (pages, apolloClient) => {
   loadFirstRoute(url.pathname, pages, apolloClient).then(route => {
     ReactDOM.hydrate(
       <ApolloProvider client={apolloClient}>
-        <App pages={pages} initialRoute={route} />
+        <App
+          pages={pages}
+          initialRoute={route}
+          getLocation={() => window.location}
+          history={window.history}
+        />
       </ApolloProvider>,
       document.getElementById("root")
     );
