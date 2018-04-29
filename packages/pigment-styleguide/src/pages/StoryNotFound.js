@@ -1,10 +1,10 @@
 import React from "react";
-import StyleguideLayout from "./StyleguideLayout";
+import layout from "./_layout";
 
 const StoryNotFound = () => {
   return <div>Oops, the story you requested does not seem to exist.</div>;
 };
 
-StoryNotFound.layout = StyleguideLayout;
+StoryNotFound.layout = layout;
 
 export default StoryNotFound;

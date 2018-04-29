@@ -2,7 +2,7 @@ import loadableRoute from "@pigment/app/src/loadableRoute";
 
 export default [
   loadableRoute({
-    test: /^\/story\/(.+?)$/i,
+    test: /^\/story\/([^!]+?)(?:!)?$/i,
     pathKeys: [
       {
         name: "story",
@@ -14,13 +14,13 @@ export default [
         pattern: "[^\\/]+?"
       }
     ],
-    routeComponent: () => import("./StoryRoute.js"),
-    filePath: "./StoryRoute.js"
+    routeComponent: () => import("../pages/StoryRoute.js"),
+    filePath: "../pages/StoryRoute.js"
   }),
   loadableRoute({
     test: /^\/404(?:\/)?$/i,
     pathKeys: [],
-    routeComponent: () => import("./StoryNotFound.js"),
-    filePath: "./StoryNotFound.js"
+    routeComponent: () => import("../pages/StoryNotFound.js"),
+    filePath: "../pages/StoryNotFound.js"
   })
 ];

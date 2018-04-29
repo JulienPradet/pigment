@@ -1,7 +1,7 @@
 import React from "react";
-import StyleguideLayout from "./StyleguideLayout";
-import Features from "./Features";
-import StoriesContext from "./StoriesContext";
+import layout from "./_layout";
+import Features from "../modules/Features";
+import StoriesContext from "../StoriesContext";
 
 const StoryRoute = ({ params }) => {
   return (
@@ -47,6 +47,6 @@ const StoryRoute = ({ params }) => {
   );
 };
 
-StoryRoute.layout = StyleguideLayout;
+StoryRoute.layout = layout;
 
 export default StoryRoute;

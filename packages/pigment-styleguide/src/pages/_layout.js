@@ -1,11 +1,10 @@
 import React from "react";
-import { stories } from "./addStory";
-import Nav from "./Nav";
+import Nav from "../modules/Nav";
 
 const StyleguideLayout = ({ children }) => {
   return (
     <div>
-      <Nav stories={stories} />
+      <Nav />
       {children}
     </div>
   );

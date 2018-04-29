@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "@pigment/app/src/App";
-import { loadFirstRoute } from "@pigment/app/src/Router";
-import { stories } from "./addStory";
+import stories from "./model/stories";
 import addDependencies from "./model/addDependencies";
-import pages from "./pages";
-import hashHistory from "./hashHistory";
 import StoriesContext from "./StoriesContext";
+import { loadFirstRoute } from "@pigment/app/src/Router";
+import pages from "./router/pages";
+import hashHistory from "./router/hashHistory";
 
 const renderStyleguide = () => {
   const pathname = window.location.hash
