@@ -1,6 +1,7 @@
 const Story = (module, name) => {
   let dependsOn = new Set();
   let reliesOn = new Set();
+  let features = new Map();
 
   return {
     get id() {
@@ -18,7 +19,6 @@ const Story = (module, name) => {
     addDependsOn(story) {
       if (!dependsOn.has(story)) {
         dependsOn.add(story);
-        console.log(this.name, "depends on", story.name);
       }
     },
     get reliesOn() {
@@ -27,8 +27,13 @@ const Story = (module, name) => {
     addReliesOn(story) {
       if (!reliesOn.has(story)) {
         reliesOn.add(story);
-        console.log(this.name, "relies on", story.name);
       }
+    },
+    get features() {
+      return features;
+    },
+    add(name, storyFn) {
+      features.set(name, storyFn);
     }
   };
 };

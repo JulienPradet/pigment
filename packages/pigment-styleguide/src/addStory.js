@@ -1,4 +1,5 @@
-import Story from "./Story";
+import Story from "./model/Story";
+import Feature from "./model/Feature";
 
 export let stories = new Map();
 
@@ -7,7 +8,9 @@ const addStory = (module, name) => {
   stories.set(module.id, story);
 
   return {
-    addStory: (name, storyFn) => {}
+    add: (name, storyFn) => {
+      return story.add(name, Feature(name, storyFn));
+    }
   };
 };
 

@@ -29,8 +29,6 @@ const generateStyleguide = paths => {
         filepath
       );
 
-      const canonicalPath = path.relative(path.dirname(paths.src), filepath);
-
       return `require("${importPath}")`;
     }),
     reduceObservable((acc, pageDefinition) => [...acc, pageDefinition], []),
