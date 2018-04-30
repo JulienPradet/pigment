@@ -5,29 +5,45 @@ class Page extends Component {
   constructor(props) {
     super();
     this.state = {
+      page: props.page,
       Component: props.page.getComponent(),
+      params: props.params,
       loadingNextPage: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.page !== nextProps.page) {
+    if (
+      this.props.page !== nextProps.page ||
+      this.props.params !== nextProps.params
+    ) {
       const Component = nextProps.page.getComponent();
       if (Component) {
-        this.setState({ Component, loadingNextPage: false });
+        this.setState({
+          page: nextProps.page,
+          Component,
+          params: nextProps.params,
+          loadingNextPage: false
+        });
       } else {
         this.setState({
           loadingNextPage: true
         });
         nextProps.page.loadComponent().then(Component => {
-          this.setState({ Component, loadingNextPage: false });
+          this.setState({
+            page: nextProps.page,
+            Component,
+            params: nextProps.params,
+            loadingNextPage: false
+          });
         });
       }
     }
   }
 
   render() {
-    const { page, params } = this.props;
+    const page = this.state.page;
+    const params = this.state.params;
     const Component = this.state.Component;
     const loadingNextPage = this.state.loadingNextPage;
     let decorateWithLayout = Component.layout;

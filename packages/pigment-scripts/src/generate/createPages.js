@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("@pigment/fs");
 const { of } = require("rxjs/observable/of");
-const { interval } = require("rxjs/observable/interval");
 const {
   first,
   filter,

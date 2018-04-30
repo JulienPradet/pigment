@@ -11,6 +11,7 @@ module.exports = args => {
   const createClientEntry = require("../src/generate/createClient");
   const createSsrMiddleware = require("../src/generate/createSsrMiddleware");
   const createGraphQLMiddleware = require("../src/generate/createGraphQLMiddleware");
+  const createStyleguideEntry = require("../src/generate/createStyleguide");
 
   let served = null;
 
@@ -18,7 +19,8 @@ module.exports = args => {
     createClientEntry(paths),
     createSsrMiddleware(paths),
     createGraphQLMiddleware(paths),
-    createPages(paths)
+    createPages(paths),
+    createStyleguideEntry(paths)
   ).pipe(share());
 
   const serveApp$ = generateFiles$.pipe(

@@ -5,7 +5,9 @@ const loadableRoute = ({ test, pathKeys, routeComponent, filePath }) => {
   const loadComponent = () => {
     if (!loadingPromise) {
       loadingPromise = routeComponent()
-        .then(module => module.default)
+        .then(
+          module => (typeof module === "function" ? module : module.default)
+        )
         .then(Component => {
           loadedComponent = Component;
           return loadedComponent;
