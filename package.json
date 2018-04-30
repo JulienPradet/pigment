@@ -60,7 +60,11 @@
     "webpack": "^4.1.1",
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "babel-plugin-emotion": "^9.1.2",
+    "emotion": "^9.1.2",
+    "emotion-server": "^9.1.2",
+    "react-emotion": "^9.1.2"
   },
   "scripts": {
     "start": "cd packages/pigment-demo && yarn -s start",

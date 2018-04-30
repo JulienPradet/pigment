@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { loadFirstRoute } from "./Router";
 import ApolloProvider from "react-apollo/ApolloProvider";
+import { hydrate } from "react-emotion";
+
+if ("__EMOTION_STATE__" in window) {
+  hydrate(window.__EMOTION_STATE__);
+}
 
 const url = new URL(window.location.href);
 

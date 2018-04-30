@@ -95,6 +95,7 @@ module.exports = paths => {
                   babelrc: false,
                   presets: [require.resolve("babel-preset-react-app")],
                   plugins: [
+                    require.resolve("babel-plugin-emotion"),
                     require.resolve("babel-plugin-dynamic-import-node")
                   ],
                   cacheDirectory: paths.cacheBabel

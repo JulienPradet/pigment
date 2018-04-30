@@ -1,9 +1,15 @@
 import React from "react";
 import Link from "@pigment/app/src/Link";
+import { css } from "emotion";
+
+const headerContainer = css`
+  background: #f0f0f0;
+  padding: 1em;
+`;
 
 const Header = () => {
   return (
-    <div>
+    <div className={headerContainer}>
       Pigment.js
       <ul>
         <li>
