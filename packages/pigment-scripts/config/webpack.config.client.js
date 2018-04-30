@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const publicPath = "/";
 
-module.exports = paths => {
+module.exports = (paths, env) => {
   // src
   // tmp
   // node_modules/@pigment/*/src (userland)
@@ -17,14 +17,19 @@ module.exports = paths => {
   return {
     name: "client",
     target: "web",
-    mode: "development",
-    devtool: "cheap-module-source-map",
+    mode: env === "production" ? "production" : "development",
+    devtool: env === "production" ? "source-map" : "cheap-module-source-map",
     entry: {
-      main: [
-        require.resolve("webpack-hot-middleware/client") +
-          "?name=client&reload=true&overlayWarnings=true",
-        paths.clientEntry
-      ]
+      main: []
+        .concat(
+          env === "production"
+            ? [
+                require.resolve("webpack-hot-middleware/client") +
+                  "?name=client&reload=true&overlayWarnings=true"
+              ]
+            : []
+        )
+        .concat([paths.clientEntry])
     },
     output: {
       path: paths.buildClient,
@@ -50,7 +55,7 @@ module.exports = paths => {
           include: input => shouldCompileRegExp.test(input),
           loader: "eslint-loader",
           options: {
-            cache: paths.cacheEslint,
+            cache: env === "production" ? false : paths.cacheEslint,
             baseConfig: {
               extends: [require.resolve("eslint-config-react-app")],
               rules: {
@@ -58,7 +63,9 @@ module.exports = paths => {
               }
             },
             ignore: false,
-            useEslintrc: false
+            useEslintrc: false,
+            failOnWarning: env === "production",
+            failOnError: env === "production"
           }
         },
         {
@@ -72,7 +79,8 @@ module.exports = paths => {
                   babelrc: false,
                   presets: [require.resolve("babel-preset-react-app")],
                   plugins: [require.resolve("babel-plugin-emotion")],
-                  cacheDirectory: paths.cacheBabel
+                  cacheDirectory:
+                    env === "production" ? false : paths.cacheBabel
                 }
               }
             },
@@ -88,7 +96,7 @@ module.exports = paths => {
     plugins: [
       new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production"),
+          NODE_ENV: JSON.stringify(env),
           PUBLIC_URL: JSON.stringify("http://localhost:3000" + publicPath),
           SERVER: "false"
         }
@@ -96,9 +104,14 @@ module.exports = paths => {
       new CleanWebpackPlugin(paths.build, {
         verbose: false,
         root: process.cwd()
-      }),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin()
-    ]
+      })
+    ].concat(
+      env === "production"
+        ? []
+        : [
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin()
+          ]
+    )
   };
 };

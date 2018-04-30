@@ -1,5 +1,5 @@
-module.exports = paths => [
-  require("./webpack.config.client")(paths),
-  require("./webpack.config.styleguide")(paths),
-  require("./webpack.config.server")(paths)
+module.exports = (paths, env) => [
+  require("./webpack.config.client")(paths, env),
+  require("./webpack.config.styleguide")(paths, env),
+  require("./webpack.config.server")(paths, env)
 ];

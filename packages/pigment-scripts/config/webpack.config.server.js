@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const publicPath = "/";
 
-module.exports = paths => {
+module.exports = (paths, env) => {
   // src
   // tmp
   // node_modules/@pigment/*/src (userland)
@@ -35,8 +35,8 @@ module.exports = paths => {
       // ``/.../src/...`
       __dirname: true
     },
-    mode: "development",
-    devtool: "inline-cheap-source-map",
+    mode: process.env === "production" ? "production" : "development",
+    devtool: env === "production" ? "source-map" : "inline-cheap-source-map",
     entry: {
       ssr: [paths.ssrEntry],
       graphql: [paths.graphQLEntry]
@@ -73,7 +73,7 @@ module.exports = paths => {
           include: input => shouldCompileRegExp.test(input),
           loader: "eslint-loader",
           options: {
-            cache: paths.cacheEslint,
+            cache: env === "production" ? false : paths.cacheEslint,
             baseConfig: {
               extends: [require.resolve("eslint-config-react-app")],
               rules: {
@@ -81,7 +81,9 @@ module.exports = paths => {
               }
             },
             ignore: false,
-            useEslintrc: false
+            useEslintrc: false,
+            failOnWarning: env === "production",
+            failOnError: env === "production"
           }
         },
         {
@@ -98,7 +100,8 @@ module.exports = paths => {
                     require.resolve("babel-plugin-emotion"),
                     require.resolve("babel-plugin-dynamic-import-node")
                   ],
-                  cacheDirectory: paths.cacheBabel
+                  cacheDirectory:
+                    env === "production" ? false : paths.cacheBabel
                 }
               }
             },

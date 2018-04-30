@@ -17,7 +17,8 @@ const printHelp = () => {
 
     Available scripts:
       help     displays this help message
-      start     launches your application in developer mode
+      start    launches your application in developer mode
+      build    Builds all the files needed
 
     For further information on each available script, please
     use the help command after your script name.
@@ -28,6 +29,9 @@ const printHelp = () => {
 switch (script) {
   case "start":
     require("../scripts/start.js")(args);
+    break;
+  case "build":
+    require("../scripts/build.js")(args);
     break;
   case "help":
     console.log("Welcome to Pigment.js!");
