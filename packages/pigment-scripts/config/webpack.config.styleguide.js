@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const publicPath = "/";
 
@@ -24,11 +25,11 @@ module.exports = (paths, env) => {
       styleguide: []
         .concat(
           env === "production"
-            ? [
+            ? []
+            : [
                 require.resolve("webpack-hot-middleware/client") +
                   "?name=client&reload=true&overlayWarnings=true"
               ]
-            : []
         )
         .concat([paths.styleguideEntry])
     },
@@ -105,6 +106,9 @@ module.exports = (paths, env) => {
       new CleanWebpackPlugin(paths.build, {
         verbose: false,
         root: process.cwd()
+      }),
+      new StatsWriterPlugin({
+        filename: "../stats/stats.styleguide.json"
       })
     ].concat(
       env === "production"

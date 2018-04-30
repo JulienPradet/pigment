@@ -5,7 +5,7 @@ const { findCompiler, findStats } = require("./util");
 const requireFromString = require("require-from-string");
 const log = require("@pigment/log")("SERVER");
 
-module.exports = compiler => {
+module.exports = (paths, compiler) => {
   const serverCompiler = findCompiler(compiler, "server")[0];
   const outputFs = serverCompiler.outputFileSystem;
   const outputPath = serverCompiler.outputPath;

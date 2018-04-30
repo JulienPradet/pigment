@@ -3,6 +3,7 @@ const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const publicPath = "/";
 
@@ -109,11 +110,13 @@ module.exports = (paths, env) => {
       }),
       new BundleAnalyzerPlugin({
         analyzerMode: "static",
-        reportFilename: "../log/report.html",
-        generateStatsFile: true,
-        statsFilename: "../log/stats.json",
+        reportFilename: "../stats/report.html",
+        generateStatsFile: false,
         openAnalyzer: process.env.ANALYZE,
         defaultSizes: "gzip"
+      }),
+      new StatsWriterPlugin({
+        filename: "../stats/stats.client.json"
       })
     ].concat(
       env === "production"

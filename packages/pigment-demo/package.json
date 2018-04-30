@@ -6,6 +6,7 @@
   "scripts": {
     "start": "pigment start",
     "build": "ANALYZE=true pigment build",
+    "serve": "pigment serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

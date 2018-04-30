@@ -5,14 +5,14 @@ const Story = (module, name) => {
 
   return {
     get id() {
-      return module.id;
+      return module.id.toString();
     },
     get name() {
       return name.replace(/^.*\//, "");
     },
     get path() {
       const params = new URLSearchParams();
-      params.append("story", module.id);
+      params.append("story", module.id.toString());
       return `/_pigment/styleguide/story?${params.toString()}`;
     },
     get dependencies() {

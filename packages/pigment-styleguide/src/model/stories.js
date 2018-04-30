@@ -5,7 +5,7 @@ let stories = new Map();
 
 const addStory = (module, name) => {
   const story = Story(module, name);
-  stories.set(module.id, story);
+  stories.set(story.id, story);
 
   return {
     add: (name, storyFn) => {

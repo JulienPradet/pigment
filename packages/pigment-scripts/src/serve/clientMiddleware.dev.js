@@ -1,9 +1,10 @@
 const express = require("express");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 
-module.exports = compiler => {
+module.exports = (paths, compiler) => {
   const router = express.Router();
 
+  router.use(express.static(paths.public));
   router.use(require("webpack-hot-middleware")(compiler, { log: false }));
   router.use(
     webpackDevMiddleware(compiler, {

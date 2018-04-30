@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
 
 const publicPath = "/";
 
@@ -125,6 +126,9 @@ module.exports = (paths, env) => {
       new CleanWebpackPlugin(paths.build, {
         verbose: false,
         root: process.cwd()
+      }),
+      new StatsWriterPlugin({
+        filename: "../stats/stats.server.json"
       })
     ]
   };

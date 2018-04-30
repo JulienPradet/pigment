@@ -33,6 +33,9 @@ switch (script) {
   case "build":
     require("../scripts/build.js")(args);
     break;
+  case "serve":
+    require("../scripts/serve.js")(args);
+    break;
   case "help":
     console.log("Welcome to Pigment.js!");
     printHelp();

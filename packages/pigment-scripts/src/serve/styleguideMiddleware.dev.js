@@ -1,7 +1,8 @@
 const express = require("express");
 const { findCompiler, findStats } = require("./util");
+const { stripIndent } = require("common-tags");
 
-module.exports = compiler => {
+module.exports = (paths, compiler) => {
   const router = express.Router();
   let styleguideMiddleware;
 
@@ -12,7 +13,8 @@ module.exports = compiler => {
         styleguideStats.publicPath +
         styleguideStats.assetsByChunkName.styleguide[0];
 
-      res.send(`
+      res.send(stripIndent`
+        <!doctype html>
         <html>
           <head>
             <title>Pigment Styleguide</title>

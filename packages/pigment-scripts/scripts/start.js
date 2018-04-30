@@ -28,7 +28,7 @@ module.exports = args => {
     mergeMap(() => {
       const config = require("../config/webpack.config")(paths);
       const compiler = require("../src/webpack/createCompiler")(config);
-      const serve = require("../src/serve/serve");
+      const serve = require("../src/serve/serve.dev");
 
       return Observable.create(observer => {
         const server = serve(paths, compiler);
