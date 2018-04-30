@@ -7,6 +7,7 @@ const log = require("@pigment/log")("SERVER");
 const createAppRouter = compiler => {
   const router = express.Router();
   router.use(clientMiddleware(compiler));
+  router.use(styleguideMiddleware(compiler));
   router.use(serverMiddleware(compiler));
   return router;
 };

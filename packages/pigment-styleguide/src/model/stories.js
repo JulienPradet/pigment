@@ -9,7 +9,7 @@ const addStory = (module, name) => {
 
   return {
     add: (name, storyFn) => {
-      return story.add(name, Feature(name, storyFn));
+      return story.add(name, Feature(name, storyFn, story));
     }
   };
 };

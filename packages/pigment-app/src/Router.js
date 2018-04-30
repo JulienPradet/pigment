@@ -4,29 +4,40 @@ import FirstRouteQuery from "./FirstRouteQuery.gql";
 
 export const toRoute = route => {
   if (typeof route === "string") {
-    return { pathname: route };
+    const searchParams = new URLSearchParams(route.replace(/^[^?]+/, ""));
+    let params = {};
+    for (let [key, value] of searchParams.entries()) {
+      params[key] = value;
+    }
+    return {
+      pathname: route.replace(/\?.+/, ""),
+      params: params
+    };
   } else {
     return route;
   }
 };
 
-const getFirstRoute = (pathname, apolloClient) => {
+const getFirstRoute = (baseRoute, apolloClient) => {
   if (apolloClient) {
     return apolloClient
-      .query({ query: FirstRouteQuery, variables: { path: pathname } })
+      .query({
+        query: FirstRouteQuery,
+        variables: { path: baseRoute.pathname }
+      })
       .then(({ data }) => {
-        const route = toRoute(
-          data.matchUrl ? data.matchUrl.pagePath : pathname
-        );
+        const route = data.matchUrl
+          ? { ...baseRoute, pathname: data.matchUrl.pagePath }
+          : baseRoute;
         return route;
       });
   } else {
-    return Promise.resolve(toRoute(pathname));
+    return Promise.resolve(baseRoute);
   }
 };
 
-export const loadFirstRoute = (pathname, pages, apolloClient) => {
-  return getFirstRoute(pathname, apolloClient).then(route => {
+export const loadFirstRoute = (url, pages, apolloClient) => {
+  return getFirstRoute(toRoute(url), apolloClient).then(route => {
     const page = getPage(route, pages);
     return page.loadComponent().then(() => route);
   });
@@ -48,7 +59,7 @@ const getParams = (route, page) => {
       ...params,
       [name]: match[key + 1]
     }),
-    {}
+    route.params
   );
 };
 
@@ -66,10 +77,18 @@ class Router extends Component {
   }
 
   componentDidMount() {
+    const pathname = this.props.initialRoute.pathname;
+    const search = new URLSearchParams(
+      this.props.initialRoute.params
+    ).toString();
+    const url = search.length > 0 ? `${pathname}?${search}` : pathname;
+
     this.props.history.replaceState(
-      { as: this.props.initialRoute.pathname },
+      {
+        as: url
+      },
       null,
-      this.props.getLocation().pathname
+      url
     );
 
     window.addEventListener("popstate", this.handlePopState);

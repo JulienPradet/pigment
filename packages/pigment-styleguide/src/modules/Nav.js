@@ -16,9 +16,7 @@ const Nav = ({ stories }) => {
             {storiesArray.map(story => {
               return (
                 <li key={story.id}>
-                  <Link to={`#/story/${story.id}`} as={`/story/${story.id}`}>
-                    {story.name}
-                  </Link>
+                  <Link to={story.path}>{story.name}</Link>
                 </li>
               );
             })}

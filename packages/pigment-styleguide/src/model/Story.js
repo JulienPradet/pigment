@@ -10,6 +10,11 @@ const Story = (module, name) => {
     get name() {
       return name.replace(/^.*\//, "");
     },
+    get path() {
+      const params = new URLSearchParams();
+      params.append("story", module.id);
+      return `/_pigment/styleguide/story?${params.toString()}`;
+    },
     get dependencies() {
       return module.children;
     },
