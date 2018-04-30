@@ -2,8 +2,7 @@
   "private": true,
   "name": "pigment",
   "version": "0.0.0",
-  "description":
-    "A React/GraphQL Framework. One could say it's an opiniated Next.js alternative.",
+  "description": "A React/GraphQL Framework. One could say it's an opiniated Next.js alternative.",
   "main": "index.js",
   "author": "Julien Pradet <julien@pradet.me>",
   "license": "MIT",
@@ -19,12 +18,15 @@
     "babel-eslint": "^8.2.2",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-emotion": "^9.1.2",
     "babel-preset-react-app": "^4.0.0-next.47d2d941",
     "body-parser": "^1.18.2",
     "chalk": "^2.3.2",
     "chokidar": "^2.0.2",
     "clean-webpack-plugin": "^0.1.19",
     "common-tags": "^1.7.2",
+    "emotion": "^9.1.2",
+    "emotion-server": "^9.1.2",
     "eslint": "^4.18.2",
     "eslint-config-react-app": "^3.0.0-next.47d2d941",
     "eslint-loader": "^2.0.0",
@@ -49,6 +51,7 @@
     "react": "^16.3.2",
     "react-apollo": "^2.1.0-beta.3",
     "react-dom": "^16.3.2",
+    "react-emotion": "^9.1.2",
     "react-hot-loader": "^4.0.0",
     "remark": "^9.0.0",
     "remark-html": "^7.0.0",
@@ -58,24 +61,25 @@
     "serialize-javascript": "^1.4.0",
     "source-map-support": "^0.5.3",
     "webpack": "^4.1.1",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2",
-    "webpack-node-externals": "^1.6.0",
-    "babel-plugin-emotion": "^9.1.2",
-    "emotion": "^9.1.2",
-    "emotion-server": "^9.1.2",
-    "react-emotion": "^9.1.2"
+    "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
     "start": "cd packages/pigment-demo && yarn -s start",
     "build": "cd packages/pigment-demo && yarn -s build",
     "precommit": "lint-staged",
-    "format":
-      "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
+    "format": "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
   },
   "repository": "https://github.com/JulienPradet/pigment.js",
   "lint-staged": {
-    "*.js": ["prettier --write", "git add"]
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }

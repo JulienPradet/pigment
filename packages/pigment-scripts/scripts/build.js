@@ -33,11 +33,5 @@ module.exports = args => {
     })
   );
 
-  buildFiles$.subscribe(
-    () => {},
-    err => console.error(err),
-    () => {
-      process.exit(0);
-    }
-  );
+  buildFiles$.subscribe(() => {}, err => console.error(err), () => {});
 };

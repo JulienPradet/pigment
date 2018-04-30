@@ -1,6 +1,8 @@
 const webpack = require("webpack");
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 const publicPath = "/";
 
@@ -104,6 +106,14 @@ module.exports = (paths, env) => {
       new CleanWebpackPlugin(paths.build, {
         verbose: false,
         root: process.cwd()
+      }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: "static",
+        reportFilename: "../log/report.html",
+        generateStatsFile: true,
+        statsFilename: "../log/stats.json",
+        openAnalyzer: process.env.ANALYZE,
+        defaultSizes: "gzip"
       })
     ].concat(
       env === "production"
