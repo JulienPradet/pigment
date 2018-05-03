@@ -18,7 +18,6 @@ module.exports = () => {
     const lighthouse = spawn(
       "lighthouse",
       [
-        "--quiet",
         "--perf",
         "--output=json",
         "--save-assets",
