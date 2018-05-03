@@ -3,7 +3,6 @@ const compression = require("compression");
 const clientMiddleware = require("./clientMiddleware.prod");
 const serverMiddleware = require("./serverMiddleware.prod");
 const styleguideMiddleware = require("./styleguideMiddleware.prod");
-const log = require("@pigment/log")("SERVER");
 
 const createAppRouter = paths => {
   const router = express.Router();
@@ -13,7 +12,7 @@ const createAppRouter = paths => {
   return router;
 };
 
-module.exports = paths => {
+module.exports = (paths, onReady) => {
   const app = express();
 
   app.use(compression());
@@ -25,7 +24,9 @@ module.exports = paths => {
       host: "0.0.0.0"
     },
     () => {
-      log.message("success", "App available at http://localhost:3000/");
+      if (typeof onReady === "function") {
+        onReady(app);
+      }
     }
   );
 

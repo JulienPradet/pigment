@@ -16,9 +16,10 @@ const printHelp = () => {
     Usage : pigment <script> [arguments]
 
     Available scripts:
-      help     displays this help message
-      start    launches your application in developer mode
-      build    Builds all the files needed
+      help         displays this help message
+      start        launches your application in developer mode
+      build        Builds all the files needed
+      test:perf    Checks site's performance through lighthouse CLI
 
     For further information on each available script, please
     use the help command after your script name.
@@ -35,6 +36,9 @@ switch (script) {
     break;
   case "serve":
     require("../scripts/serve.js")(args);
+    break;
+  case "test:perf":
+    require("../scripts/test.perf.js")(args);
     break;
   case "help":
     console.log("Welcome to Pigment.js!");

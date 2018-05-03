@@ -12,6 +12,7 @@ module.exports = () => {
     build: resolveApp("build"),
     buildClient: resolveApp("build/client"),
     buildServer: resolveApp("build/server"),
+    buildStats: resolveApp("build/stats"),
     tmp: path.join(__dirname, "../var/tmp"),
     pagesIndex: path.join(__dirname, "../var/tmp/app/index.js"),
     graphQLEntry: path.join(

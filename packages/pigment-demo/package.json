@@ -7,6 +7,7 @@
     "start": "pigment start",
     "build": "pigment build",
     "serve": "pigment serve",
+    "test:perf": "pigment test:perf",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

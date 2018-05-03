@@ -1,8 +1,12 @@
-module.exports = args => {
+const log = require("@pigment/log")("SERVER");
+
+module.exports = () => {
   process.env.NODE_ENV = "production";
 
   const paths = require("../config/paths")();
-  const server = require("../src/serve/serve.prod")(paths);
+  const server = require("../src/serve/serve.prod")(paths, () => {
+    log.message("success", "App available at http://localhost:3000/");
+  });
   server.on("close", () => {
     process.exit(0);
   });

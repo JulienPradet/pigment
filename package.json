@@ -2,7 +2,8 @@
   "private": true,
   "name": "pigment",
   "version": "0.0.0",
-  "description": "A React/GraphQL Framework. One could say it's an opiniated Next.js alternative.",
+  "description":
+    "A React/GraphQL Framework. One could say it's an opiniated Next.js alternative.",
   "main": "index.js",
   "author": "Julien Pradet <julien@pradet.me>",
   "license": "MIT",
@@ -42,6 +43,7 @@
     "html-react-parser": "^0.4.3",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^0.13.4",
+    "lighthouse": "^2.9.4",
     "lint-staged": "^3.3.1",
     "loadable-components": "^1.1.1",
     "minimist": "^1.2.0",
@@ -71,17 +73,15 @@
   "scripts": {
     "start": "cd packages/pigment-demo && yarn -s start",
     "build": "cd packages/pigment-demo && yarn -s build",
+    "serve": "cd packages/pigment-demo && yarn -s serve",
+    "test:perf": "cd packages/pigment-demo && yarn -s test:perf",
     "precommit": "lint-staged",
-    "format": "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
+    "format":
+      "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
   },
   "repository": "https://github.com/JulienPradet/pigment.js",
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "git add"]
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"]
 }
