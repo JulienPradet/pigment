@@ -21,7 +21,7 @@ module.exports = () => {
         "--perf",
         "--output=json",
         "--save-assets",
-        '--chrome-flags="--headless"',
+        '--chrome-flags="--no-sandbox --headless --ignore-certificate-errors"',
         "http://localhost:3000/",
         "--output-path=./build/stats/lighthouse.json"
       ],
