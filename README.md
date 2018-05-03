@@ -1,4 +1,4 @@
-# 🎨 Pigment.js
+# 🎨 Pigment.js [![Build Status](https://travis-ci.org/JulienPradet/pigment.svg?branch=master)](https://travis-ci.org/JulienPradet/pigment)
 
 An attempt at building a React Framework all batteries included.
 
