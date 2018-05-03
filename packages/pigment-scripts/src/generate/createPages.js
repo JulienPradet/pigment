@@ -32,7 +32,10 @@ const findPages = pagesFolder => {
     .getRecursiveFiles(of(pagesFolder))
     .pipe(
       map(({ filepath }) => filepath),
-      filter(filepath => filepath.endsWith(".js"))
+      filter(
+        filepath =>
+          !path.basename(filepath).startsWith("_") && filepath.endsWith(".js")
+      )
     );
 };
 

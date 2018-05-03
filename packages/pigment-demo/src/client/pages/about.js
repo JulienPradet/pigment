@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultLayout from "../layouts/DefaultLayout";
+import DefaultLayout from "./_layout";
 
 const About = () => {
   return (

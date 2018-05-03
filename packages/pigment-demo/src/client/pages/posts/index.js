@@ -1,5 +1,5 @@
 import React from "react";
-import PostLayout from "../../layouts/PostLayout";
+import PostLayout from "./_layout";
 
 const Posts = () => {
   return <div>Let's look at those posts!</div>;

@@ -1,6 +1,6 @@
 import React from "react";
-import DefaultLayout from "./DefaultLayout";
-import PostList from "../modules/Posts/PostList";
+import DefaultLayout from "../_layout";
+import PostList from "../../modules/Posts/PostList";
 
 const PostLayout = ({ children, loadingNextPage }) =>
   DefaultLayout({
