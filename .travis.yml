@@ -5,6 +5,8 @@ cache:
   yarn: true
   directories:
     - node_modules
+before_script:
+  - export CHROME_PATH="$(which google-chrome-stable)"
 script:
   - yarn build
   - yarn test:perf
