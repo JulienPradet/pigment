@@ -26,11 +26,11 @@ module.exports = (paths, env) => {
       main: []
         .concat(
           env === "production"
-            ? [
+            ? []
+            : [
                 require.resolve("webpack-hot-middleware/client") +
                   "?name=client&reload=true&overlayWarnings=true"
               ]
-            : []
         )
         .concat([paths.clientEntry])
     },
@@ -111,8 +111,9 @@ module.exports = (paths, env) => {
       new BundleAnalyzerPlugin({
         analyzerMode: "static",
         reportFilename: "../stats/report.html",
+        logLevel: "warn",
         generateStatsFile: false,
-        openAnalyzer: process.env.ANALYZE,
+        openAnalyzer: process.env.ANALYZE === "true",
         defaultSizes: "gzip"
       }),
       new StatsWriterPlugin({

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "pigment start",
-    "build": "ANALYZE=true pigment build",
+    "build": "pigment build",
     "serve": "pigment serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

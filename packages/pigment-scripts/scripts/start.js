@@ -19,8 +19,8 @@ module.exports = args => {
     createClientEntry(paths),
     createSsrMiddleware(paths),
     createGraphQLMiddleware(paths),
-    createPages(paths),
-    createStyleguideEntry(paths)
+    createPages(paths, true),
+    createStyleguideEntry(paths, true)
   ).pipe(share());
 
   const serveApp$ = generateFiles$.pipe(

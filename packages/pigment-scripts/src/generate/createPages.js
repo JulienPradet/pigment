@@ -81,19 +81,23 @@ const generatePages = paths => {
 };
 
 module.exports = (paths, watch = false) => {
-  return generatePages(paths).pipe(
-    first(),
-    switchMap(() =>
-      fs
-        .watch(paths.pages)
-        .pipe(
-          filter(
-            ({ event, path, details }) =>
-              event === "rename" && path.endsWith(".js")
-          ),
-          debounceTime(20),
-          switchMap(() => generatePages(paths))
-        )
-    )
-  );
+  if (watch) {
+    return generatePages(paths).pipe(
+      first(),
+      switchMap(() =>
+        fs
+          .watch(paths.pages)
+          .pipe(
+            filter(
+              ({ event, path, details }) =>
+                event === "rename" && path.endsWith(".js")
+            ),
+            debounceTime(20),
+            switchMap(() => generatePages(paths))
+          )
+      )
+    );
+  } else {
+    return generatePages(paths);
+  }
 };

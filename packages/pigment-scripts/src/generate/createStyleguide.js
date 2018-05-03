@@ -49,19 +49,23 @@ const generateStyleguide = paths => {
 };
 
 module.exports = (paths, watch = false) => {
-  return generateStyleguide(paths).pipe(
-    first(),
-    switchMap(() =>
-      fs
-        .watch(paths.stories)
-        .pipe(
-          filter(
-            ({ event, path, details }) =>
-              event === "rename" && path.endsWith(".js")
-          ),
-          debounceTime(20),
-          switchMap(() => generateStyleguide(paths))
-        )
-    )
-  );
+  if (watch) {
+    return generateStyleguide(paths).pipe(
+      first(),
+      switchMap(() =>
+        fs
+          .watch(paths.stories)
+          .pipe(
+            filter(
+              ({ event, path, details }) =>
+                event === "rename" && path.endsWith(".js")
+            ),
+            debounceTime(20),
+            switchMap(() => generateStyleguide(paths))
+          )
+      )
+    );
+  } else {
+    return generateStyleguide(paths);
+  }
 };
