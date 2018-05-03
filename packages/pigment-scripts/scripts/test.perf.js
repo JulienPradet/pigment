@@ -7,7 +7,7 @@ const chromeLauncher = require("chrome-launcher");
 const perfConfig = require("lighthouse/lighthouse-core/config/perf.json");
 
 const budget = {
-  performance: 98
+  performance: 95
 };
 
 module.exports = () => {
