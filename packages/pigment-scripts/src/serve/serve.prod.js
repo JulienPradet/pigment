@@ -1,4 +1,5 @@
 const express = require("express");
+const compression = require("compression");
 const clientMiddleware = require("./clientMiddleware.prod");
 const serverMiddleware = require("./serverMiddleware.prod");
 const styleguideMiddleware = require("./styleguideMiddleware.prod");
@@ -15,6 +16,7 @@ const createAppRouter = paths => {
 module.exports = paths => {
   const app = express();
 
+  app.use(compression());
   app.use(createAppRouter(paths));
 
   const server = app.listen(
