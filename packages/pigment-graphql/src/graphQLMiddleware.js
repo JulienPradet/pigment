@@ -4,13 +4,9 @@ import gramps from "@gramps/gramps";
 import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import urlModule from "./modules/url";
 
-const graphQLMiddleware = appModules => {
-  const router = express.Router();
-
-  const modules = [
-    urlModule(appModules.map(({ loader }) => loader)),
-    ...appModules
-  ];
+const graphQLMiddleware = (modulesFactory, endpoint, mock = false) => {
+  const modules = [...modulesFactory];
+  modules.push(urlModule(modules.map(({ loader }) => loader)));
 
   const dataSources = modules.map(({ loader, ...module }) => ({
     ...module,
@@ -18,14 +14,17 @@ const graphQLMiddleware = appModules => {
   }));
 
   const grampsOptions = {
-    dataSources: [...dataSources]
+    dataSources: [...dataSources],
+    enableMockData: mock
   };
 
   const GraphQLOptions = gramps(grampsOptions);
 
+  const router = express.Router();
+
   router.use(bodyParser.json());
   router.use("/graphql", graphqlExpress(GraphQLOptions));
-  router.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
+  router.use("/graphiql", graphiqlExpress({ endpointURL: endpoint }));
 
   return router;
 };

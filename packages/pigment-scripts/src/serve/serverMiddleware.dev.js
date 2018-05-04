@@ -5,7 +5,7 @@ const { findCompiler, findStats } = require("./util");
 const requireFromString = require("require-from-string");
 const log = require("@pigment/log")("SERVER");
 
-module.exports = (paths, compiler) => {
+module.exports = (paths, compiler, compilerDone$) => {
   const serverCompiler = findCompiler(compiler, "server")[0];
   const outputFs = serverCompiler.outputFileSystem;
   const outputPath = serverCompiler.outputPath;
@@ -41,7 +41,7 @@ module.exports = (paths, compiler) => {
     return graphQLMiddleware;
   };
 
-  compiler.plugin("done", stats => {
+  compilerDone$.subscribe(stats => {
     try {
       ssrMiddleware = makeSsrMiddleware(stats);
       graphQLMiddleware = makeGraphQLMiddleware(stats);

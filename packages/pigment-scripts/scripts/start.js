@@ -1,6 +1,13 @@
 const { Observable } = require("rxjs/Observable");
 const { merge } = require("rxjs/observable/merge");
-const { mergeMap, takeUntil, share, first, last } = require("rxjs/operators");
+const {
+  mergeMap,
+  takeUntil,
+  share,
+  first,
+  last,
+  tap
+} = require("rxjs/operators");
 
 module.exports = args => {
   process.env.BABEL_ENV = "development";
@@ -10,17 +17,21 @@ module.exports = args => {
   const createPages = require("../src/generate/createPages");
   const createClientEntry = require("../src/generate/createClient");
   const createSsrMiddleware = require("../src/generate/createSsrMiddleware");
+  const createGraphQLModules = require("../src/generate/createGraphQLModules");
   const createGraphQLMiddleware = require("../src/generate/createGraphQLMiddleware");
   const createStyleguideEntry = require("../src/generate/createStyleguide");
+  const createStyleguideGraphQLMiddleware = require("../src/generate/createStyleguideGraphQLMiddleware");
 
   let served = null;
 
   const generateFiles$ = merge(
     createClientEntry(paths),
     createSsrMiddleware(paths),
+    createGraphQLModules(paths),
     createGraphQLMiddleware(paths),
     createPages(paths, true),
-    createStyleguideEntry(paths, true)
+    createStyleguideEntry(paths, true),
+    createStyleguideGraphQLMiddleware(paths)
   ).pipe(share());
 
   const serveApp$ = generateFiles$.pipe(

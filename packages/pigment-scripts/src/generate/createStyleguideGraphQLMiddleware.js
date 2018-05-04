@@ -5,7 +5,7 @@ const writeGeneratedFile = require("./writeGeneratedFile");
 
 module.exports = paths => {
   const modulesPath = path.relative(
-    path.dirname(paths.graphQLEntry),
+    path.dirname(paths.styleguideGraphQLEntry),
     paths.graphQLModulesEntry
   );
 
@@ -13,6 +13,6 @@ module.exports = paths => {
     import modules from "./${modulesPath}";
     import graphQLMiddleware from "@pigment/graphql/src/graphQLMiddleware";
 
-    export default graphQLMiddleware(modules, "/graphql");
-  `).pipe(writeGeneratedFile(paths.graphQLEntry));
+    export default graphQLMiddleware(modules,"/_pigment/styleguide/graphql", true);
+  `).pipe(writeGeneratedFile(paths.styleguideGraphQLEntry));
 };

@@ -40,7 +40,8 @@ module.exports = (paths, env) => {
     devtool: env === "production" ? "source-map" : "inline-cheap-source-map",
     entry: {
       ssr: [paths.ssrEntry],
-      graphql: [paths.graphQLEntry]
+      graphql: [paths.graphQLEntry],
+      styleguideGraphQL: [paths.styleguideGraphQLEntry]
     },
     output: {
       path: paths.buildServer,

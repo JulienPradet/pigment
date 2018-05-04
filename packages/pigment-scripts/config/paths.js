@@ -15,6 +15,7 @@ module.exports = () => {
     buildStats: resolveApp("build/stats"),
     tmp: path.join(__dirname, "../var/tmp"),
     pagesIndex: path.join(__dirname, "../var/tmp/app/index.js"),
+    graphQLModulesEntry: path.join(__dirname, "../var/tmp/server/modules.js"),
     graphQLEntry: path.join(
       __dirname,
       "../var/tmp/server/graphQLMiddleware.js"
@@ -22,6 +23,10 @@ module.exports = () => {
     ssrEntry: path.join(__dirname, "../var/tmp/server/ssrMiddleware.js"),
     clientEntry: path.join(__dirname, "../var/tmp/client/index.js"),
     styleguideEntry: path.join(__dirname, "../var/tmp/styleguide/index.js"),
+    styleguideGraphQLEntry: path.join(
+      __dirname,
+      "../var/tmp/styleguide/graphQLMiddleware.js"
+    ),
     log: resolveApp("var/log"),
     cacheBabel: resolveApp("var/cache/babel"),
     cacheEslint: resolveApp("var/cache/eslint"),
