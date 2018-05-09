@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "@pigment/app/src/Link";
 import layout from "./_layout";
 import Features from "../modules/Features";
 import StoriesContext from "../StoriesContext";
@@ -26,7 +27,11 @@ const StoryRoute = ({ params }) => {
               <section>
                 <h2>Depends on</h2>
                 <ul>
-                  {dependsOn.map(story => <li key={story.id}>{story.name}</li>)}
+                  {dependsOn.map(story => (
+                    <li key={story.id}>
+                      <Link to={story.path}>{story.name}</Link>
+                    </li>
+                  ))}
                 </ul>
               </section>
             )}
@@ -34,7 +39,11 @@ const StoryRoute = ({ params }) => {
               <section>
                 <h2>Relies on</h2>
                 <ul>
-                  {reliesOn.map(story => <li key={story.id}>{story.name}</li>)}
+                  {reliesOn.map(story => (
+                    <li key={story.id}>
+                      <Link to={story.path}>{story.name}</Link>
+                    </li>
+                  ))}
                 </ul>
               </section>
             )}
