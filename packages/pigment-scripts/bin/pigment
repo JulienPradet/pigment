@@ -18,7 +18,8 @@ const printHelp = () => {
     Available scripts:
       help         displays this help message
       start        launches your application in developer mode
-      build        Builds all the files needed
+      build        Builds all the files needed for production usage
+      serve        Serve production server
       test:perf    Checks site's performance through lighthouse CLI
 
     For further information on each available script, please
