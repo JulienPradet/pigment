@@ -2,6 +2,12 @@ import loadableRoute from "@pigment/app/src/loadableRoute";
 
 export default [
   loadableRoute({
+    test: /^\/_pigment\/styleguide\/(?:\/)?$/i,
+    pathKeys: [],
+    routeComponent: () => import("../pages/Home.js"),
+    filePath: "../pages/Home.js"
+  }),
+  loadableRoute({
     test: /^\/_pigment\/styleguide\/story(?:\/)?$/i,
     pathKeys: [],
     routeComponent: () => import("../pages/Story.js"),
