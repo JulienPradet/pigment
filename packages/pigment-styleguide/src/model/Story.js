@@ -1,4 +1,4 @@
-const Story = (module, name) => {
+const Story = (module, name, isGenerated = false) => {
   let dependsOn = new Set();
   let reliesOn = new Set();
   let features = new Map();
@@ -7,8 +7,14 @@ const Story = (module, name) => {
     get id() {
       return module.id.toString();
     },
+    get isGenerated() {
+      return isGenerated;
+    },
     get name() {
       return name.replace(/^.*\//, "");
+    },
+    get fullname() {
+      return name;
     },
     get path() {
       const params = new URLSearchParams();
