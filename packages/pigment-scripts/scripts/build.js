@@ -17,15 +17,19 @@ module.exports = args => {
   const createPages = require("../src/generate/createPages");
   const createClientEntry = require("../src/generate/createClient");
   const createSsrMiddleware = require("../src/generate/createSsrMiddleware");
+  const createGraphQLModules = require("../src/generate/createGraphQLModules");
   const createGraphQLMiddleware = require("../src/generate/createGraphQLMiddleware");
   const createStyleguideEntry = require("../src/generate/createStyleguide");
+  const createStyleguideGraphQLMiddleware = require("../src/generate/createStyleguideGraphQLMiddleware");
 
   const generateFiles$ = merge(
     createClientEntry(paths),
     createSsrMiddleware(paths),
+    createGraphQLModules(paths),
     createGraphQLMiddleware(paths),
     createPages(paths),
-    createStyleguideEntry(paths)
+    createStyleguideEntry(paths),
+    createStyleguideGraphQLMiddleware(paths)
   );
 
   generateFiles$.subscribe(
