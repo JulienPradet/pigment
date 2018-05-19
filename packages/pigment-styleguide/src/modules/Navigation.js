@@ -4,6 +4,7 @@ import StoriesContext from "../StoriesContext";
 import getTreeFromStories from "../model/getTreeFromStories";
 import LinkTree from "../ui/LinkTree";
 import Searchable from "../ui/Searchable";
+import Togglable from "../ui/Togglable";
 
 const StoryNav = ({ story, children }) => {
   const childrenArray = [];
@@ -16,11 +17,19 @@ const StoryNav = ({ story, children }) => {
   ) : (
     <Link to={story.path}>{story.name}</Link>
   );
-  return (
-    <LinkTree.Node key={story.id}>
-      {label}
-      <StoryTree tree={children} />
-    </LinkTree.Node>
+
+  return childrenArray.length > 0 ? (
+    <Togglable>
+      {(isOpened, toggle) => (
+        <LinkTree.Node>
+          {label}
+          <button onClick={toggle}>{isOpened ? "-" : "+"}</button>
+          {isOpened && <StoryTree tree={children} />}
+        </LinkTree.Node>
+      )}
+    </Togglable>
+  ) : (
+    <LinkTree.Node>{label}</LinkTree.Node>
   );
 };
 
