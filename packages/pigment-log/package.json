@@ -1,6 +1,6 @@
 {
   "name": "pigment-log",
-  "version": "0.0.0",
+  "version": "0.0.1-0",
   "description": "Logging system used within Pigment.js React Framework",
   "main": "index.js",
   "repository": {

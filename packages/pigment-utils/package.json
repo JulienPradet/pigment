@@ -1,6 +1,6 @@
 {
   "name": "pigment-utils",
-  "version": "0.0.0",
+  "version": "0.0.1-0",
   "description": "Utility functions for Pigment.js",
   "main": "index.js",
   "repository": {

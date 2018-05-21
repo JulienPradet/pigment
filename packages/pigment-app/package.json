@@ -1,11 +1,10 @@
 {
   "name": "pigment-app",
-  "version": "0.0.0",
+  "version": "0.0.1-0",
   "description": "React components that glue together a Pigment.js app",
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-app"
+    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-app"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
