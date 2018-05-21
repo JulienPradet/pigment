@@ -1,4 +1,4 @@
-const fs = require("@pigment/fs");
+const fs = require("pigment-fs");
 const path = require("path");
 const { mergeMap } = require("rxjs/operators");
 const prettier = require("prettier");

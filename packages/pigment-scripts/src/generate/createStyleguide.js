@@ -1,8 +1,8 @@
 const path = require("path");
-const fs = require("@pigment/fs");
+const fs = require("pigment-fs");
 const { stripIndent } = require("common-tags");
 const writeGeneratedFile = require("./writeGeneratedFile");
-const reduceObservable = require("@pigment/utils/src/reduceObservable");
+const reduceObservable = require("pigment-utils/src/reduceObservable");
 const { of } = require("rxjs/observable/of");
 const {
   first,
@@ -35,7 +35,7 @@ const generateStyleguide = paths => {
     map(
       storiesDefinitions =>
         stripIndent`
-        import renderStyleguide from "@pigment/styleguide/src/renderStyleguide";
+        import renderStyleguide from "pigment-styleguide/src/renderStyleguide";
 
         const stories = [
           ${storiesDefinitions.join(",")}

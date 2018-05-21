@@ -1,5 +1,5 @@
 import path from "path";
-import fileLoader from "@pigment/graphql/src/helpers/fileLoader";
+import fileLoader from "pigment-graphql/src/helpers/fileLoader";
 
 const postsDirname = path.resolve(
   __dirname,

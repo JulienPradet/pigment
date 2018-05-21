@@ -1,8 +1,8 @@
 import React from "react";
-import ProgressiveQuery from "@pigment/app/src/ProgressiveQuery";
+import ProgressiveQuery from "pigment-app/src/ProgressiveQuery";
 import SmallPostQuery from "./SmallPostQuery.gql";
 import PostQuery from "./PostQuery.gql";
-import htmlToReact from "@pigment/app/src/htmlToReact";
+import htmlToReact from "pigment-app/src/htmlToReact";
 import loadable from "loadable-components";
 
 const RenderHtml = htmlToReact({

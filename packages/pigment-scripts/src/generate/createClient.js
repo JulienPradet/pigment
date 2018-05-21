@@ -18,8 +18,8 @@ module.exports = paths => {
     stripIndent`
       import pages from "${pagesPath}";
       import cacheRedirects from "${cacheRedirectsPath}";
-      import clientRenderApp from "@pigment/app/src/clientRenderApp";
-      import makeApolloClient from "@pigment/app/src/makeApolloClient";
+      import clientRenderApp from "pigment-app/src/clientRenderApp";
+      import makeApolloClient from "pigment-app/src/makeApolloClient";
 
       const apolloClient = makeApolloClient({
         fetch: fetch,

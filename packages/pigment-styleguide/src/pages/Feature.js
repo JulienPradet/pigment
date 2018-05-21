@@ -1,7 +1,7 @@
 import React from "react";
 import StoriesContext from "../StoriesContext";
 import layout from "./_layout";
-import Link from "@pigment/app/src/Link";
+import Link from "pigment-app/src/Link";
 
 const Feature = ({ params }) => {
   return (

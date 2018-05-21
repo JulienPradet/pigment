@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "@pigment/app/src/Link";
+import Link from "pigment-app/src/Link";
 
 const Feature = ({ feature }) => {
   return (

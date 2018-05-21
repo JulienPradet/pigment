@@ -17,7 +17,7 @@ module.exports = paths => {
       path.dirname(paths.ssrEntry),
       path.join(paths.src, "client/graphql/cacheRedirects.js")
     )}";
-    import {ssrMiddleware} from "@pigment/app/src/ssrMiddleware";
+    import {ssrMiddleware} from "pigment-app/src/ssrMiddleware";
 
     export default ssrMiddleware(Document, pages, cacheRedirects);
   `).pipe(writeGeneratedFile(paths.ssrEntry));

@@ -1,6 +1,6 @@
 import React from "react";
-import Link from "@pigment/app/src/Link";
-import Query from "@pigment/app/src/Query";
+import Link from "pigment-app/src/Link";
+import Query from "pigment-app/src/Query";
 import PostListQuery from "./PostListQuery.gql";
 
 const PostList = () => {

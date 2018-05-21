@@ -4,7 +4,7 @@ const { share } = require("rxjs/operators");
 const clientMiddleware = require("./clientMiddleware.dev");
 const serverMiddleware = require("./serverMiddleware.dev");
 const styleguideMiddleware = require("./styleguideMiddleware.dev");
-const log = require("@pigment/log")("SERVER");
+const log = require("pigment-log")("SERVER");
 
 const createAppRouter = (paths, compiler) => {
   const compilerDone$ = Observable.create(observer => {

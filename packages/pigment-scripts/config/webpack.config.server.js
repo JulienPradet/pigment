@@ -10,14 +10,14 @@ const publicPath = "/";
 module.exports = (paths, env) => {
   // src
   // tmp
-  // node_modules/@pigment/*/src (userland)
+  // node_modules/pigment-*/src (userland)
   // packages/pigment-*/src (dev)
   const { src, tmp } = paths;
   const shouldCompileRegExp = new RegExp(
-    `^(${src}|${tmp})|(@pigment\/[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
+    `^(${src}|${tmp})|(pigment-[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
   );
 
-  const whitelist = [/^@pigment\/\w+\/src/, /^react-apollo/];
+  const whitelist = [/^pigment-\w+\/src/, /^react-apollo/];
 
   return {
     name: "server",
@@ -57,11 +57,11 @@ module.exports = (paths, env) => {
       alias: {
         "loadable-components": require.resolve("loadable-components"),
         express: require.resolve("express"),
-        "@pigment/app": path.join(__dirname, "../../pigment-app"),
-        "@pigment/fs": path.join(__dirname, "../../pigment-fs"),
-        "@pigment/graphql": path.join(__dirname, "../../pigment-graphql"),
-        "@pigment/log": path.join(__dirname, "../../pigment-log"),
-        "@pigment/utils": path.join(__dirname, "../../pigment-utils")
+        "pigment-app": path.join(__dirname, "../../pigment-app"),
+        "pigment-fs": path.join(__dirname, "../../pigment-fs"),
+        "pigment-graphql": path.join(__dirname, "../../pigment-graphql"),
+        "pigment-log": path.join(__dirname, "../../pigment-log"),
+        "pigment-utils": path.join(__dirname, "../../pigment-utils")
       }
     },
     resolveLoader: {

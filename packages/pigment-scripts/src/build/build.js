@@ -1,5 +1,5 @@
 const { Observable } = require("rxjs/Observable");
-const log = require("@pigment/log")("WEBPACK");
+const log = require("pigment-log")("WEBPACK");
 
 module.exports = (paths, compiler) => {
   log.message("info", "Compiling...");

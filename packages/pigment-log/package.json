@@ -1,12 +1,11 @@
 {
-  "name": "@pigment/log",
+  "name": "pigment-log",
   "version": "0.0.0",
   "description": "Logging system used within Pigment.js React Framework",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-log"
+    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-log"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",

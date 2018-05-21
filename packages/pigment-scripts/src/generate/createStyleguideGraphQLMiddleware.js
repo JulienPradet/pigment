@@ -11,7 +11,7 @@ module.exports = paths => {
 
   return of(stripIndent`
     import modules from "./${modulesPath}";
-    import graphQLMiddleware from "@pigment/graphql/src/graphQLMiddleware";
+    import graphQLMiddleware from "pigment-graphql/src/graphQLMiddleware";
 
     export default graphQLMiddleware(modules,"/_pigment/styleguide/graphql", true);
   `).pipe(writeGeneratedFile(paths.styleguideGraphQLEntry));

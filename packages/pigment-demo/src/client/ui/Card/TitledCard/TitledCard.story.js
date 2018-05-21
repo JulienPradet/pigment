@@ -1,5 +1,5 @@
 import React from "react";
-import storiesOf from "@pigment/styleguide/src/addStory";
+import storiesOf from "pigment-styleguide/src/addStory";
 import TitledCard from "./TitledCard";
 
 storiesOf(module, "ui/Card/TitledCard").add("default", () => (

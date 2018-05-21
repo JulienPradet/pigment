@@ -1,9 +1,9 @@
 const path = require("path");
-const fs = require("@pigment/fs");
+const fs = require("pigment-fs");
 const { from } = require("rxjs/observable/from");
 const { filter, map, mergeMap } = require("rxjs/operators");
 const { stripIndent } = require("common-tags");
-const reduceObservable = require("@pigment/utils/src/reduceObservable");
+const reduceObservable = require("pigment-utils/src/reduceObservable");
 const writeGeneratedFile = require("./writeGeneratedFile");
 
 const directoriesOnly = () => source$ =>

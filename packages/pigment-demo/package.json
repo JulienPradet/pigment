@@ -1,5 +1,6 @@
 {
-  "name": "@pigment/demo",
+  "private": true,
+  "name": "pigment-demo",
   "version": "0.0.0",
   "description": "Example app using Pigment.js React Framework",
   "main": "index.js",
@@ -12,15 +13,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-demo"
+    "url":
+      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-demo"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@pigment/app": "^0.0.0",
-    "@pigment/fs": "^0.0.0",
-    "@pigment/graphql": "^0.0.0",
-    "@pigment/scripts": "^0.0.0",
+    "pigment-app": "^0.0.0",
+    "pigment-fs": "^0.0.0",
+    "pigment-graphql": "^0.0.0",
+    "pigment-scripts": "^0.0.0",
     "apollo-utilities": "^1.0.11",
     "casual": "^1.5.19",
     "loadable-components": "^1.1.1",

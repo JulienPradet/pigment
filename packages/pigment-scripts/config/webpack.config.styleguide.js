@@ -9,11 +9,11 @@ const publicPath = "/";
 module.exports = (paths, env) => {
   // src
   // tmp
-  // node_modules/@pigment/*/src (userland)
+  // node_modules/pigment-*/src (userland)
   // packages/pigment-*/src (dev)
   const { src, tmp } = paths;
   const shouldCompileRegExp = new RegExp(
-    `^(${src}|${tmp})|(node_modules\/@pigment\/[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
+    `^(${src}|${tmp})|(node_modules\/pigment-[^/]+\/src)|(packages\/pigment-[^/]+\/src)`
   );
 
   return {
@@ -43,8 +43,8 @@ module.exports = (paths, env) => {
     resolve: {
       alias: {
         "loadable-components": require.resolve("loadable-components"),
-        "@pigment/app": path.join(__dirname, "../../pigment-app"),
-        "@pigment/utils": path.join(__dirname, "../../pigment-utils")
+        "pigment-app": path.join(__dirname, "../../pigment-app"),
+        "pigment-utils": path.join(__dirname, "../../pigment-utils")
       }
     },
     resolveLoader: {

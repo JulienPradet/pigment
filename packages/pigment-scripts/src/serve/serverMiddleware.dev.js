@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const { findCompiler, findStats } = require("./util");
 const requireFromString = require("require-from-string");
-const log = require("@pigment/log")("SERVER");
+const log = require("pigment-log")("SERVER");
 
 module.exports = (paths, compiler, compilerDone$) => {
   const serverCompiler = findCompiler(compiler, "server")[0];

@@ -1,5 +1,5 @@
 {
-  "name": "@pigment/app",
+  "name": "pigment-app",
   "version": "0.0.0",
   "description": "React components that glue together a Pigment.js app",
   "repository": {
@@ -15,15 +15,15 @@
     "apollo-link-error": "^1.0.9",
     "apollo-link-http": "^1.5.4",
     "common-tags": "^1.7.2",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.8.0",
-    "html-react-parser": "^0.4.3",
-    "node-fetch": "^2.1.2",
-    "react-apollo": "^2.1.0-beta.3",
-    "serialize-javascript": "^1.4.0",
     "emotion": "^9.1.2",
     "emotion-server": "^9.1.2",
-    "react-emotion": "^9.1.2"
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
+    "html-react-parser": "^0.4.6",
+    "node-fetch": "^2.1.2",
+    "react-apollo": "^2.1.4",
+    "react-emotion": "^9.1.2",
+    "serialize-javascript": "^1.4.0"
   },
   "devDependencies": {
     "react": "^16.3.2",

@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
-const log = require("@pigment/log")("SERVER");
+const log = require("pigment-log")("SERVER");
 
 module.exports = paths => {
   const serverStats = require(path.join(

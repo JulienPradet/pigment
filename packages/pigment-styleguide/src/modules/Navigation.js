@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "@pigment/app/src/Link";
+import Link from "pigment-app/src/Link";
 import StoriesContext from "../StoriesContext";
 import getTreeFromStories from "../model/getTreeFromStories";
 import LinkTree from "../ui/LinkTree";

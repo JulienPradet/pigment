@@ -1,5 +1,5 @@
 {
-  "name": "@pigment/graphql",
+  "name": "pigment-graphql",
   "version": "0.0.0",
   "description": "Manages a GraphQL middleware using GrAMPS",
   "repository": {
@@ -11,16 +11,16 @@
   "license": "MIT",
   "dependencies": {
     "@gramps/gramps": "^1.4.0",
+    "pigment-fs": "^0.0.0",
+    "pigment-utils": "^0.0.0",
     "apollo-server-express": "^1.3.4",
     "body-parser": "^1.18.2",
     "common-tags": "^1.7.2",
     "graphql": "^0.13.2",
+    "gray-matter": "^4.0.1",
     "remark": "^9.0.0",
     "remark-html": "^7.0.0",
     "remark-preset-lint-recommended": "^3.0.1",
-    "rxjs": "^5.5.10",
-    "@pigment/fs": "^0.0.0",
-    "@pigment/utils": "^0.0.0",
-    "gray-matter": "^4.0.1"
+    "rxjs": "^5.5.10"
   }
 }

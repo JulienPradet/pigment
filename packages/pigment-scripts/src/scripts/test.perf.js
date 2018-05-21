@@ -7,7 +7,7 @@ module.exports = () => {
 
   const path = require("path");
   const paths = require("../../config/paths")();
-  const log = require("@pigment/log")("PERF");
+  const log = require("pigment-log")("PERF");
   const { stripIndent } = require("common-tags");
   const lighthouse = require("lighthouse");
   const chromeLauncher = require("chrome-launcher");

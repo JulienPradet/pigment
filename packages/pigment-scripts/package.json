@@ -1,5 +1,5 @@
 {
-  "name": "@pigment/scripts",
+  "name": "pigment-scripts",
   "version": "0.0.0",
   "description": "Scripts that allow to develop your Pigment.js app",
   "bin": {
@@ -10,17 +10,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-scripts"
+    "url":
+      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-scripts"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "7.0.0-beta.46",
-    "@pigment/app": "0.0.0",
-    "@pigment/fs": "0.0.0",
-    "@pigment/graphql": "0.0.0",
-    "@pigment/log": "0.0.0",
-    "@pigment/utils": "0.0.0",
+    "pigment-app": "^0.0.0",
+    "pigment-fs": "^0.0.0",
+    "pigment-graphql": "^0.0.0",
+    "pigment-log": "^0.0.0",
+    "pigment-utils": "^0.0.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.4",

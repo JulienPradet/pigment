@@ -1,5 +1,5 @@
 {
-  "name": "@pigment/styleguide",
+  "name": "pigment-styleguide",
   "version": "0.0.0",
   "description": "A styleguide for Pigment.js apps",
   "repository": {

@@ -1,5 +1,5 @@
 const path = require("path");
-const fs = require("@pigment/fs");
+const fs = require("pigment-fs");
 const { of } = require("rxjs/observable/of");
 const {
   first,
@@ -10,7 +10,7 @@ const {
 } = require("rxjs/operators");
 const pathToRegexp = require("path-to-regexp");
 const writeGeneratedFile = require("./writeGeneratedFile");
-const reduceObservable = require("@pigment/utils/src/reduceObservable");
+const reduceObservable = require("pigment-utils/src/reduceObservable");
 const { stripIndent } = require("common-tags");
 
 const filePathToRoute = filePath => {
@@ -70,7 +70,7 @@ const generatePages = paths => {
     map(pagesDefinitions => {
       return stripIndent`
         /* eslint no-useless-escape: 0 */
-        import loadableRoute from "@pigment/app/src/loadableRoute";
+        import loadableRoute from "pigment-app/src/loadableRoute";
 
         const pages = [
           ${pagesDefinitions.join(",")}

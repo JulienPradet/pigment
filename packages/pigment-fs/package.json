@@ -1,12 +1,11 @@
 {
-  "name": "@pigment/fs",
+  "name": "pigment-fs",
   "version": "0.0.0",
   "description": "rxjs fs utilities used within Pigment.js React Framework",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-fs"
+    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-fs"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",

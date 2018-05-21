@@ -1,4 +1,4 @@
-import loadableRoute from "@pigment/app/src/loadableRoute";
+import loadableRoute from "pigment-app/src/loadableRoute";
 
 export default [
   loadableRoute({

@@ -1,4 +1,4 @@
-const log = require("@pigment/log")("SERVER");
+const log = require("pigment-log")("SERVER");
 
 module.exports = () => {
   process.env.NODE_ENV = "production";

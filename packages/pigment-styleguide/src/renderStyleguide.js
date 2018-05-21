@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider as IsServerSideProvider } from "@pigment/app/src/IsServerSide";
-import Router from "@pigment/app/src/Router";
+import { Provider as IsServerSideProvider } from "pigment-app/src/IsServerSide";
+import Router from "pigment-app/src/Router";
 import stories from "./model/stories";
 import addDependencies from "./model/addDependencies";
 import StoriesContext from "./StoriesContext";
-import { loadFirstRoute } from "@pigment/app/src/Router";
+import { loadFirstRoute } from "pigment-app/src/Router";
 import pages from "./router/pages";
 
 const renderStyleguide = () => {
