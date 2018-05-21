@@ -110,14 +110,10 @@ module.exports = (paths, env) => {
       }),
       new StatsWriterPlugin({
         filename: "../stats/stats.styleguide.json"
-      })
+      }),
+      new webpack.NamedModulesPlugin()
     ].concat(
-      env === "production"
-        ? []
-        : [
-            new webpack.HotModuleReplacementPlugin(),
-            new webpack.NamedModulesPlugin()
-          ]
+      env === "production" ? [] : [new webpack.HotModuleReplacementPlugin()]
     )
   };
 };
