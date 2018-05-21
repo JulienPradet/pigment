@@ -13,9 +13,9 @@ const budget = {
 module.exports = () => {
   process.env.NODE_ENV = "production";
 
-  const paths = require("../config/paths")();
+  const paths = require("../../config/paths")();
   log.message("info", "Launching example server...");
-  const server = require("../src/serve/serve.prod")(paths, async () => {
+  const server = require("../serve/serve.prod")(paths, async () => {
     log.message("info", "Launching browser...");
 
     const opts = {

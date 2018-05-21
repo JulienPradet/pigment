@@ -7,13 +7,12 @@
     "start": "pigment start",
     "build": "pigment build",
     "serve": "pigment serve",
-    "test:perf": "pigment test:perf",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "pigment test",
+    "test:perf": "pigment test:perf"
   },
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-demo"
+    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-demo"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",

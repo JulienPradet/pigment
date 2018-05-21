@@ -30,6 +30,7 @@ module.exports = () => {
     log: resolveApp("var/log"),
     cacheBabel: resolveApp("var/cache/babel"),
     cacheEslint: resolveApp("var/cache/eslint"),
+    cacheJest: resolveApp("var/cache/jest"),
     src: resolveApp("src"),
     stories: resolveApp("src/client"),
     pages: resolveApp("src/client/pages"),

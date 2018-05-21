@@ -2,12 +2,13 @@
   "private": true,
   "name": "pigment",
   "version": "0.0.0",
-  "description": "A React/GraphQL Framework. One could say it's an opiniated Next.js alternative.",
+  "description":
+    "A React/GraphQL Framework. One could say it's an opiniated Next.js alternative.",
   "main": "index.js",
   "author": "Julien Pradet <julien@pradet.me>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.38",
+    "@babel/core": "7.0.0-beta.46",
     "@gramps/gramps": "^1.4.0",
     "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.2.8",
@@ -16,10 +17,11 @@
     "apollo-server-express": "^1.3.4",
     "apollo-utilities": "^1.0.11",
     "babel-eslint": "^8.2.2",
+    "babel-jest": "^22.4.4",
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-plugin-emotion": "^9.1.2",
-    "babel-preset-react-app": "^4.0.0-next.47d2d941",
+    "babel-preset-react-app": "3.1.1",
     "body-parser": "^1.18.2",
     "casual": "^1.5.19",
     "chalk": "^2.3.2",
@@ -44,6 +46,8 @@
     "html-react-parser": "^0.4.3",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^0.13.4",
+    "jest": "^22.4.4",
+    "jest-transform-graphql": "^2.1.0",
     "lighthouse": "^2.9.4",
     "lint-staged": "^3.3.1",
     "loadable-components": "^1.1.1",
@@ -72,21 +76,21 @@
     "webpack-stats-plugin": "^0.2.1"
   },
   "scripts": {
-    "start": "cd packages/pigment-demo && yarn -s start",
-    "build": "cd packages/pigment-demo && yarn -s build",
-    "serve": "cd packages/pigment-demo && yarn -s serve",
-    "test:perf": "cd packages/pigment-demo && yarn -s test:perf",
+    "demo:start": "cd packages/pigment-demo && yarn -s start",
+    "demo:build": "cd packages/pigment-demo && yarn -s build",
+    "demo:serve": "cd packages/pigment-demo && yarn -s serve",
+    "demo:test": "cd packages/pigment-demo && yarn -s test",
+    "demo:test:perf": "cd packages/pigment-demo && yarn -s test:perf",
     "precommit": "lint-staged",
-    "format": "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
+    "format":
+      "prettier --config .prettierrc.js --write './*.{js,json,md}' './packages/*.{js,json,md}' './packages/*/!(node-modules)/**/*.{js,json,md}'"
   },
   "repository": "https://github.com/JulienPradet/pigment.js",
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["prettier --write", "git add"]
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"],
+  "dependencies": {
+    "immutable": "^3.8.2"
+  }
 }
