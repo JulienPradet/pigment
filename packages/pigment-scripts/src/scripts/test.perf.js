@@ -1,11 +1,3 @@
-const path = require("path");
-const paths = require("../config/paths");
-const log = require("@pigment/log")("PERF");
-const { stripIndent } = require("common-tags");
-const lighthouse = require("lighthouse");
-const chromeLauncher = require("chrome-launcher");
-const perfConfig = require("lighthouse/lighthouse-core/config/perf.json");
-
 const budget = {
   performance: 95
 };
@@ -13,7 +5,14 @@ const budget = {
 module.exports = () => {
   process.env.NODE_ENV = "production";
 
+  const path = require("path");
   const paths = require("../../config/paths")();
+  const log = require("@pigment/log")("PERF");
+  const { stripIndent } = require("common-tags");
+  const lighthouse = require("lighthouse");
+  const chromeLauncher = require("chrome-launcher");
+  const perfConfig = require("lighthouse/lighthouse-core/config/perf.json");
+
   log.message("info", "Launching example server...");
   const server = require("../serve/serve.prod")(paths, async () => {
     log.message("info", "Launching browser...");
