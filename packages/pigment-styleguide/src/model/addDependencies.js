@@ -1,9 +1,10 @@
 /* global __webpack_require__ */
+import { Map, Set } from "immutable";
 const nodeModulesRegexp = /node_modules/;
 const isNodeModules = dependency => nodeModulesRegexp.test(dependency);
 
 export default stories => {
-  let mapModuleToStoriesDependingOnIt = new Map();
+  let storiesToDependencies = new Map();
   let parsedDependencies = new Set();
 
   const parseDependency = (story, dependency, depth = 2) => {
@@ -16,39 +17,39 @@ export default stories => {
     __webpack_require__.c[dependency].children
       .filter(dependency => !isNodeModules(dependency))
       .forEach(child => {
-        if (!mapModuleToStoriesDependingOnIt.has(child)) {
-          mapModuleToStoriesDependingOnIt.set(child, []);
+        if (!storiesToDependencies.has(child)) {
+          storiesToDependencies = storiesToDependencies.set(child, []);
         }
-        mapModuleToStoriesDependingOnIt.set(
+        storiesToDependencies = storiesToDependencies.set(
           child,
-          mapModuleToStoriesDependingOnIt.get(child).concat(story)
+          storiesToDependencies.get(child).concat(story)
         );
         parseDependency(story, child, depth - 1);
       });
   };
 
-  for (let story of stories.values()) {
+  stories.forEach(story =>
     story.dependencies
       .filter(dependency => !isNodeModules(dependency))
       .forEach(dependency => {
         if (!parsedDependencies.has(dependency)) {
           parseDependency(story, dependency);
         }
-      });
-  }
+      })
+  );
 
-  for (let story of stories.values()) {
+  stories.forEach(story =>
     story.dependencies.forEach(dependency => {
-      if (mapModuleToStoriesDependingOnIt.has(dependency)) {
-        mapModuleToStoriesDependingOnIt.get(dependency).forEach(otherStory => {
+      if (storiesToDependencies.has(dependency)) {
+        storiesToDependencies.get(dependency).forEach(otherStory => {
           if (otherStory.id !== story.id) {
             otherStory.addDependsOn(story);
             story.addReliesOn(otherStory);
           }
         });
       }
-    });
-  }
+    })
+  );
 
   return Promise.resolve(stories);
 };

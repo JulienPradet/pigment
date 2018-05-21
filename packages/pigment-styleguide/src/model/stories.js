@@ -1,3 +1,4 @@
+import { Map } from "immutable";
 import Story from "./Story";
 import Feature from "./Feature";
 
@@ -5,7 +6,7 @@ let stories = new Map();
 
 const addStory = (module, name) => {
   const story = Story(module, name);
-  stories.set(story.id, story);
+  stories = stories.set(story.id, story);
 
   return {
     add: (name, storyFn) => {
@@ -14,5 +15,5 @@ const addStory = (module, name) => {
   };
 };
 
-export default stories;
+export default () => stories;
 export { addStory };

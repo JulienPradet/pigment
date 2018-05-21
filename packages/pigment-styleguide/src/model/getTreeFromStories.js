@@ -1,47 +1,47 @@
+import { Map } from "immutable";
 import Story from "./Story";
 
-const getTreeFromStories = stories => {
-  let storiesTree = new Map();
+const addLeaf = (path, story, tree, parentPath = []) => {
+  if (path.length === 1) {
+    tree = tree.set(story.name, {
+      story,
+      children: tree.has(story.name) ? tree.get(story.name).children : new Map()
+    });
+  } else {
+    const currentNodeName = path[0];
 
-  const addLeaf = (path, story, tree, parentPath = []) => {
-    if (path.length === 1) {
-      if (tree.has(story.name)) {
-        tree.set(story.name, {
-          story,
-          children: tree.get(story.name).children
-        });
-      } else {
-        tree.set(story.name, { story, children: new Map() });
-      }
-    } else {
-      const currentNode = path[0];
-      if (!tree.has(currentNode)) {
-        tree.set(currentNode, {
+    const currentNode = tree.has(currentNodeName)
+      ? tree.get(currentNodeName)
+      : {
           story: Story(
             {
               id: Math.floor(Number.MAX_SAFE_INTEGER * Math.random()),
               children: []
             },
-            [...parentPath, currentNode].join("/"),
+            [...parentPath, currentNodeName].join("/"),
             true
           ),
           children: new Map()
-        });
-      }
-      addLeaf(path.slice(1), story, tree.get(currentNode).children, [
-        ...parentPath,
-        currentNode
-      ]);
-    }
-  };
+        };
 
-  for (let story of stories.values()) {
-    const name = story.fullname;
-    const path = name.split("/");
-    addLeaf(path, story, storiesTree);
+    return tree.set(currentNodeName, {
+      story: currentNode.story,
+      children: addLeaf(path.slice(1), story, currentNode.children, [
+        ...parentPath,
+        currentNodeName
+      ])
+    });
   }
 
-  return storiesTree;
+  return tree;
+};
+
+const getTreeFromStories = stories => {
+  return stories.reduce((tree, story) => {
+    const name = story.fullname;
+    const path = name.split("/");
+    return addLeaf(path, story, tree);
+  }, new Map());
 };
 
 export default getTreeFromStories;

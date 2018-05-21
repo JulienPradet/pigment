@@ -11,7 +11,7 @@ import pages from "./router/pages";
 const renderStyleguide = () => {
   const url = new URL(window.location.href);
 
-  Promise.resolve(stories)
+  Promise.resolve(stories())
     .then(stories => addDependencies(stories))
     .then(stories => {
       loadFirstRoute(url.href.replace(url.origin, ""), pages).then(route => {

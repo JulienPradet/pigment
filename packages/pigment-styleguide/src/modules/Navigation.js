@@ -7,18 +7,13 @@ import Searchable from "../ui/Searchable";
 import Togglable from "../ui/Togglable";
 
 const StoryNav = ({ story, children }) => {
-  const childrenArray = [];
-  for (let story of children.values()) {
-    childrenArray.push(story);
-  }
-
   const label = story.isGenerated ? (
     story.name
   ) : (
     <Link to={story.path}>{story.name}</Link>
   );
 
-  return childrenArray.length > 0 ? (
+  return children.size > 0 ? (
     <Togglable>
       {(isOpened, toggle) => (
         <LinkTree.Node>
@@ -38,27 +33,19 @@ const storyMatchSearch = (story, children, search) => {
 };
 
 const childrenMatchSearch = (children, search) => {
-  for (let child of children.values()) {
-    if (storyMatchSearch(child.story, child.children, search)) {
-      return true;
-    }
-  }
-  return false;
+  return children.some(child =>
+    storyMatchSearch(child.story, child.children, search)
+  );
 };
 
 const StoryTree = ({ tree }) => {
-  const array = [];
-  for (var story of tree.values()) {
-    array.push(story);
-  }
-
-  if (array.length === 0) {
+  if (tree.size === 0) {
     return null;
   }
 
   return (
     <LinkTree.Root>
-      {array.map(({ story, children }) => {
+      {tree.toArray().map(({ story, children }) => {
         return (
           <Searchable.Match
             key={story.id}

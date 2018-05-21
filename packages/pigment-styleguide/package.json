@@ -4,12 +4,13 @@
   "description": "A styleguide for Pigment.js apps",
   "repository": {
     "type": "git",
-    "url":
-      "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-styleguide"
+    "url": "https://github.com/JulienPradet/pigment.js/tree/master/packages/pigment-styleguide"
   },
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "immutable": "^3.8.2"
+  },
   "devDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
