@@ -20,6 +20,7 @@ module.exports = (paths, env) => {
   return {
     name: "client",
     target: "web",
+    node: false,
     mode: env === "production" ? "production" : "development",
     devtool: env === "production" ? "source-map" : "cheap-module-source-map",
     entry: {

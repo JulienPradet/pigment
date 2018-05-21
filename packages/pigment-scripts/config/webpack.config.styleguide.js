@@ -19,6 +19,7 @@ module.exports = (paths, env) => {
   return {
     name: "styleguide",
     target: "web",
+    node: false,
     mode: env === "production" ? "production" : "development",
     devtool: env === "production" ? "source-map" : "cheap-module-source-map",
     entry: {
@@ -28,7 +29,7 @@ module.exports = (paths, env) => {
             ? []
             : [
                 require.resolve("webpack-hot-middleware/client") +
-                  "?name=client&reload=true&overlayWarnings=true"
+                  "?name=styleguide&reload=true&overlayWarnings=true"
               ]
         )
         .concat([paths.styleguideEntry])
