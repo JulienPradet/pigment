@@ -21,6 +21,7 @@
     "@pigment/graphql": "0.0.0",
     "@pigment/log": "0.0.0",
     "@pigment/utils": "0.0.0",
+    "babel-core": "^7.0.0-0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.4",
     "babel-loader": "^8.0.0-beta.2",
