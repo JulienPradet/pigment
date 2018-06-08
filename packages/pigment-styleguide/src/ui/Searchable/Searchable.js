@@ -1,4 +1,5 @@
 import React from "react";
+import QuickForm from "../QuickForm";
 
 const SearchableContext = React.createContext("");
 
@@ -11,19 +12,15 @@ class Searchable extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  onChange(e) {
-    this.setState({ search: new RegExp(e.target.value, "i") });
+  onChange(value) {
+    this.setState({ search: new RegExp(value, "i") });
   }
 
   render() {
     const { children } = this.props;
     return (
       <SearchableContext.Provider value={this.state.search}>
-        <form>
-          <label>
-            Search: <input name="search" onChange={this.onChange} />
-          </label>
-        </form>
+        <QuickForm onChange={this.onChange} label="Search" submitLabel="OK" />
         {children}
       </SearchableContext.Provider>
     );

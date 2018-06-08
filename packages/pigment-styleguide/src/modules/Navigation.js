@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "pigment-app/src/Link";
+import Link from "../ui/Link";
 import StoriesContext from "../StoriesContext";
 import getTreeFromStories from "../model/getTreeFromStories";
 import LinkTree from "../ui/LinkTree";
@@ -17,8 +17,9 @@ const StoryNav = ({ story, children }) => {
     <Togglable>
       {(isOpened, toggle) => (
         <LinkTree.Node>
-          {label}
-          <button onClick={toggle}>{isOpened ? "-" : "+"}</button>
+          <Togglable.Title onClick={toggle} toggleLabel={isOpened ? "-" : "+"}>
+            {label}
+          </Togglable.Title>
           {isOpened && <StoryTree tree={children} />}
         </LinkTree.Node>
       )}

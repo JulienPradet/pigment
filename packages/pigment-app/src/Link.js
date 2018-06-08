@@ -1,17 +1,22 @@
 import React from "react";
 import { RouterContext } from "./Router";
 
-const Link = ({ to, as, children }) => {
+const Link = ({ className, to, as, children }) => {
   const isExternal =
     !/^#|^\.?\.?\//.test(to) && !to.startsWith(process.env.PUBLIC_URL);
 
   if (isExternal) {
-    return <a href={to}>{children}</a>;
+    return (
+      <a className={className} href={to}>
+        {children}
+      </a>
+    );
   } else {
     return (
       <RouterContext.Consumer>
         {({ push, preload }) => (
           <a
+            className={className}
             href={to}
             onMouseEnter={() => preload(as)}
             onClick={event => {

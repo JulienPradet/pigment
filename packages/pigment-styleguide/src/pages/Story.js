@@ -37,7 +37,7 @@ const StoryRoute = ({ params }) => {
             )}
             {reliesOn.length > 0 && (
               <section>
-                <h2>Relies on</h2>
+                <h2>Used in</h2>
                 <ul>
                   {reliesOn.map(story => (
                     <li key={story.id}>
