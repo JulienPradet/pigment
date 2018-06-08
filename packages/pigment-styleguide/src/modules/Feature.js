@@ -1,12 +1,19 @@
 import React from "react";
-import Link from "pigment-app/src/Link";
+import Link from "../ui/Link";
+import Card from "../ui/Card";
+import { H2 } from "../ui/Typography/Heading";
 
 const Feature = ({ feature }) => {
   return (
-    <div>
-      <Link to={feature.path}>{feature.name}</Link>
+    <Card
+      title={
+        <H2>
+          <Link to={feature.path}>{feature.name}</Link>
+        </H2>
+      }
+    >
       {feature.render()}
-    </div>
+    </Card>
   );
 };
 

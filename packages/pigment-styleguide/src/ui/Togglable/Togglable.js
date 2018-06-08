@@ -35,10 +35,10 @@ const classes = {
       background: none;
       border: none;
       color: ${colors.shade04};
-      font-size: 2rem;
+      font-size: 1.5rem;
       vertical-align: middle;
-      line-height: 1.7rem;
-      height: 1.7rem;
+      line-height: 1.6rem;
+      height: 1.6rem;
       width: 2rem;
       text-align: center;
 

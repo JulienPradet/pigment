@@ -8,11 +8,11 @@ const Features = ({ story }) => {
   }
 
   return (
-    <div>
+    <>
       {features.map(feature => (
         <Feature key={feature.name} feature={feature} />
       ))}
-    </div>
+    </>
   );
 };
 

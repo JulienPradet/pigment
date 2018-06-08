@@ -1,5 +1,7 @@
 import React from "react";
-import Link from "pigment-app/src/Link";
+import Link from "../ui/Link";
+import Card from "../ui/Card";
+import { H1, H2 } from "../ui/Typography/Heading";
 import layout from "./_layout";
 import Features from "../modules/Features";
 import StoriesContext from "../StoriesContext";
@@ -22,31 +24,32 @@ const StoryRoute = ({ params }) => {
 
         return (
           <div>
-            <h1>{story.name}</h1>
-            {dependsOn.length > 0 && (
-              <section>
-                <h2>Depends on</h2>
-                <ul>
-                  {dependsOn.map(story => (
-                    <li key={story.id}>
-                      <Link to={story.path}>{story.name}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-            {reliesOn.length > 0 && (
-              <section>
-                <h2>Used in</h2>
-                <ul>
-                  {reliesOn.map(story => (
-                    <li key={story.id}>
-                      <Link to={story.path}>{story.name}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
+            <Card title={<H1>{story.name}</H1>}>
+              {dependsOn.length > 0 && (
+                <>
+                  <H2>Depends on</H2>
+                  <ul>
+                    {dependsOn.map(story => (
+                      <li key={story.id}>
+                        <Link to={story.path}>{story.name}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {reliesOn.length > 0 && (
+                <>
+                  <H2>Used in</H2>
+                  <ul>
+                    {reliesOn.map(story => (
+                      <li key={story.id}>
+                        <Link to={story.path}>{story.name}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </Card>
 
             <Features story={story} />
           </div>

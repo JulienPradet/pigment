@@ -3,6 +3,7 @@ import Link from "../ui/Link";
 import { css, injectGlobal } from "emotion";
 import Navigation from "../modules/Navigation";
 import * as colors from "../ui/colors";
+import { RouterContext } from "pigment-app/src/Router";
 
 injectGlobal`
   body {
@@ -13,6 +14,10 @@ injectGlobal`
   }
   * {
     color: inherit;
+  }
+  input, button, textarea {
+    font-family: inherit;
+    font-size: inherit;
   }
 `;
 
@@ -28,6 +33,7 @@ const classes = {
   content: css`
     width: 100%;
     background: ${colors.lightBackground};
+    padding: 2rem;
   `,
   title: css`
     background: ${colors.primary};
@@ -40,19 +46,28 @@ const classes = {
   `
 };
 
-const StyleguideLayout = ({ children }) => {
+const StyleguideLayout = ({ children, ...rest }) => {
   return (
-    <div className={classes.layout}>
-      <div className={classes.nav}>
-        <h1 className={classes.title}>
-          <Link type="ghost" to="/_pigment/styleguide/">
-            Pigment Store
-          </Link>
-        </h1>
-        <Navigation />
-      </div>
-      <div className={classes.content}>{children}</div>
-    </div>
+    <RouterContext.Consumer>
+      {({ route }) => {
+        const TitleComponent =
+          route.pathname === "/_pigment/styleguide/" ? "h1" : "h2";
+
+        return (
+          <div className={classes.layout}>
+            <div className={classes.nav}>
+              <TitleComponent className={classes.title}>
+                <Link type="ghost" to="/_pigment/styleguide/">
+                  Pigment Store
+                </Link>
+              </TitleComponent>
+              <Navigation />
+            </div>
+            <div className={classes.content}>{children}</div>
+          </div>
+        );
+      }}
+    </RouterContext.Consumer>
   );
 };
 

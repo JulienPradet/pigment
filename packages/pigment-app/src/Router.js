@@ -130,7 +130,11 @@ class Router extends Component {
 
     return (
       <RouterContext.Provider
-        value={{ push: this.push, preload: this.preload }}
+        value={{
+          route: this.state.route,
+          push: this.push,
+          preload: this.preload
+        }}
       >
         <Page params={params} page={page} />
       </RouterContext.Provider>
