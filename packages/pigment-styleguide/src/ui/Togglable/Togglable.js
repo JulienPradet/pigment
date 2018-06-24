@@ -23,24 +23,19 @@ class Togglable extends React.Component {
 const classes = {
   title: css`
     display: flex;
+    align-items: center;
   `,
   titleText: css`
     flex: 1;
   `,
   titleButton: css`
-    margin-right: 1rem;
-    margin-left: 1rem;
+    margin-right: 0;
 
     button {
+      cursor: pointer;
       background: none;
-      border: none;
+      border: 1px solid transparent;
       color: ${colors.shade04};
-      font-size: 1.5rem;
-      vertical-align: middle;
-      line-height: 1.6rem;
-      height: 1.6rem;
-      width: 2rem;
-      text-align: center;
 
       &:hover,
       &:focus {
@@ -56,10 +51,10 @@ const classes = {
 
 Togglable.Title = props => (
   <span className={classes.title}>
-    <span className={classes.titleText}>{props.children}</span>
     <span className={classes.titleButton}>
       <button onClick={props.onClick}>{props.toggleLabel}</button>
     </span>
+    <span className={classes.titleText}>{props.children}</span>
   </span>
 );
 

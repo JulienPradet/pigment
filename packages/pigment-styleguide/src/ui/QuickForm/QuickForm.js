@@ -12,9 +12,11 @@ const classes = {
     width: 100%;
     border: 1px solid ${colors.white};
     box-sizing: border-box;
-    padding: 0 1rem;
+    padding: 0.5em 1rem;
     line-height: 2rem;
     background: ${colors.white};
+    font-size: inherit;
+    font-family: inherit;
     &:focus {
       outline: 0;
       border: 1px solid ${colors.shade04};

@@ -17,7 +17,10 @@ const StoryNav = ({ story, children }) => {
     <Togglable>
       {(isOpened, toggle) => (
         <LinkTree.Node>
-          <Togglable.Title onClick={toggle} toggleLabel={isOpened ? "-" : "+"}>
+          <Togglable.Title
+            onClick={toggle}
+            toggleLabel={isOpened ? <span>▾</span> : <span>▸</span>}
+          >
             {label}
           </Togglable.Title>
           {isOpened && <StoryTree tree={children} />}

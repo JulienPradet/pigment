@@ -9,7 +9,9 @@
   "author": "Julien Pradet <julien.pradet+git@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "immutable": "^3.8.2"
+    "immutable": "^3.8.2",
+    "rc-slider": "^8.6.1",
+    "rc-switch": "^1.6.0"
   },
   "devDependencies": {
     "react": "^16.3.2",

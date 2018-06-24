@@ -1,25 +1,10 @@
 import React from "react";
-import Link from "../ui/Link";
-import { css, injectGlobal } from "emotion";
-import Navigation from "../modules/Navigation";
+import { css } from "react-emotion";
 import * as colors from "../ui/colors";
+import Link from "../ui/Link";
+import Navigation from "../modules/Navigation";
 import { RouterContext } from "pigment-app/src/Router";
-
-injectGlobal`
-  body {
-    margin: 0;
-    color: ${colors.dark};
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-    line-height: 1.5;
-  }
-  * {
-    color: inherit;
-  }
-  input, button, textarea {
-    font-family: inherit;
-    font-size: inherit;
-  }
-`;
+import "./_globalStyles";
 
 const classes = {
   layout: css`
@@ -33,7 +18,6 @@ const classes = {
   content: css`
     width: 100%;
     background: ${colors.lightBackground};
-    padding: 2rem;
   `,
   title: css`
     background: ${colors.primary};
@@ -41,7 +25,7 @@ const classes = {
     font-size: 2em;
     margin: 0;
     font-weight: 100;
-    padding: 1em 0.5em 0;
+    padding: 1.5em 0.5em 0;
     line-height: 2em;
   `
 };

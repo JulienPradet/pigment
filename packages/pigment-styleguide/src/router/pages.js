@@ -20,6 +20,12 @@ export default [
     filePath: "../pages/Feature.js"
   }),
   loadableRoute({
+    test: /^\/_pigment\/styleguide\/iframe(?:\/)?$/i,
+    pathKeys: [],
+    routeComponent: () => import("../pages/StandaloneFeature.js"),
+    filePath: "../pages/StandaloneFeature.js"
+  }),
+  loadableRoute({
     test: /^\/404(?:\/)?$/i,
     pathKeys: [],
     routeComponent: () => import("../pages/StoryNotFound.js"),

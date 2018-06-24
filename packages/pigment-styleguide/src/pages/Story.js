@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "../ui/Link";
 import Card from "../ui/Card";
+import CardContainer from "../ui/Card/CardContainer";
 import { H1, H2 } from "../ui/Typography/Heading";
 import layout from "./_layout";
 import Features from "../modules/Features";
@@ -23,7 +24,7 @@ const StoryRoute = ({ params }) => {
         }
 
         return (
-          <div>
+          <CardContainer>
             <Card title={<H1>{story.name}</H1>}>
               {dependsOn.length > 0 && (
                 <>
@@ -52,7 +53,7 @@ const StoryRoute = ({ params }) => {
             </Card>
 
             <Features story={story} />
-          </div>
+          </CardContainer>
         );
       }}
     </StoriesContext.Consumer>
