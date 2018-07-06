@@ -14,6 +14,7 @@ const createAppRouter = (paths, compiler) => {
   }).pipe(share());
 
   const router = express.Router();
+  router.use(require("webpack-hot-middleware")(compiler, { log: false }));
   router.use(clientMiddleware(paths, compiler, compilerDone$));
   router.use(styleguideMiddleware(paths, compiler, compilerDone$));
   router.use(serverMiddleware(paths, compiler, compilerDone$));
