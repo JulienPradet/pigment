@@ -24,7 +24,9 @@ Link.propTypes = {
   ...AppLink.propTypes,
   type: PropTypes.oneOf(["default", "ghost"])
 };
-delete Link.propTypes.className;
+if (Link.propTypes && Link.propTypes.className) {
+  delete Link.propTypes.className;
+}
 
 Link.defaultProps = {
   type: "default"

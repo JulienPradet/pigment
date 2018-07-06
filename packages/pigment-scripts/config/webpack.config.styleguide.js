@@ -111,9 +111,8 @@ module.exports = (paths, env) => {
       new StatsWriterPlugin({
         filename: "../stats/stats.styleguide.json"
       }),
-      new webpack.NamedModulesPlugin()
-    ].concat(
-      env === "production" ? [] : [new webpack.HotModuleReplacementPlugin()]
-    )
+      new webpack.NamedModulesPlugin(),
+      new webpack.HotModuleReplacementPlugin() // Leave it in production to enable dependencies check
+    ]
   };
 };
