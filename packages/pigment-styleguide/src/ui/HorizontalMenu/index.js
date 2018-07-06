@@ -3,6 +3,8 @@ import { css } from "react-emotion";
 
 const classes = {
   container: css`
+    position: relative;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
     align-items: stretch;

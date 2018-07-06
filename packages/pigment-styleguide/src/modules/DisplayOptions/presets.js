@@ -2,15 +2,15 @@ export default [
   {
     label: "S",
     preset: {
-      width: 360,
-      height: "auto",
+      width: 384,
+      height: 640,
       zoom: 100
     }
   },
   {
     label: "M",
     preset: {
-      width: 960,
+      width: 1000,
       height: "auto",
       zoom: 100
     }
@@ -18,7 +18,15 @@ export default [
   {
     label: "L",
     preset: {
-      width: 1920,
+      width: "auto",
+      height: "auto",
+      zoom: 100
+    }
+  },
+  {
+    label: "XL",
+    preset: {
+      width: "auto",
       height: "auto",
       zoom: 50
     }
