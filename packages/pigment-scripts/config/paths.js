@@ -15,6 +15,7 @@ module.exports = () => {
     buildStats: resolveApp("build/stats"),
     tmp: path.join(__dirname, "../var/tmp"),
     pagesIndex: path.join(__dirname, "../var/tmp/app/index.js"),
+    pagesServerIndex: path.join(__dirname, "../var/tmp/server/pages.js"),
     graphQLModulesEntry: path.join(__dirname, "../var/tmp/server/modules.js"),
     graphQLEntry: path.join(
       __dirname,
