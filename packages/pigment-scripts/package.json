@@ -27,6 +27,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "common-tags": "^1.7.2",
     "compression": "^1.7.2",
+    "cross-spawn": "^6.0.5",
     "eslint": "^4.18.2",
     "eslint-config-react-app": "^3.0.0-next.47d2d941",
     "eslint-loader": "^2.0.0",
@@ -35,7 +36,11 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "express": "^4.16.2",
+    "file-loader": "^2.0.0",
     "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
+    "html-webpack-plugin": "^3.2.0",
+    "isomorphic-fetch": "^2.2.1",
     "jest": "^22.4.4",
     "jest-transform-graphql": "^2.1.0",
     "lighthouse": "^2.9.4",
@@ -47,6 +52,7 @@
     "pigment-graphql": "^0.0.1-0",
     "pigment-log": "^0.0.1-0",
     "pigment-utils": "^0.0.1-0",
+    "prettier": "^1.12.1",
     "react-hot-loader": "^4.0.0",
     "require-from-string": "^2.0.1",
     "rxjs": "^5.5.10",
@@ -59,8 +65,6 @@
     "webpack-stats-plugin": "^0.2.1"
   },
   "devDependencies": {
-    "graphql-tag": "^2.8.0",
-    "html-webpack-plugin": "^3.2.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
   },

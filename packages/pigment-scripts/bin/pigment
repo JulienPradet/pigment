@@ -1,11 +1,6 @@
 #!/usr/bin/env node
-process.on("unhandledRejection", err => {
-  throw err;
-});
-
-process.on("SIGTERM", () => {
-  process.exit(1);
-});
+const path = require("path");
+const { spawn } = require("cross-spawn");
 
 const script = process.argv.length > 2 ? process.argv[2] : null;
 const args = process.argv.slice(3);
@@ -29,21 +24,60 @@ const printHelp = () => {
   `);
 };
 
+const startProcess = (script, args) => {
+  let nodeArgs = [];
+  const inspectArg = process.argv.find(arg => arg.includes("--inspect"));
+  if (inspectArg) {
+    nodeArgs.push(inspectArg);
+  }
+
+  const proc = spawn("node", [...nodeArgs, ...[script], ...args], {
+    stdio: "inherit",
+    customFds: [0, 1, 2]
+  });
+  proc.on("close", (code, signal) => {
+    if (code !== null) {
+      process.exit(code);
+    }
+    if (signal) {
+      if (signal === "SIGKILL") {
+        process.exit(137);
+      }
+      console.log(`got signal ${signal}, exiting`);
+      process.exit(signal === "SIGINT" ? 0 : 1);
+    }
+    process.exit(0);
+  });
+  proc.on("error", err => {
+    console.error(err);
+    process.exit(1);
+  });
+
+  const wrapper = (...e) => {
+    if (proc) {
+      proc.kill();
+    }
+  };
+  process.on("SIGINT", wrapper);
+  process.on("SIGTERM", wrapper);
+  process.on("exit", wrapper);
+};
+
 switch (script) {
   case "start":
-    require("../src/scripts/start.js")(args);
+    startProcess(path.join(__dirname, "../src/scripts/start.js"), args);
     break;
   case "build":
-    require("../src/scripts/build.js")(args);
+    startProcess(path.join(__dirname, "../src/scripts/build.js"), args);
     break;
   case "serve":
-    require("../src/scripts/serve.js")(args);
+    startProcess(path.join(__dirname, "../src/scripts/serve.js"), args);
     break;
   case "test":
-    require("../src/scripts/test.js")(args);
+    startProcess(path.join(__dirname, "../src/scripts/test.js"), args);
     break;
   case "test:perf":
-    require("../src/scripts/test.perf.js")(args);
+    startProcess(path.join(__dirname, "../src/scripts/test.perf.js"), args);
     break;
   case "help":
     console.log("Welcome to Pigment.js!");
