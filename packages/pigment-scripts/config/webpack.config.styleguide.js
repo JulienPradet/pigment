@@ -91,6 +91,16 @@ module.exports = (paths, env) => {
               test: /\.(graphql|gql)$/,
               include: input => shouldCompileRegExp.test(input),
               loader: "graphql-tag/loader"
+            },
+            {
+              include: input => shouldCompileRegExp.test(input),
+              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              use: {
+                loader: "file-loader",
+                options: {
+                  name: "[name].[ext]"
+                }
+              }
             }
           ]
         }

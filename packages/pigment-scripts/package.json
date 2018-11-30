@@ -53,6 +53,7 @@
     "pigment-log": "^0.0.1-0",
     "pigment-utils": "^0.0.1-0",
     "prettier": "^1.12.1",
+    "raw-loader": "^0.5.1",
     "react-hot-loader": "^4.0.0",
     "require-from-string": "^2.0.1",
     "rxjs": "^5.5.10",
