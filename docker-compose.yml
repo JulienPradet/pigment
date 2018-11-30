@@ -1,0 +1,14 @@
+version: '2'
+services:
+  npm:
+    image: node:10.11.0-alpine
+    network_mode: "bridge"
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    volumes:
+      - ./:/project
+      - ~/.npm:/root/.npm
+    command: run demo:debug
+    entrypoint: npm
+    working_dir: /project
