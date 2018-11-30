@@ -3,15 +3,34 @@ const loader = (moduleLoaders = []) => {
     loader => typeof loader.matchUrl === "function"
   );
 
+  const matchUrl = path => {
+    return moduleLoaders.reduce(
+      (matchPromise, moduleLoader) => {
+        return matchPromise.then(currentMatch => {
+          if (!currentMatch.generated) {
+            return currentMatch;
+          } else {
+            return moduleLoader
+              .matchUrl(path)
+              .then(match => match || currentMatch);
+          }
+        });
+      },
+      Promise.resolve({
+        generated: true,
+        seoPath: path,
+        pagePath: path
+      })
+    );
+  };
+
   return {
-    matchUrl(path) {
-      for (var moduleLoader of moduleLoaders) {
-        const match = moduleLoader.matchUrl(path);
-        if (match) {
-          return match;
-        }
-      }
-    }
+    getUrls() {
+      return Promise.all(
+        moduleLoaders.map(moduleLoader => moduleLoader.getUrls())
+      ).then(moduleUrls => moduleUrls.reduce((acc, curr) => [...acc, ...curr]));
+    },
+    matchUrl: matchUrl
   };
 };
 

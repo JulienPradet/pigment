@@ -22,6 +22,9 @@ const loader = () => {
     load(id) {
       return getItemById(id);
     },
+    getUrls() {
+      return getList().then(posts => posts.map(post => post.path));
+    },
     matchUrl(path) {
       return getItemByAttribute("path", path).then(post => {
         if (!post) {

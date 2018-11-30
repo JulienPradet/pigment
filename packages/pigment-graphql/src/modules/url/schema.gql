@@ -1,4 +1,5 @@
 type Query {
+  urls: [String]
   matchUrl(path: String!): MatchedUrl
 }
 

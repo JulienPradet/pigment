@@ -22,7 +22,8 @@
     "node-fetch": "^2.1.2",
     "react-apollo": "^2.1.4",
     "react-emotion": "^9.1.2",
-    "serialize-javascript": "^1.4.0"
+    "serialize-javascript": "^1.4.0",
+    "through2": "^2.0.3"
   },
   "devDependencies": {
     "react": "^16.3.2",
