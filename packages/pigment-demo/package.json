@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "pigment start",
+    "debug": "pigment start --inspect",
     "build": "pigment build",
     "serve": "pigment serve",
     "test": "pigment test",
