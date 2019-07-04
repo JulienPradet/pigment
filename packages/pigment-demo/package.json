@@ -9,7 +9,9 @@
     "build": "pigment build",
     "serve": "pigment serve",
     "test": "pigment test",
-    "test:perf": "pigment test:perf"
+    "test:perf": "pigment test:perf",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,8 @@
     "pigment-graphql": "^0.0.1-0",
     "pigment-scripts": "^0.0.1-0",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
-  }
+    "react-dom": "^16.3.2",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
