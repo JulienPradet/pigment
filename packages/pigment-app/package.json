@@ -22,7 +22,8 @@
     "node-fetch": "^2.1.2",
     "react-apollo": "^2.1.4",
     "react-emotion": "^9.1.2",
-    "serialize-javascript": "^1.4.0"
+    "serialize-javascript": "^1.4.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "react": "^16.3.2",
@@ -31,5 +32,10 @@
   "peerDependencies": {
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
