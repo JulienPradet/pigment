@@ -71,7 +71,7 @@
     "rc-slider": "^8.6.1",
     "rc-switch": "^1.6.0",
     "rxjs": "^5.5.10",
-    "serialize-javascript": "^1.4.0",
+    "serialize-javascript": "^3.1.0",
     "source-map-support": "^0.5.3",
     "webpack": "^4.1.1",
     "webpack-bundle-analyzer": "^2.11.1",
